@@ -241,3 +241,94 @@ uv add gadcodegenerator
 # Add module
 uv run gadcodegenerator -f https://raw.githubusercontent.com/AlexDemure/gadfaststyle/refs/heads/main/.templates/module.toml --context '{"module": {"snake": {"single": "user", "many": "users"}, "pascal": {"single": "User", "many": "Users"}, "kebab": {"single": "user", "many": "users"}}}'
 ```
+
+# Дерево папок проекта
+
+```text
+.
+├── .ai
+│   ├── agents
+│   │   ├── _templates
+│   │   └── code-writer
+│   └── rules
+├── .compose
+├── .scripts
+│   └── lints
+│       └── configs
+├── .templates
+├── src
+│   ├── application
+│   │   ├── usecases
+│   │   │   └── accounts
+│   │   │       └── get
+│   │   └── utils
+│   ├── bootstrap
+│   ├── common
+│   │   ├── calendar
+│   │   ├── formats
+│   │   ├── http
+│   │   ├── human
+│   │   ├── keyboard
+│   │   ├── locales
+│   │   ├── os
+│   │   ├── socials
+│   │   └── typings
+│   ├── configuration
+│   ├── domain
+│   │   ├── collections
+│   │   │   ├── enums
+│   │   │   └── exceptions
+│   │   └── models
+│   ├── entrypoints
+│   │   ├── cron
+│   │   ├── http
+│   │   │   ├── common
+│   │   │   ├── public
+│   │   │   └── system
+│   │   └── workers
+│   │       └── telegram
+│   │           └── aiogram
+│   ├── framework
+│   │   ├── background
+│   │   ├── collections
+│   │   ├── openapi
+│   │   └── routing
+│   ├── infrastructure
+│   │   ├── databases
+│   │   │   ├── orm
+│   │   │   │   └── sqlalchemy
+│   │   │   └── postgres
+│   │   │       ├── adapters
+│   │   │       ├── collections
+│   │   │       ├── crud
+│   │   │       ├── migrations
+│   │   │       │   └── versions
+│   │   │       └── tables
+│   │   ├── integrations
+│   │   │   └── telegram
+│   │   │       └── telethon
+│   │   ├── monitoring
+│   │   │   ├── asyncio
+│   │   │   ├── health
+│   │   │   ├── logging
+│   │   │   └── sentry
+│   │   ├── scheduling
+│   │   │   └── apscheduler
+│   │   ├── security
+│   │   │   ├── encryption
+│   │   │   └── jwt
+│   │   └── storages
+│   │       └── redis
+│   ├── localization
+│   │   └── models
+│   ├── representation
+│   └── static
+│       └── localizations
+└── tests
+    ├── factories
+    ├── mocking
+    ├── test_integrations
+    ├── test_loads
+    ├── test_units
+    └── tools
+```
