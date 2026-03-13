@@ -1,0 +1,323 @@
+[
+    { "id": "telegram", "en": "telegram", "ru": "telegram", "domains": [] },
+  {
+    "id": "vk",
+    "en": "VK",
+    "ru": "ВКонтакте",
+    "domains": ["vk.com", "vkontakte.ru"]
+  },
+  {
+    "id": "ok",
+    "en": "Odnoklassniki",
+    "ru": "Одноклассники",
+    "domains": ["ok.ru"]
+  },
+  {
+    "id": "facebook",
+    "en": "Facebook",
+    "ru": "Facebook",
+    "domains": ["facebook.com", "fb.com"]
+  },
+  {
+    "id": "instagram",
+    "en": "Instagram",
+    "ru": "Instagram",
+    "domains": ["instagram.com"]
+  },
+  {
+    "id": "twitter",
+    "en": "Twitter",
+    "ru": "Twitter",
+    "domains": ["twitter.com", "x.com"]
+  },
+  {
+    "id": "tiktok",
+    "en": "TikTok",
+    "ru": "TikTok",
+    "domains": ["tiktok.com"]
+  },
+  {
+    "id": "snapchat",
+    "en": "Snapchat",
+    "ru": "Snapchat",
+    "domains": ["snapchat.com"]
+  },
+  {
+    "id": "pinterest",
+    "en": "Pinterest",
+    "ru": "Pinterest",
+    "domains": ["pinterest.com"]
+  },
+  {
+    "id": "reddit",
+    "en": "Reddit",
+    "ru": "Reddit",
+    "domains": ["reddit.com"]
+  },
+  {
+    "id": "discord",
+    "en": "Discord",
+    "ru": "Discord",
+    "domains": ["discord.com", "discord.gg"]
+  },
+  {
+    "id": "clubhouse",
+    "en": "Clubhouse",
+    "ru": "Clubhouse",
+    "domains": ["clubhouse.com"]
+  },
+  {
+    "id": "threads",
+    "en": "Threads",
+    "ru": "Threads",
+    "domains": ["threads.net"]
+  },
+  {
+    "id": "youtube",
+    "en": "YouTube",
+    "ru": "YouTube",
+    "domains": ["youtube.com", "youtu.be"]
+  },
+  {
+    "id": "twitch",
+    "en": "Twitch",
+    "ru": "Twitch",
+    "domains": ["twitch.tv"]
+  },
+  { "id": "vimeo", "en": "Vimeo", "ru": "Vimeo", "domains": ["vimeo.com"] },
+  {
+    "id": "rutube",
+    "en": "RuTube",
+    "ru": "RuTube",
+    "domains": ["rutube.ru"]
+  },
+  {
+    "id": "linkedin",
+    "en": "LinkedIn",
+    "ru": "LinkedIn",
+    "domains": ["linkedin.com"]
+  },
+  { "id": "xing", "en": "Xing", "ru": "Xing", "domains": ["xing.com"] },
+  {
+    "id": "viadeo",
+    "en": "Viadeo",
+    "ru": "Viadeo",
+    "domains": ["viadeo.com"]
+  },
+
+  {
+    "id": "github",
+    "en": "GitHub",
+    "ru": "GitHub",
+    "domains": ["github.com"]
+  },
+  {
+    "id": "gitlab",
+    "en": "GitLab",
+    "ru": "GitLab",
+    "domains": ["gitlab.com"]
+  },
+  {
+    "id": "bitbucket",
+    "en": "Bitbucket",
+    "ru": "Bitbucket",
+    "domains": ["bitbucket.org"]
+  },
+  {
+    "id": "stackoverflow",
+    "en": "Stack Overflow",
+    "ru": "Stack Overflow",
+    "domains": ["stackoverflow.com", "stackexchange.com"]
+  },
+  {
+    "id": "dev_to",
+    "en": "DEV Community",
+    "ru": "DEV Community",
+    "domains": ["dev.to"]
+  },
+  {
+    "id": "idpen",
+    "en": "idPen",
+    "ru": "idPen",
+    "domains": ["idpen.io"]
+  },
+  {
+    "id": "idsandbox",
+    "en": "idSandbox",
+    "ru": "idSandbox",
+    "domains": ["idsandbox.io"]
+  },
+  {
+    "id": "hackerrank",
+    "en": "HackerRank",
+    "ru": "HackerRank",
+    "domains": ["hackerrank.com"]
+  },
+  {
+    "id": "leetid",
+    "en": "Leetid",
+    "ru": "Leetid",
+    "domains": ["leetid.com"]
+  },
+  {
+    "id": "kaggle",
+    "en": "Kaggle",
+    "ru": "Kaggle",
+    "domains": ["kaggle.com"]
+  },
+
+  {
+    "id": "behance",
+    "en": "Behance",
+    "ru": "Behance",
+    "domains": ["behance.net"]
+  },
+  {
+    "id": "dribbble",
+    "en": "Dribbble",
+    "ru": "Dribbble",
+    "domains": ["dribbble.com"]
+  },
+  {
+    "id": "artstation",
+    "en": "ArtStation",
+    "ru": "ArtStation",
+    "domains": ["artstation.com"]
+  },
+
+  {
+    "id": "soundcloud",
+    "en": "SoundCloud",
+    "ru": "SoundCloud",
+    "domains": ["soundcloud.com"]
+  },
+  {
+    "id": "bandcamp",
+    "en": "Bandcamp",
+    "ru": "Bandcamp",
+    "domains": ["bandcamp.com"]
+  },
+  { "id": "vsco", "en": "VSCO", "ru": "VSCO", "domains": ["vsco.co"] },
+  {
+    "id": "medium",
+    "en": "Medium",
+    "ru": "Medium",
+    "domains": ["medium.com"]
+  },
+  {
+    "id": "substack",
+    "en": "Substack",
+    "ru": "Substack",
+    "domains": ["substack.com"]
+  },
+  {
+    "id": "upwork",
+    "en": "Upwork",
+    "ru": "Upwork",
+    "domains": ["upwork.com"]
+  },
+  {
+    "id": "freelancer",
+    "en": "Freelancer",
+    "ru": "Freelancer",
+    "domains": ["freelancer.com"]
+  },
+  {
+    "id": "fiverr",
+    "en": "Fiverr",
+    "ru": "Fiverr",
+    "domains": ["fiverr.com"]
+  },
+  {
+    "id": "toptal",
+    "en": "Toptal",
+    "ru": "Toptal",
+    "domains": ["toptal.com"]
+  },
+  { "id": "guru", "en": "Guru", "ru": "Guru", "domains": ["guru.com"] },
+
+  {
+    "id": "glassdoor",
+    "en": "Glassdoor",
+    "ru": "Glassdoor",
+    "domains": ["glassdoor.com"]
+  },
+  {
+    "id": "indeed",
+    "en": "Indeed",
+    "ru": "Indeed",
+    "domains": ["indeed.com"]
+  },
+  {
+    "id": "headhunter",
+    "en": "HeadHunter",
+    "ru": "HeadHunter",
+    "domains": ["hh.ru"]
+  },
+  {
+    "id": "superjob",
+    "en": "SuperJob",
+    "ru": "SuperJob",
+    "domains": ["superjob.ru"]
+  },
+  {
+    "id": "rabota_ru",
+    "en": "Rabota.ru",
+    "ru": "Работа.ру",
+    "domains": ["rabota.ru"]
+  },
+
+  {
+    "id": "researchgate",
+    "en": "ResearchGate",
+    "ru": "ResearchGate",
+    "domains": ["researchgate.net"]
+  },
+  {
+    "id": "academia_edu",
+    "en": "Academia.edu",
+    "ru": "Academia.edu",
+    "domains": ["academia.edu"]
+  },
+  { "id": "orcid", "en": "ORCID", "ru": "ORCID", "domains": ["orcid.org"] },
+  {
+    "id": "scholar",
+    "en": "Google Scholar",
+    "ru": "Google Scholar",
+    "domains": ["scholar.google.com"]
+  },
+  {
+    "id": "mendeley",
+    "en": "Mendeley",
+    "ru": "Mendeley",
+    "domains": ["mendeley.com"]
+  },
+  {
+    "id": "crunchbase",
+    "en": "Crunchbase",
+    "ru": "Crunchbase",
+    "domains": ["crunchbase.com"]
+  },
+  {
+    "id": "angel_list",
+    "en": "AngelList",
+    "ru": "AngelList",
+    "domains": ["angel.co", "wellfound.com"]
+  },
+  {
+    "id": "product_hunt",
+    "en": "Product Hunt",
+    "ru": "Product Hunt",
+    "domains": ["producthunt.com"]
+  },
+  { "id": "figma", "en": "Figma", "ru": "Figma", "domains": ["figma.com"] },
+  {
+    "id": "notion",
+    "en": "Notion",
+    "ru": "Notion",
+    "domains": ["notion.so", "notion.site"]
+  },
+  { "id": "avito", "en": "Avito", "ru": "Avito", "domains": ["avito.ru"] },
+  { "id": "website", "en": "Website", "ru": "Website", "domains": [] },
+  { "id": "blog", "en": "Blog", "ru": "Blog", "domains": [] }
+]

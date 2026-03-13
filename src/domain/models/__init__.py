@@ -1,2 +1,8 @@
+from .account import Account
 from .base import Model
-from .dummy import Dummy
+
+
+__all__ = [
+    "Account",
+    "Model",
+]

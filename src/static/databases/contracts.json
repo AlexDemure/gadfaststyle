@@ -1,0 +1,8 @@
+[
+  {"id": "pernament", "en": "Permanent", "ru": "Постоянный"},
+  {"id": "temporary", "en": "Temporary", "ru": "Временный"},
+  {"id": "internship", "en": "Internship", "ru": "Стажировка"},
+  {"id": "freelance", "en": "Freelance", "ru": "Фриланс"},
+  {"id": "part_time", "en": "Part-time", "ru": "Частичная занятость"},
+  {"id": "full_time",  "en": "Full-time", "ru": "Полная занятость"}
+]

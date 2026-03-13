@@ -51,10 +51,8 @@ __snapshots__/
 .env.*
 .env.docker
 .envrc
-.venv
 .gitpod/
 .idea/
-.gigaide/
 .pydevproject
 .python-version
 .pyre/
@@ -66,7 +64,7 @@ __snapshots__/
 .spyderworkspace
 .tox/
 .vscode/
-
+.volumes
 build/
 celerybeat-schedule
 develop-eggs/
@@ -77,13 +75,10 @@ eggs/
 env/
 env.bak/
 ENV/
-venv/
-VENV/
 htmlcov/
 instance/
 lib/
 lib64/
-migrations/
 nox/
 pip-wheel-metadata/
 sdist/
@@ -95,8 +90,6 @@ Desktop.ini
 Pipfile.lock
 coverage.xml
 dmypy.json
-migrations/env.pyc
-migrations/versions/
 nosetests.xml
 pip-delete-this-directory.txt
 pip-log.txt

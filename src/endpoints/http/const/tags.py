@@ -1,2 +1,0 @@
-SYSTEMAPI = "🔐"
-OPENAPI = "⚪️"

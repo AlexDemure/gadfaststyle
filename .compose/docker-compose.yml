@@ -18,21 +18,46 @@ services:
       POSTGRES_PASSWORD: postgres
       POSTGRES_HOST: localhost
       POSTGRES_PORT: 5432
-      POSTGRES_DB: db
-    command: ["postgres", "-c", "log_statement=all"]
+      POSTGRES_DB: database
+    command: [ "postgres", "-c", "log_statement=all" ]
 
-  etcd:
-    image: quay.io/coreos/etcd:v3.5.0
-    container_name: etcd
+  minio:
+    container_name: minio
+    image: minio/minio:RELEASE.2024-05-10T01-41-38Z
     environment:
-      - ETCD_LISTEN_PEER_URLS=http://0.0.0.0:2380
-      - ETCD_LISTEN_CLIENT_URLS=http://0.0.0.0:2379
-      - ETCD_ADVERTISE_CLIENT_URLS=http://etcd:2379
-      - ETCD_INITIAL_ADVERTISE_PEER_URLS=http://etcd:2380
-      - ETCD_INITIAL_CLUSTER=etcd=http://etcd:2380
-      - ETCD_INITIAL_CLUSTER_STATE=new
-      - ETCD_INITIAL_CLUSTER_TOKEN=etcd-cluster-1
-      - ETCD_NAME=etcd
+      MINIO_ROOT_USER: root
+      MINIO_ROOT_PASSWORD: Root123!
     ports:
-      - "2379:2379"
-      - "2380:2380"
+      - "9000:9000"
+      - "9001:9001"
+    volumes:
+      - ../.volumes/miniodata:/data
+    command: server --console-address ":9001" /data
+
+  redis:
+    image: redis:7-alpine
+    container_name: redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    command: >
+      redis-server
+      --save ""
+      --appendonly no
+      --maxmemory 128mb
+      --maxmemory-policy allkeys-lru
+
+
+  redis-commander:
+    container_name: redis-commander
+    image: rediscommander/redis-commander:latest
+    restart: always
+    environment:
+      REDIS_HOSTS: redis
+      REDIS_HOST: redis
+      REDIS_PORT: redis:6379
+      REDIS_PASSWORD: redis
+      HTTP_USER: root
+      HTTP_PASSWORD: root
+    ports:
+      - 8081:8081

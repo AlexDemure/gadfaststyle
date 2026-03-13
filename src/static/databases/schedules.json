@@ -1,0 +1,32 @@
+[
+  {
+    "id": "flexible",
+    "en": "Flexible",
+    "ru": "Гибкий график"
+  },
+  {
+    "id": "fixed",
+    "en": "Fixed",
+    "ru": "Фиксированный график"
+  },
+  {
+    "id": "shift_work",
+    "en": "Shift work",
+    "ru": "Сменный график"
+  },
+  {
+    "id": "day_shift",
+    "en": "Day shift",
+    "ru": "Дневной график"
+  },
+  {
+    "id": "night_shift",
+    "en": "Night shift",
+    "ru": "Ночной график"
+  },
+  {
+    "id": "weekends",
+    "en": "Weekends",
+    "ru": "Работа по выходным"
+  }
+]
