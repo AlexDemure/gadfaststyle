@@ -1,8 +1,10 @@
 import pytest
+
 from httpx import AsyncClient
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from src.infrastructure.security.jwt.models import Tokens
+
 from tests.faker import fake
 
 

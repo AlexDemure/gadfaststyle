@@ -5,6 +5,7 @@ from factory import LazyFunction
 
 from src.common.formats.utils import date
 from src.domain.models import Account as _Account
+
 from tests.faker import fake
 
 
