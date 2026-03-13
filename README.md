@@ -230,3 +230,14 @@ class Account(Base):
     blocked = Column(DateTime(timezone=True), nullable=True)
     authorization = Column(DateTime(timezone=True), nullable=True)
 ```
+
+# Развертывание module.toml
+
+Пример генерации модуля по шаблону `.templates/module.toml`:
+
+```bash
+uv add gadcodegenerator
+
+# Add module
+uv run gadcodegenerator -f https://raw.githubusercontent.com/AlexDemure/gadfaststyle/refs/heads/main/.templates/module.toml --context '{"module": {"snake": {"single": "user", "many": "users"}, "pascal": {"single": "User", "many": "Users"}, "kebab": {"single": "user", "many": "users"}}}'
+```
