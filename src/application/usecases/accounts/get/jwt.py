@@ -1,3 +1,4 @@
+from src.decorators import sessionmaker
 from src.domain.collections import AccountBlocked
 from src.domain.models import Account
 from src.infrastructure.databases.orm.sqlalchemy.queries import Filter
@@ -7,7 +8,7 @@ from src.infrastructure.security.jwt import jwt
 from src.infrastructure.security.jwt.collections import TokenPurpose
 
 
-class Repositories:
+class Repository:
     def __init__(self, session: Session) -> None:
         self.account = adapters.repositories.Account(session)
 
@@ -18,19 +19,25 @@ class Security:
 
 
 class Container:
-    def __init__(self, repositories: Repositories, security: Security) -> None:
-        self.repositories = repositories
+    def __init__(self, repository: Repository, security: Security) -> None:
+        self.repository = repository
         self.security = security
 
 
 class Usecase:
-    def __init__(self, container: Container) -> None:
-        self.container = container
+    def __init__(self) -> None:
+        self.container: Container | None = None
 
-    async def __call__(self, token: str) -> Account:
+    def build(self, session: Session) -> None:
+        self.container = Container(repository=Repository(session), security=Security())
+
+    @sessionmaker.read
+    async def __call__(self, session: Session, token: str) -> Account:
+        self.build(session)
+
         account_id = int((self.container.security.jwt.decode(token, TokenPurpose.access)).sub)
 
-        account = await self.container.repositories.account.one(Filter.eq(key="id", value=account_id))
+        account = await self.container.repository.account.one(Filter.eq(key="id", value=account_id))
 
         if account.blocked:
             raise AccountBlocked

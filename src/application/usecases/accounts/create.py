@@ -1,3 +1,4 @@
+from src.decorators import sessionmaker
 from src.domain.collections import AccountAlreadyExists
 from src.domain.models import Account
 from src.infrastructure.databases.orm.sqlalchemy.queries import Filter
@@ -8,7 +9,7 @@ from src.infrastructure.security.jwt import jwt
 from src.infrastructure.security.jwt.models import Tokens
 
 
-class Repositories:
+class Repository:
     def __init__(self, session: Session) -> None:
         self.account = adapters.repositories.Account(session)
 
@@ -20,17 +21,23 @@ class Security:
 
 
 class Container:
-    def __init__(self, repositories: Repositories, security: Security) -> None:
-        self.repositories = repositories
+    def __init__(self, repository: Repository, security: Security) -> None:
+        self.repository = repository
         self.security = security
 
 
 class Usecase:
-    def __init__(self, container: Container) -> None:
-        self.container = container
+    def __init__(self) -> None:
+        self.container: Container | None = None
 
-    async def __call__(self, external_id: str) -> Tokens:
-        if await self.container.repositories.account.exists(
+    def build(self, session: Session) -> None:
+        self.container = Container(repository=Repository(session), security=Security())
+
+    @sessionmaker.write
+    async def __call__(self, session: Session, external_id: str) -> Tokens:
+        self.build(session)
+
+        if await self.container.repository.account.exists(
             Filter.eq(
                 key="external_id",
                 value=self.container.security.encryption.encrypt(external_id.lower()),
@@ -38,7 +45,7 @@ class Usecase:
         ):
             raise AccountAlreadyExists
 
-        account = await self.container.repositories.account.create(
+        account = await self.container.repository.account.create(
             model=Account.init(
                 **Account.encrypt(
                     encrypter=self.container.security.encryption.encrypt,

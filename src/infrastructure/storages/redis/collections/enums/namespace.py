@@ -1,6 +1,4 @@
 import enum
 
 
-class Namespace(enum.StrEnum):
-    directory = "directory"
-    statistics = "statistics"
+class Namespace(enum.StrEnum): ...

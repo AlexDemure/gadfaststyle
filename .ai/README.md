@@ -1,7 +1,15 @@
 # AI Instructions Layout
 
-- `.ai/rules/` — инструкции по написанию кода для агентов.
-- `.ai/agents/` — конфигурации и описания конкретных агентов.
-- `.ai/agents/_templates/` — шаблоны для создания будущих агентов.
+- `.ai/rules/` - базовые правила для всех агентов.
+- `.ai/architecture/` - проектные инструкции по слоям и общая карта архитектуры.
+- `.ai/agents/` - роли агентов и их рабочие процессы.
+- `.ai/reports/` - формат хранения артефактов и итоговых отчетов.
 
-Стартовый агент: `.ai/agents/code-writer/AGENT.md`.
+Текущий рекомендуемый конвейер:
+
+1. `project-architect`
+2. `task-orchestrator`
+3. `code-implementer`
+4. `test-writer`
+5. `code-reviewer`
+6. `report-compiler`

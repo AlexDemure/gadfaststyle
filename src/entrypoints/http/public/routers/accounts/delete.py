@@ -32,4 +32,4 @@ router = APIRouter()
     },
 )
 async def query(usecase: Usecase = Depends(dependency), _account: Account = Depends(account)) -> None:
-    return await usecase(account_id=field.required(_account.id))
+    await usecase(account_id=field.required(_account.id))

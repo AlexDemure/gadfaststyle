@@ -17,24 +17,20 @@ from fastapi.staticfiles import StaticFiles
 from src.common.http.collections import HTTPError
 from src.entrypoints.http import router
 from src.entrypoints.http.common.deps import basic
-from src.entrypoints.workers import workers
 from src.framework.background import background
 from src.framework.openapi import OpenAPI
 from src.infrastructure.databases.postgres import postgres
 from src.infrastructure.monitoring.asyncio.detector import detector
 from src.infrastructure.monitoring.health import health
 from src.infrastructure.monitoring.logging import logger
-from src.infrastructure.monitoring.sentry import sentry
 from src.infrastructure.storages.redis import redis
 
 
 @contextlib.asynccontextmanager
 async def lifespan(_app: FastAPI) -> typing.Any:
-    sentry.start()
     postgres.start()
     await redis.start()
     detector.start()
-    workers()
     background.start()
     logger.info("Application started")
     yield
@@ -43,7 +39,6 @@ async def lifespan(_app: FastAPI) -> typing.Any:
     detector.shutdown()
     await redis.shutdown()
     postgres.shutdown()
-    sentry.shutdown()
 
 
 app = FastAPI(
