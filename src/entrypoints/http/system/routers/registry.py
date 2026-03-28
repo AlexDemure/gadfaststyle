@@ -1,7 +1,7 @@
+from src.framework.routing import APIRouter
 from fastapi import Depends
 
 from src.entrypoints.http.common.deps import basic
-from src.framework.routing import APIRouter
 
 from . import accounts
 

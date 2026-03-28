@@ -1,4 +1,4 @@
-from .list import dependency
+from .search import dependency
 
 
 __all__ = [
