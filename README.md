@@ -248,8 +248,13 @@ uv run gadcodegenerator -f https://raw.githubusercontent.com/AlexDemure/gadfasts
 .
 ├── .ai
 │   ├── agents
-│   │   ├── _templates
-│   │   └── code-writer
+│   │   ├── 10-delivery-manager.md
+│   │   ├── 20-project-architect.md
+│   │   ├── 30-task-orchestrator.md
+│   │   ├── 40-code-implementer.md
+│   │   ├── 50-test-writer.md
+│   │   ├── 60-code-reviewer.md
+│   │   └── 70-report-compiler.md
 │   └── rules
 ├── .compose
 ├── .scripts
