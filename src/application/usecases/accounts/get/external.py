@@ -1,3 +1,4 @@
+from src.application.utils.account import decrypt
 from src.common.formats.utils import string
 from src.decorators import sessionmaker
 from src.domain.collections import AccountBlocked
@@ -41,5 +42,10 @@ class Usecase:
 
         if account.blocked:
             raise AccountBlocked
+
+        account = decrypt(
+            decrypter=self.container.security.encryption.decrypt,
+            account=account,
+        )
 
         return account

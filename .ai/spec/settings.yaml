@@ -1,0 +1,7 @@
+version: 1
+
+runtime:
+  max_iterations_per_stage: 5
+  task_dir: .ai/runtime/tasks
+  require_task_prefix: "Задача:"
+  review_status_field: status

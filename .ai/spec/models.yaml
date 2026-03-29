@@ -1,0 +1,11 @@
+version: 1
+
+defaults:
+  model: gpt-5
+  temperature: 0
+
+providers:
+  default:
+    provider: openai
+    model: gpt-5
+    temperature: 0

@@ -12,8 +12,6 @@ from sqlalchemy.orm import sessionmaker as _sessionmaker
 
 from src.configuration import settings
 from src.entrypoints.http import router
-from src.entrypoints.http.common.deps import read
-from src.entrypoints.http.common.deps import write
 
 from tests.factories.infrastructure.databases.postgres import tables
 
@@ -53,8 +51,6 @@ def factories(session: AsyncSession) -> None:
 
 @pytest.fixture(scope="function")
 async def client(app: FastAPI, session: AsyncSession) -> typing.AsyncGenerator[AsyncClient, None]:
-    app.dependency_overrides[read] = lambda: session
-    app.dependency_overrides[write] = lambda: session
     async with AsyncClient(transport=ASGITransport(app=app), base_url="http://test") as _client:
         yield _client
     app.dependency_overrides.clear()

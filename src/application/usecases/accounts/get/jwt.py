@@ -1,9 +1,11 @@
+from src.application.utils.account import decrypt
 from src.decorators import sessionmaker
 from src.domain.collections import AccountBlocked
 from src.domain.models import Account
 from src.infrastructure.databases.orm.sqlalchemy.queries import Filter
 from src.infrastructure.databases.orm.sqlalchemy.session import Session
 from src.infrastructure.databases.postgres import adapters
+from src.infrastructure.security.encryption import encryption
 from src.infrastructure.security.jwt import jwt
 from src.infrastructure.security.jwt.collections import TokenPurpose
 
@@ -15,6 +17,7 @@ class Repository:
 
 class Security:
     def __init__(self) -> None:
+        self.encryption = encryption
         self.jwt = jwt
 
 
@@ -41,5 +44,10 @@ class Usecase:
 
         if account.blocked:
             raise AccountBlocked
+
+        account = decrypt(
+            decrypter=self.container.security.encryption.decrypt,
+            account=account,
+        )
 
         return account
