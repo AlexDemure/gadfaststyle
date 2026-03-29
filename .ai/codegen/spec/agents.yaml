@@ -1,0 +1,31 @@
+version: 1
+
+agents:
+  delivery-manager:
+    knowledge_path: .ai/knowledge/agents/10-delivery-manager
+    output_artifact: 10-delivery-manager.md
+    model: default
+  project-architect:
+    knowledge_path: .ai/knowledge/agents/20-project-architect
+    output_artifact: 20-project-architect.md
+    model: default
+  task-orchestrator:
+    knowledge_path: .ai/knowledge/agents/30-task-orchestrator
+    output_artifact: 30-task-orchestrator.md
+    model: default
+  code-implementer:
+    knowledge_path: .ai/knowledge/agents/40-code-implementer
+    output_artifact: 40-code-implementer.md
+    model: default
+  test-writer:
+    knowledge_path: .ai/knowledge/agents/50-test-writer
+    output_artifact: 50-test-writer.md
+    model: default
+  code-reviewer:
+    knowledge_path: .ai/knowledge/agents/60-code-reviewer
+    output_artifact: 60-code-reviewer.md
+    model: default
+  report-compiler:
+    knowledge_path: .ai/knowledge/agents/70-report-compiler
+    output_artifact: 70-report-compiler.md
+    model: default
