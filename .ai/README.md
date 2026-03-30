@@ -1,16 +1,10 @@
 ## Назначение
 
-`.ai` — изолированный модуль агентной системы.
+`.ai` содержит переиспользуемые агентные роли, общую базу знаний, pipeline-реализации и runtime-артефакты.
 
-## Слои
+## Файлы пакета
 
-- `knowledge/` — инструкции, правила и примеры для LLM.
-- `spec/` — machine-readable спецификация pipeline, агентов и артефактов.
-- `engine/` — исполняемый код orchestration runtime.
-- `runtime/` — артефакты запусков и рабочее состояние задач.
-
-## Принцип разделения
-
-- `knowledge/` описывает смысл, роли и инструкции без привязки к конкретной реализации runtime.
-- `spec/` задает контракт, какие knowledge-документы должен подбирать engine.
-- `engine/` интерпретирует `spec/` и `knowledge/`, но не держит в коде жестко прошитый список knowledge-файлов.
+- [agents/INSTRUCTION.MD](./agents/INSTRUCTION.MD) - каталог ролей агентов.
+- [knowledge/INSTRUCTION.MD](./knowledge/INSTRUCTION.MD) - общая база знаний и проектные инструкции.
+- [pipelines/codegen/README.md](./pipelines/codegen/README.md) - Python/LangGraph pipeline кодогенерации.
+- [runtime/INSTRUCTION.MD](./runtime/INSTRUCTION.MD) - артефакты запусков и задач.
