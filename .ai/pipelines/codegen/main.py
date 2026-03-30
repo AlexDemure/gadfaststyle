@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import argparse
 import importlib.util
 import json
 import re
@@ -306,19 +305,6 @@ def ensure_runtime_dependencies() -> None:
             "Missing pipeline dependencies. Install them in the environment, for example: "
             f"pip install {packages}"
         )
-
-
-def build_parser() -> argparse.ArgumentParser:
-    parser = argparse.ArgumentParser(prog="ai-codegen-pipeline")
-    parser.add_argument("--repo-root", default=str(default_repo_root()), help="Repository root")
-    subparsers = parser.add_subparsers(dest="command", required=True)
-
-    subparsers.add_parser("validate", help="Validate hardcoded pipeline and knowledge paths")
-
-    run_parser = subparsers.add_parser("run", help="Run multi-agent pipeline")
-    run_parser.add_argument("task_request", help="Task description in any language")
-
-    return parser
 
 
 def build_project_spec() -> ProjectSpec:
@@ -1181,33 +1167,22 @@ class Orchestrator:
 
 def main(argv: list[str] | None = None) -> int:
     argv = list(argv or sys.argv[1:])
-    if argv and argv[0] not in {"run", "validate", "--help", "-h"}:
-        argv.insert(0, "run")
+    if not argv:
+        raise ValueError("Task description must be passed as command line arguments")
 
-    parser = build_parser()
-    args = parser.parse_args(argv)
-    repo_root = Path(args.repo_root).resolve()
+    repo_root = default_repo_root().resolve()
     project_spec = build_project_spec()
-
-    if args.command == "validate":
-        validate_project_spec(project_spec, repo_root)
-        print("pipeline: ok")
-        return 0
-
-    if args.command == "run":
-        task_request = normalize_task_request(
-            task_request=args.task_request,
-            prefix=project_spec.settings.runtime.require_task_prefix,
-        )
-        ensure_runtime_dependencies()
-        runner = OpenAIAgentRunner(models_spec=project_spec.models, repo_root=repo_root)
-        orchestrator = Orchestrator(repo_root=repo_root, runner=runner)
-        state = orchestrator.run(task_request)
-        print(state.task_dir)
-        return 0
-
-    parser.print_help()
-    return 1
+    validate_project_spec(project_spec, repo_root)
+    task_request = normalize_task_request(
+        task_request=" ".join(argv),
+        prefix=project_spec.settings.runtime.require_task_prefix,
+    )
+    ensure_runtime_dependencies()
+    runner = OpenAIAgentRunner(models_spec=project_spec.models, repo_root=repo_root)
+    orchestrator = Orchestrator(repo_root=repo_root, runner=runner)
+    state = orchestrator.run(task_request)
+    print(state.task_dir)
+    return 0
 
 
 if __name__ == "__main__":
