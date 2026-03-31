@@ -1,6 +1,0 @@
-import typing
-
-
-NORMALIAZATION = typing.Literal["NFC", "NFD", "NFKC", "NFKD"]
-
-UNICODE_NORMALIZATION_FORM: NORMALIAZATION = "NFKD"

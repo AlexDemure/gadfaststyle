@@ -1,0 +1,6061 @@
+workdir = ""
+folders = [
+  "src/application",
+  "src/application/usecases",
+  "src/application/utils",
+  "src/bootstrap",
+  "src/common",
+  "src/common/formats",
+  "src/common/formats/collections",
+  "src/common/formats/collections/const",
+  "src/common/formats/collections/enums",
+  "src/common/formats/encoders",
+  "src/common/formats/utils",
+  "src/common/http",
+  "src/common/http/collections",
+  "src/common/http/collections/enums",
+  "src/common/http/collections/exceptions",
+  "src/common/keyboard",
+  "src/common/keyboard/collections",
+  "src/common/keyboard/collections/const",
+  "src/common/os",
+  "src/common/os/collections",
+  "src/common/os/collections/const",
+  "src/common/os/utils",
+  "src/common/typings",
+  "src/common/typings/validators",
+  "src/common/typings/variables",
+  "src/configuration",
+  "src/decorators",
+  "src/decorators/usecases",
+  "src/domain",
+  "src/domain/collections",
+  "src/domain/collections/enums",
+  "src/domain/collections/exceptions",
+  "src/domain/models",
+  "src/entrypoints",
+  "src/entrypoints/http",
+  "src/entrypoints/http/common",
+  "src/entrypoints/http/common/collections",
+  "src/entrypoints/http/common/collections/errors",
+  "src/entrypoints/http/common/deps",
+  "src/entrypoints/http/common/deps/security",
+  "src/entrypoints/http/common/schemas",
+  "src/entrypoints/http/public",
+  "src/entrypoints/http/public/deps",
+  "src/entrypoints/http/public/routers",
+  "src/entrypoints/http/public/schemas",
+  "src/entrypoints/http/system",
+  "src/entrypoints/http/system/deps",
+  "src/entrypoints/http/system/routers",
+  "src/entrypoints/http/system/schemas",
+  "src/framework",
+  "src/framework/background",
+  "src/framework/collections",
+  "src/framework/collections/exceptions",
+  "src/framework/openapi",
+  "src/framework/openapi/collections",
+  "src/framework/openapi/collections/const",
+  "src/framework/openapi/handlers",
+  "src/framework/openapi/models",
+  "src/framework/openapi/utils",
+  "src/framework/routing",
+  "src/framework/routing/collections",
+  "src/framework/routing/collections/enums",
+  "src/infrastructure",
+  "src/infrastructure/databases",
+  "src/infrastructure/databases/orm",
+  "src/infrastructure/databases/orm/sqlalchemy",
+  "src/infrastructure/databases/orm/sqlalchemy/builders",
+  "src/infrastructure/databases/orm/sqlalchemy/collections",
+  "src/infrastructure/databases/orm/sqlalchemy/collections/enums",
+  "src/infrastructure/databases/orm/sqlalchemy/collections/exceptions",
+  "src/infrastructure/databases/orm/sqlalchemy/crud",
+  "src/infrastructure/databases/orm/sqlalchemy/models",
+  "src/infrastructure/databases/orm/sqlalchemy/profilers",
+  "src/infrastructure/databases/orm/sqlalchemy/queries",
+  "src/infrastructure/databases/orm/sqlalchemy/tables",
+  "src/infrastructure/databases/orm/sqlalchemy/utils",
+  "src/infrastructure/databases/postgres",
+  "src/infrastructure/databases/postgres/adapters",
+  "src/infrastructure/databases/postgres/adapters/repositories",
+  "src/infrastructure/databases/postgres/collections",
+  "src/infrastructure/databases/postgres/collections/const",
+  "src/infrastructure/databases/postgres/collections/exceptions",
+  "src/infrastructure/databases/postgres/crud",
+  "src/infrastructure/databases/postgres/migrations",
+  "src/infrastructure/databases/postgres/migrations/versions",
+  "src/infrastructure/databases/postgres/tables",
+  "src/infrastructure/monitoring",
+  "src/infrastructure/monitoring/asyncio",
+  "src/infrastructure/monitoring/asyncio/detector",
+  "src/infrastructure/monitoring/asyncio/detector/handles",
+  "src/infrastructure/monitoring/health",
+  "src/infrastructure/monitoring/logging",
+  "src/infrastructure/monitoring/logging/collections",
+  "src/infrastructure/monitoring/logging/collections/const",
+  "src/infrastructure/monitoring/logging/formatters",
+  "src/infrastructure/monitoring/logging/mappers",
+  "src/infrastructure/monitoring/logging/models",
+  "src/infrastructure/monitoring/logging/parsers",
+  "src/infrastructure/monitoring/logging/utils",
+  "src/infrastructure/security",
+  "src/infrastructure/security/encryption",
+  "src/infrastructure/security/encryption/collections",
+  "src/infrastructure/security/encryption/collections/exceptions",
+  "src/infrastructure/security/jwt",
+  "src/infrastructure/security/jwt/collections",
+  "src/infrastructure/security/jwt/collections/enums",
+  "src/infrastructure/security/jwt/collections/exceptions",
+  "src/infrastructure/security/jwt/models",
+  "src/infrastructure/storages",
+  "src/infrastructure/storages/redis",
+  "src/infrastructure/storages/redis/collections",
+  "src/infrastructure/storages/redis/collections/enums",
+  "src/infrastructure/storages/redis/collections/exceptions",
+  "src/static",
+  "tests/factories",
+  "tests/factories/domain",
+  "tests/factories/domain/models",
+  "tests/factories/infrastructure",
+  "tests/factories/infrastructure/databases",
+  "tests/factories/infrastructure/databases/postgres",
+  "tests/factories/infrastructure/databases/postgres/tables",
+  "tests/mocking",
+  "tests/mocking/infrastructure",
+  "tests/mocking/infrastructure/storages",
+  "tests/mocking/infrastructure/storages/redis",
+  "tests/test_integrations",
+  "tests/test_integrations/test_entrypoints",
+  "tests/test_integrations/test_entrypoints/test_http",
+  "tests/test_integrations/test_entrypoints/test_http/test_public",
+  "tests/test_integrations/test_entrypoints/test_http/test_system",
+  "tests/test_loads",
+  "tests/test_units",
+  "tests/tools",
+  "tests/tools/profiler",
+  "tests/tools/profiler/contextmanagers",
+  "tests/tools/profiler/models",
+  "tests/tools/profiler/models/profilers",
+  "tests/tools/profiler/models/profilers/extensions",
+  "tests/tools/profiler/models/reports",
+  "tests/tools/profiler/models/reports/extensions",
+  "tests/tools/profiler/models/reports/python",
+  "tests/tools/profiler/profilers",
+  "tests/tools/profiler/profilers/extensions",
+  "tests/tools/profiler/reports",
+  "tests/tools/profiler/reports/extensions",
+  "tests/tools/profiler/reports/python",
+]
+
+exclude = [
+  "src/static/__init__.py",
+  "src/infrastructure/databases/postgres/migrations/__init__.py",
+  "src/infrastructure/databases/postgres/migrations/versions/__init__.py",
+]
+
+[[files]]
+path = "src/__init__.py"
+mode = "w"
+content = """
+
+"""
+
+[[files]]
+path = "src/application/__init__.py"
+mode = "w"
+content = """
+
+"""
+
+[[files]]
+path = "src/application/usecases/__init__.py"
+mode = "w"
+content = """
+
+"""
+
+[[files]]
+path = "src/application/utils/__init__.py"
+mode = "w"
+content = """
+
+"""
+
+[[files]]
+path = "src/bootstrap/__init__.py"
+mode = "w"
+content = """
+
+"""
+
+[[files]]
+path = "src/bootstrap/server.py"
+mode = "w"
+content = """
+import asyncio
+import contextlib
+import typing
+
+import uvicorn
+
+from fastapi import Depends
+from fastapi import FastAPI
+from fastapi import Request
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.openapi.docs import get_redoc_html
+from fastapi.openapi.docs import get_swagger_ui_html
+from fastapi.responses import HTMLResponse
+from fastapi.responses import JSONResponse
+from fastapi.staticfiles import StaticFiles
+
+from src.common.http.collections import HTTPError
+from src.entrypoints.http import router
+from src.entrypoints.http.common.deps import basic
+from src.framework.background import background
+from src.framework.openapi import OpenAPI
+from src.infrastructure.databases.postgres import postgres
+from src.infrastructure.monitoring.asyncio.detector import detector
+from src.infrastructure.monitoring.health import health
+from src.infrastructure.monitoring.logging import logger
+from src.infrastructure.storages.redis import redis
+
+
+@contextlib.asynccontextmanager
+async def lifespan(_app: FastAPI) -> typing.Any:
+    postgres.start()
+    await redis.start()
+    detector.start()
+    background.start()
+    logger.info("Application started")
+    yield
+    logger.info("Application shutdown")
+    background.shutdown()
+    detector.shutdown()
+    await redis.shutdown()
+    postgres.shutdown()
+
+
+app = FastAPI(
+    lifespan=lifespan,
+    docs_url=None,
+    redoc_url=None,
+)
+
+
+@app.get(
+    "/api/swagger",
+    description="Swagger Documentation",
+    include_in_schema=False,
+    response_class=HTMLResponse,
+    dependencies=[Depends(basic)],
+)
+def swagger() -> HTMLResponse:
+    return get_swagger_ui_html(openapi_url="/api/specification.json", title=app.title)
+
+
+@app.get(
+    "/api/redoc",
+    description="Redoc Documentation",
+    include_in_schema=False,
+    response_class=HTMLResponse,
+    dependencies=[Depends(basic)],
+)
+def redoc() -> HTMLResponse:
+    return get_redoc_html(openapi_url="/api/specification.json", title=app.title)
+
+
+@app.get(
+    "/api/specification.json",
+    description="API Specification",
+    include_in_schema=False,
+    response_model=dict,
+    dependencies=[Depends(basic)],
+)
+def specification() -> dict[typing.Any, typing.Any]:
+    return OpenAPI(app).generate()
+
+
+@app.exception_handler(HTTPError)
+async def error_handler(_: Request, error: HTTPError) -> JSONResponse:
+    return JSONResponse(status_code=error.code, content=error.http)
+
+
+app.include_router(redis.router, dependencies=[Depends(basic)])
+
+app.include_router(health.router)
+
+app.include_router(router)
+
+app.exclude_paths = []  # type: ignore
+
+app.mount("/api/static", StaticFiles(directory="src/static"), name="static")
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+
+async def run() -> None:
+    await uvicorn.Server(
+        uvicorn.Config(
+            app=app,
+            host="0.0.0.0",
+            port=8000,
+            log_config=None,
+        )
+    ).serve()
+
+
+if __name__ == "__main__":
+    asyncio.run(run())
+"""
+
+[[files]]
+path = "src/common/__init__.py"
+mode = "w"
+content = """
+
+"""
+
+[[files]]
+path = "src/common/formats/__init__.py"
+mode = "w"
+content = """
+
+"""
+
+[[files]]
+path = "src/common/formats/collections/__init__.py"
+mode = "w"
+content = """
+from .const import ENCODING_ASCII
+from .const import ENCODING_ERROR_IGNORE
+from .const import ENCODING_UTF
+from .const import REGEXP_NON_ALPHANUMERIC
+from .const import REGEXP_PASCAL_WORDS
+from .const import UNICODE_NORMALIZATION_FORM
+from .enums import Format
+
+
+__all__ = [
+    "ENCODING_ASCII",
+    "ENCODING_ERROR_IGNORE",
+    "ENCODING_UTF",
+    "Format",
+    "REGEXP_NON_ALPHANUMERIC",
+    "REGEXP_PASCAL_WORDS",
+    "UNICODE_NORMALIZATION_FORM",
+]
+"""
+
+[[files]]
+path = "src/common/formats/collections/const/__init__.py"
+mode = "w"
+content = """
+from .encoding import ENCODING_ASCII
+from .encoding import ENCODING_ERROR_IGNORE
+from .encoding import ENCODING_UTF
+from .regexp import REGEXP_NON_ALPHANUMERIC
+from .regexp import REGEXP_PASCAL_WORDS
+from .unicode import UNICODE_NORMALIZATION_FORM
+
+
+__all__ = [
+    "ENCODING_ASCII",
+    "ENCODING_ERROR_IGNORE",
+    "ENCODING_UTF",
+    "REGEXP_NON_ALPHANUMERIC",
+    "REGEXP_PASCAL_WORDS",
+    "UNICODE_NORMALIZATION_FORM",
+]
+"""
+
+[[files]]
+path = "src/common/formats/collections/const/encoding.py"
+mode = "w"
+content = """
+ENCODING_UTF = "utf-8"
+ENCODING_ASCII = "ASCII"
+ENCODING_ERROR_IGNORE = "ignore"
+"""
+
+[[files]]
+path = "src/common/formats/collections/const/regexp.py"
+mode = "w"
+content = """
+import re
+
+
+REGEXP_NON_ALPHANUMERIC = re.compile(r"[^a-zA-Z0-9]")
+REGEXP_PASCAL_WORDS = re.compile(r"[A-Z]{2,}(?=[A-Z][a-z]|[0-9]|$)|[A-Z]?[a-z0-9]+|[A-Z]+|[0-9]+")
+"""
+
+[[files]]
+path = "src/common/formats/collections/const/unicode.py"
+mode = "w"
+content = """
+import typing
+
+
+NORMALIAZATION = typing.Literal["NFC", "NFD", "NFKC", "NFKD"]
+
+UNICODE_NORMALIZATION_FORM: NORMALIAZATION = "NFKD"
+"""
+
+[[files]]
+path = "src/common/formats/collections/enums/__init__.py"
+mode = "w"
+content = """
+from .date import Format
+
+
+__all__ = [
+    "Format",
+]
+"""
+
+[[files]]
+path = "src/common/formats/collections/enums/date.py"
+mode = "w"
+content = """
+import enum
+
+
+class Format(enum.StrEnum):
+    year = "%Y"
+    month = "%m"
+    month_short = "%b"
+    month_full = "%B"
+    day = "%d"
+    day_short = "%a"
+    day_full = "%A"
+    hour = "%H"
+    minute = "%M"
+    second = "%S"
+    microsecond = "%f"
+    timezone = "%z"
+
+    @classmethod
+    def iso(cls) -> str:
+        return "{year}-{month}-{day}T{hour}:{minute}:{second}.{microsecond}{timezone}".format(
+            year=cls.year.value,
+            month=cls.month.value,
+            day=cls.day.value,
+            hour=cls.hour.value,
+            minute=cls.minute.value,
+            second=cls.second.value,
+            microsecond=cls.microsecond.value,
+            timezone=cls.timezone.value,
+        )
+
+    @classmethod
+    def short(cls) -> str:
+        return "{year}-{month}-{day}".format(
+            year=cls.year.value,
+            month=cls.month.value,
+            day=cls.day.value,
+        )
+
+    @classmethod
+    def full(cls) -> str:
+        return "{day_short}, {day} {month_short} {year} {hour}:{minute}:{second}".format(
+            day_short=cls.day_short.value,
+            day=cls.day.value,
+            month_short=cls.month_short.value,
+            year=cls.year.value,
+            hour=cls.hour.value,
+            minute=cls.minute.value,
+            second=cls.second.value,
+        )
+
+    @classmethod
+    def human(cls) -> str:
+        return "{day} {month_full} {year}".format(
+            day=cls.day.value,
+            month_full=cls.month_full.value,
+            year=cls.year.value,
+        )
+
+    @classmethod
+    def time(cls) -> str:
+        return "{hour}:{minute}:{second}".format(
+            hour=cls.hour.value,
+            minute=cls.minute.value,
+            second=cls.second.value,
+        )
+
+    @classmethod
+    def us(cls) -> str:
+        return "{month}/{day}/{year}".format(
+            month=cls.month.value,
+            day=cls.day.value,
+            year=cls.year.value,
+        )
+
+    @classmethod
+    def eu(cls) -> str:
+        return "{day}/{month}/{year}".format(
+            day=cls.day.value,
+            month=cls.month.value,
+            year=cls.year.value,
+        )
+
+    @classmethod
+    def rfc2822(cls) -> str:
+        return "{day_short}, {day} {month_short} {year} {hour}:{minute}:{second} {timezone}".format(
+            day_short=cls.day_short.value,
+            day=cls.day.value,
+            month_short=cls.month_short.value,
+            year=cls.year.value,
+            hour=cls.hour.value,
+            minute=cls.minute.value,
+            second=cls.second.value,
+            timezone=cls.timezone.value,
+        )
+
+    @classmethod
+    def rfc3339(cls) -> str:
+        return "{year}-{month}-{day}T{hour}:{minute}:{second}{timezone}".format(
+            year=cls.year.value,
+            month=cls.month.value,
+            day=cls.day.value,
+            hour=cls.hour.value,
+            minute=cls.minute.value,
+            second=cls.second.value,
+            timezone=cls.timezone.value,
+        )
+"""
+
+[[files]]
+path = "src/common/formats/encoders/__init__.py"
+mode = "w"
+content = """
+from .json import Encoder as JSONEncoder
+
+
+__all__ = [
+    "JSONEncoder",
+]
+"""
+
+[[files]]
+path = "src/common/formats/encoders/json.py"
+mode = "w"
+content = """
+import datetime
+import decimal
+import enum
+import json
+import typing
+
+from pydantic import BaseModel
+
+
+class Encoder(json.JSONEncoder):
+    def default(self, obj: typing.Any) -> typing.Any:
+        if isinstance(obj, datetime.datetime):
+            return obj.isoformat()
+        elif isinstance(obj, datetime.date):
+            return obj.isoformat()
+        elif isinstance(obj, enum.Enum):
+            return obj.value
+        elif isinstance(obj, decimal.Decimal):
+            return str(obj)
+        elif isinstance(obj, BaseModel):
+            return obj.model_dump()
+        try:
+            return json.JSONEncoder.default(self, obj)
+        except TypeError:
+            return str(obj)
+"""
+
+[[files]]
+path = "src/common/formats/utils/__init__.py"
+mode = "w"
+content = """
+
+"""
+
+[[files]]
+path = "src/common/formats/utils/array.py"
+mode = "w"
+content = """
+import typing
+
+
+def unique(iterable: typing.Iterable[typing.Any]) -> list[typing.Any]:
+    return list(dict.fromkeys(iterable))
+
+
+def flatten(iterable: typing.Iterable[typing.Any]) -> list[typing.Any]:
+    array = []
+    for item in iterable:
+        if isinstance(item, (list, tuple)):
+            array.extend(flatten(item))
+        else:
+            array.append(item)
+    return array
+
+
+def sort(
+    iterable: typing.Iterable[typing.Any],
+    key: typing.Any | None = None,
+    swap: bool = False,
+) -> typing.List[typing.Any]:
+    return sorted(iterable, key=key, reverse=swap)
+
+
+def first(iterable: typing.Iterable[typing.Any]) -> typing.Any:
+    return next(iter(iterable))
+
+
+def last(iterable: typing.Sequence[typing.Any]) -> typing.Any:
+    return iterable[-1]
+
+
+def reverse(iterable: typing.Iterable[typing.Any]) -> list[typing.Any]:
+    return list(iterable)[::-1]
+"""
+
+[[files]]
+path = "src/common/formats/utils/base64.py"
+mode = "w"
+content = """
+import base64
+import typing
+
+from . import json
+
+
+def encode(data: dict[str, typing.Any]) -> str:
+    return base64.urlsafe_b64encode(json.tostring(data).encode()).decode()
+
+
+def decode(data: str) -> typing.Any:
+    return json.fromstring(base64.urlsafe_b64decode(data).decode())
+"""
+
+[[files]]
+path = "src/common/formats/utils/binary.py"
+mode = "w"
+content = """
+from src.common.formats.collections import ENCODING_UTF
+from src.common.keyboard.collections import SYMBOL_EMPTY
+from src.common.keyboard.collections import SYMBOL_NEWLINE
+
+from .string import strip
+
+
+def tostring(string: bytes) -> str:
+    return strip(string.decode(ENCODING_UTF).replace(SYMBOL_NEWLINE, SYMBOL_EMPTY))
+"""
+
+[[files]]
+path = "src/common/formats/utils/date.py"
+mode = "w"
+content = """
+import datetime
+
+from src.common.formats.collections import Format
+
+
+def now() -> datetime.datetime:
+    return datetime.datetime.now(datetime.UTC)
+
+
+def midnight() -> datetime.datetime:
+    return now().replace(hour=0, minute=0, second=0, microsecond=0)
+
+
+def today() -> datetime.date:
+    return now().date()
+
+
+def previous() -> datetime.datetime:
+    return now().replace(day=1) - datetime.timedelta(days=1)
+
+
+def tostring(date: datetime.datetime, fmt: str) -> str:
+    return date.strftime(fmt)
+
+
+def fromstring(date: str, fmt: str) -> datetime.datetime:
+    return datetime.datetime.strptime(date, fmt)
+
+
+def before(date: datetime.datetime, comparison: datetime.datetime) -> bool:
+    return date < comparison
+
+
+def after(date: datetime.datetime, comparison: datetime.datetime) -> bool:
+    return date > comparison
+
+
+def include(date: datetime.datetime, comparison: datetime.datetime) -> bool:
+    return date <= now() <= comparison.date()
+
+
+def same(date: datetime.datetime, comparison: datetime.datetime) -> bool:
+    return date == comparison
+
+
+def diff(date: datetime.datetime, comparison: datetime.datetime) -> datetime.timedelta:
+    return date - comparison
+
+
+def age(date: datetime.datetime) -> int:
+    return (now() - date).days // 365
+
+
+def iso(date: datetime.datetime) -> str:
+    return tostring(date, Format.iso())
+
+
+def short(date: datetime.datetime) -> str:
+    return tostring(date, Format.short())
+
+
+def full(date: datetime.datetime) -> str:
+    return tostring(date, Format.full())
+
+
+def human(date: datetime.datetime) -> str:
+    return tostring(date, Format.human())
+
+
+def time(date: datetime.datetime) -> str:
+    return tostring(date, Format.time())
+
+
+def us(date: datetime.datetime) -> str:
+    return tostring(date, Format.us())
+
+
+def eu(date: datetime.datetime) -> str:
+    return tostring(date, Format.eu())
+
+
+def rfc2822(date: datetime.datetime) -> str:
+    return tostring(date, Format.rfc2822())
+
+
+def rfc3339(date: datetime.datetime) -> str:
+    return tostring(date, Format.rfc3339())
+
+
+def start(date: datetime.datetime) -> datetime.datetime:
+    return date.replace(hour=0, minute=0, second=0, microsecond=0)
+
+
+def end(date: datetime.datetime) -> datetime.datetime:
+    return date.replace(hour=23, minute=59, second=59, microsecond=999999)
+
+
+def weekend(date: datetime.datetime) -> bool:
+    return date.weekday() >= 5
+
+
+def shift(*, seconds: int = 0, minutes: int = 0, hours: int = 0, days: int = 0) -> datetime.datetime:
+    return now() + datetime.timedelta(days=days, hours=hours, minutes=minutes, seconds=seconds)
+"""
+
+[[files]]
+path = "src/common/formats/utils/field.py"
+mode = "w"
+content = """
+import contextlib
+import typing
+
+
+def required(field: typing.Any) -> typing.Any:
+    if not field:
+        raise ValueError("Field is required")
+    return field
+
+
+def safe(
+    func: typing.Callable[..., typing.Any],
+    *args: typing.Any,
+    **kwargs: typing.Any,
+) -> typing.Any | None:
+    with contextlib.suppress(Exception):
+        return func(*args, **kwargs)
+    return None
+"""
+
+[[files]]
+path = "src/common/formats/utils/hashes.py"
+mode = "w"
+content = """
+import hashlib
+import typing
+
+from pydantic import BaseModel
+
+from . import json
+
+
+def deterministic(func: typing.Callable[..., typing.Any], context: dict[str, typing.Any] | None = None) -> str:
+    params: dict[str, typing.Any] = (
+        {
+            name: value
+            for name, value in context.items()
+            if isinstance(value, (str, int, float, bool, list, dict, tuple, BaseModel, type(None)))
+        }
+        if context
+        else {}
+    )
+    data: dict[str, typing.Any] = {
+        "func": f"{func.__module__}.{func.__name__}",
+        "params": dict(sorted(params.items())),
+    }
+    return hashlib.md5(json.tostring(data, sort_keys=True).encode()).hexdigest()
+"""
+
+[[files]]
+path = "src/common/formats/utils/jinja.py"
+mode = "w"
+content = """
+import typing
+
+from jinja2 import Template
+
+
+def generate(file: str, context: dict[str, typing.Any]) -> str:
+    with open(file) as _file:
+        template = Template(_file.read())
+    return template.render(context)
+"""
+
+[[files]]
+path = "src/common/formats/utils/json.py"
+mode = "w"
+content = """
+import base64
+import json
+import typing
+
+from src.common.formats.encoders import JSONEncoder
+
+
+def tostring(obj: typing.Any, sort_keys: bool = False, indent: int | None = None, ensure_ascii: bool = False) -> str:
+    return json.dumps(obj, cls=JSONEncoder, sort_keys=sort_keys, indent=indent, ensure_ascii=ensure_ascii)
+
+
+def fromstring(text: str) -> typing.Any:
+    return json.loads(text)
+
+
+def atob(text: str) -> typing.Any:
+    return json.loads(base64.urlsafe_b64decode(text + "=="))
+"""
+
+[[files]]
+path = "src/common/formats/utils/modules.py"
+mode = "w"
+content = """
+import types
+
+
+def define(module: types.ModuleType) -> str:
+    return module.__name__
+"""
+
+[[files]]
+path = "src/common/formats/utils/number.py"
+mode = "w"
+content = """
+import decimal
+import typing
+
+
+Number = typing.Union[int, float, str, decimal.Decimal]
+
+UNIT = 100
+
+
+def _decimal(number: Number) -> decimal.Decimal:
+    if isinstance(number, decimal.Decimal):
+        return number
+    return decimal.Decimal(str(number))
+
+
+def _tounit(number: Number, unit: int = UNIT) -> int:
+    return int(_decimal(number) * unit)
+
+
+def _fromunit(number: Number, unit: int = UNIT) -> decimal.Decimal:
+    return decimal.Decimal(number) / unit
+
+
+def convert(number: Number, current_unit: int, convert_unit: int) -> decimal.Decimal:
+    return _fromunit(_tounit(number, current_unit), convert_unit)
+
+
+def round(number: Number, unit: int = UNIT, rounding: str = decimal.ROUND_HALF_UP) -> decimal.Decimal:
+    return _fromunit(_decimal(_tounit(number, unit)).quantize(decimal.Decimal("1"), rounding=rounding), unit)
+
+
+def add(a: Number, b: Number, unit: int = UNIT) -> decimal.Decimal:
+    return _fromunit(_tounit(a, unit) + _tounit(b, unit), unit)
+
+
+def sub(a: Number, b: Number, unit: int = UNIT) -> decimal.Decimal:
+    return _fromunit(_tounit(a, unit) - _tounit(b, unit), unit)
+
+
+def mul(a: Number, b: Number, unit: int = UNIT) -> decimal.Decimal:
+    return _fromunit(_tounit(a, unit) * _tounit(b, unit), unit)
+
+
+def div(a: Number, b: Number, unit: int = UNIT) -> decimal.Decimal:
+    return _fromunit(_tounit(a, unit) // _tounit(b, unit), unit)
+
+
+def split(number: Number, parts: int, unit: int = UNIT) -> list[decimal.Decimal]:
+    amount = _tounit(number, unit)
+    base = amount // parts
+    remainder = amount % parts
+    result = [_fromunit(base, unit)] * parts
+    for i in range(remainder):
+        result[i] = _fromunit(base + 1, unit)
+    return result
+
+
+def compare(a: Number, b: Number, unit: int = UNIT) -> int:
+    left = _tounit(a, unit)
+    right = _tounit(b, unit)
+    return (left > right) - (left < right)
+
+
+def minvalue(*numbers: Number, unit: int = UNIT) -> decimal.Decimal:
+    return _fromunit(min(_tounit(number, unit) for number in numbers), unit)
+
+
+def maxvalue(*numbers: Number, unit: int = UNIT) -> decimal.Decimal:
+    return _fromunit(max(_tounit(number, unit) for number in numbers), unit)
+
+
+def sums(*numbers: Number, unit: int = UNIT) -> decimal.Decimal:
+    return _fromunit(sum(_tounit(number, unit) for number in numbers), unit)
+
+
+def area(length: Number, width: Number, unit: int = UNIT) -> decimal.Decimal:
+    return mul(length, width, unit)
+
+
+def volume(length: Number, width: Number, height: Number, unit: int = UNIT) -> decimal.Decimal:
+    return mul(mul(length, width, unit), height, unit)
+"""
+
+[[files]]
+path = "src/common/formats/utils/path.py"
+mode = "w"
+content = """
+import pathlib
+
+from src.common.keyboard.collections import SYMBOL_FORWARD_SLASH
+
+
+def current() -> pathlib.Path:
+    return pathlib.Path.cwd()
+
+
+def define(path: str | pathlib.Path | None = None) -> pathlib.Path:
+    if not path:
+        return current()
+    elif isinstance(path, str) and path.startswith(SYMBOL_FORWARD_SLASH):
+        return pathlib.Path(path)
+    else:
+        return current() / path
+"""
+
+[[files]]
+path = "src/common/formats/utils/stream.py"
+mode = "w"
+content = """
+import sys
+import typing
+
+
+def name(stream: typing.TextIO) -> str:
+    if stream is sys.stdout:
+        return "stdout"
+    elif stream is sys.stderr:
+        return "stderr"
+    else:
+        raise NotImplementedError
+"""
+
+[[files]]
+path = "src/common/formats/utils/string.py"
+mode = "w"
+content = """
+import contextlib
+import unicodedata
+
+from src.common.formats.collections import ENCODING_ASCII
+from src.common.formats.collections import ENCODING_ERROR_IGNORE
+from src.common.formats.collections import REGEXP_NON_ALPHANUMERIC
+from src.common.formats.collections import REGEXP_PASCAL_WORDS
+from src.common.formats.collections import UNICODE_NORMALIZATION_FORM
+from src.common.keyboard.collections import SYMBOL_COMMA
+from src.common.keyboard.collections import SYMBOL_DOT
+from src.common.keyboard.collections import SYMBOL_EMPTY
+from src.common.keyboard.collections import SYMBOL_HYPHEN
+from src.common.keyboard.collections import SYMBOL_LOWER_HYPHEN
+from src.common.keyboard.collections import SYMBOL_TRUNCATION
+from src.common.keyboard.collections import SYMBOL_WHITESPACE
+
+
+def strip(string: str, clean: bool = True) -> str:
+    return string.strip() if clean else string
+
+
+def normalized(string: str, clean: bool = True) -> str:
+    return (
+        unicodedata.normalize(UNICODE_NORMALIZATION_FORM, strip(string, clean))
+        .encode(ENCODING_ASCII, ENCODING_ERROR_IGNORE)
+        .decode(ENCODING_ASCII)
+    )
+
+
+def compact(string: str, clean: bool = True) -> str:
+    return SYMBOL_WHITESPACE.join(strip(string, clean).split())
+
+
+def truncate(string: str, length: int, clean: bool = True) -> str:
+    return strip(string, clean)[: length - len(SYMBOL_TRUNCATION)] + SYMBOL_TRUNCATION
+
+
+def remove(string: str, prefix: str | None = None, suffix: str | None = None, clean: bool = True) -> str:
+    string = strip(string, clean)
+    if prefix:
+        string = string.removeprefix(prefix)
+    if suffix:
+        string = string.removesuffix(suffix)
+    return string
+
+
+def empty(string: str, clean: bool = True) -> bool:
+    return not bool(strip(string, clean))
+
+
+def number(string: str, clean: bool = True) -> bool:
+    with contextlib.suppress(ValueError):
+        float(strip(string, clean).replace(SYMBOL_COMMA, SYMBOL_DOT))
+        return True
+    return False
+
+
+def count(string: str, clean: bool = True) -> int:
+    return len(strip(string, clean))
+
+
+def lower(string: str, clean: bool = True) -> str:
+    return strip(string, clean).lower()
+
+
+def upper(string: str, clean: bool = True) -> str:
+    return strip(string, clean).upper()
+
+
+def title(string: str, clean: bool = True) -> str:
+    return strip(string, clean).title()
+
+
+def capitalize(string: str, clean: bool = True) -> str:
+    return strip(string, clean).capitalize()
+
+
+def sentence(string: str, clean: bool = True) -> str:
+    string = compact(string, clean)
+    return string[:1].upper() + string[1:].lower() if string else string
+
+
+def acronym(string: str, clean: bool = True) -> str:
+    words = REGEXP_NON_ALPHANUMERIC.findall(strip(string, clean))
+    return SYMBOL_EMPTY.join(word[0].upper() for word in words)
+
+
+def words(string: str, clean: bool = True) -> list[str]:
+    return REGEXP_NON_ALPHANUMERIC.findall(strip(string, clean))
+
+
+def snake(string: str, clean: bool = True) -> str:
+    string = strip(string, clean)
+
+    chunks = REGEXP_NON_ALPHANUMERIC.split(string)
+    words = []
+
+    for chunk in chunks:
+        if not chunk:
+            continue
+
+        chunk_words = REGEXP_PASCAL_WORDS.findall(chunk)
+        words.extend(chunk_words)
+
+    return SYMBOL_LOWER_HYPHEN.join(word.lower() for word in words if word)
+
+
+def camel(string: str, clean: bool = True) -> str:
+    string = strip(string, clean)
+
+    chunks = REGEXP_NON_ALPHANUMERIC.split(string)
+    words: list[str] = []
+
+    for chunk in chunks:
+        if not chunk:
+            continue
+
+        chunk_words: list[str] = REGEXP_PASCAL_WORDS.findall(chunk)
+        words.extend(chunk_words)
+
+    if not words:
+        return ""
+
+    return words[0].lower() + "".join(word.capitalize() for word in words[1:])
+
+
+def pascal(string: str, preserve: bool = True, clean: bool = True) -> str:
+    string = strip(string, clean)
+
+    chunks = REGEXP_NON_ALPHANUMERIC.split(string)
+    words = []
+
+    for chunk in chunks:
+        if not chunk:
+            continue
+
+        chunk_words = REGEXP_PASCAL_WORDS.findall(chunk)
+        for word in chunk_words:
+            if preserve and word.isupper() and len(word) > 1:
+                words.append(word)
+            else:
+                words.append(word.capitalize())
+
+    return SYMBOL_EMPTY.join(words)
+
+
+def kebab(string: str, clean: bool = True) -> str:
+    string = strip(string, clean)
+
+    chunks = REGEXP_NON_ALPHANUMERIC.split(string)
+    words = []
+
+    for chunk in chunks:
+        if not chunk:
+            continue
+
+        chunk_words = REGEXP_PASCAL_WORDS.findall(chunk)
+        words.extend(chunk_words)
+
+    return SYMBOL_HYPHEN.join(word.lower() for word in words if word)
+
+
+def split(string: str, separator: str = SYMBOL_WHITESPACE, clean: bool = True) -> list[str]:
+    return strip(string, clean).split(separator)
+
+
+def join(words: list[str], separator: str = SYMBOL_WHITESPACE, clean: bool = True) -> str:
+    return separator.join([strip(word, clean) for word in words])
+
+
+def splitlines(string: str, clean: bool = True) -> list[str]:
+    return strip(string, clean).splitlines()
+"""
+
+[[files]]
+path = "src/common/formats/utils/urls.py"
+mode = "w"
+content = """
+import io
+import ipaddress
+import socket
+import typing
+import urllib.parse
+import urllib.request
+
+from rfc3986 import uri_reference
+
+
+def parse(url: str) -> urllib.parse.ParseResult:
+    return urllib.parse.urlparse(url)
+
+
+def check(scheme: str) -> bool:
+    return scheme in ("http", "https")
+
+
+def join(domain: str, path: str) -> str:
+    return urllib.parse.urljoin(domain, path)
+
+
+def download(path: str) -> io.BytesIO:
+    with urllib.request.urlopen(path) as response:
+        return io.BytesIO(response.read())
+
+
+def safe(url: str) -> bool:
+    try:
+        parsed = parse(url)
+
+        if not check(parsed.scheme):
+            return False
+
+        host = parsed.hostname
+
+        if not host:
+            return False
+
+        ip = socket.gethostbyname(host)
+
+        addr = ipaddress.ip_address(ip)
+
+        if addr.is_private or addr.is_loopback:
+            return False
+
+        return True
+
+    except Exception:
+        return False
+
+
+def allowed(url: str, domains: list[str]) -> bool:
+    parsed = parse(url)
+
+    host = parsed.hostname
+
+    if not host:
+        return False
+
+    for domain in domains:
+        if host == domain or host.endswith("." + domain):
+            return True
+
+    return False
+
+
+def normalize(url: str) -> typing.Any:
+    return uri_reference(url).normalize().unsplit()
+
+
+def equal(first: str, second: str) -> typing.Any:
+    return normalize(first) == normalize(second)
+"""
+
+[[files]]
+path = "src/common/formats/utils/uuid.py"
+mode = "w"
+content = """
+import uuid
+
+
+def unique() -> str:
+    return str(uuid.uuid4())
+"""
+
+[[files]]
+path = "src/common/http/__init__.py"
+mode = "w"
+content = """
+
+"""
+
+[[files]]
+path = "src/common/http/collections/__init__.py"
+mode = "w"
+content = """
+from .enums import HTTPCode
+from .enums import HTTPHeader
+from .exceptions import Forbidden
+from .exceptions import HTTPError
+
+
+__all__ = [
+    "Forbidden",
+    "HTTPCode",
+    "HTTPError",
+    "HTTPHeader",
+]
+"""
+
+[[files]]
+path = "src/common/http/collections/enums/__init__.py"
+mode = "w"
+content = """
+from .request import HTTPHeader
+from .response import HTTPCode
+
+
+__all__ = [
+    "HTTPCode",
+    "HTTPHeader",
+]
+"""
+
+[[files]]
+path = "src/common/http/collections/enums/request.py"
+mode = "w"
+content = """
+import enum
+
+
+class HTTPHeader(enum.StrEnum):
+    authorization = "authorization"
+    cookie = "cookie"
+    set_cookie = "set-cookie"
+    x_api_key = "x-api-key"
+    proxy_authorization = "proxy-authorization"
+    www_authenticate = "www-authenticate"
+    x_forwarded_for = "x-forwarded-for"
+    x_real_ip = "x-real-ip"
+    x_csrf_token = "x-csrf-token"
+    x_xsrf_token = "x-xsrf-token"
+    x_auth_token = "x-auth-token"
+    x_cache_hit = "x-cache-hit"
+"""
+
+[[files]]
+path = "src/common/http/collections/enums/response.py"
+mode = "w"
+content = """
+import http
+
+
+HTTPCode = http.HTTPStatus
+"""
+
+[[files]]
+path = "src/common/http/collections/exceptions/__init__.py"
+mode = "w"
+content = """
+from .error import Forbidden
+from .error import HTTPError
+
+
+__all__ = [
+    "Forbidden",
+    "HTTPError",
+]
+"""
+
+[[files]]
+path = "src/common/http/collections/exceptions/error.py"
+mode = "w"
+content = """
+import typing
+
+from src.common.http.collections.enums.response import HTTPCode
+
+
+class HTTPError(Exception):
+    code: int = HTTPCode.IM_A_TEAPOT
+
+    def __str__(self) -> str:
+        return self.__class__.__name__
+
+    @property
+    def http(self) -> dict[str, typing.Any]:
+        return dict(
+            status_code=self.code,
+            detail=dict(type=self.__class__.__name__),
+        )
+
+
+class Forbidden(HTTPError):
+    code = HTTPCode.FORBIDDEN
+"""
+
+[[files]]
+path = "src/common/keyboard/__init__.py"
+mode = "w"
+content = """
+
+"""
+
+[[files]]
+path = "src/common/keyboard/collections/__init__.py"
+mode = "w"
+content = """
+from .const import SYMBOL_ASTERISK
+from .const import SYMBOL_COLON
+from .const import SYMBOL_COMMA
+from .const import SYMBOL_DASH
+from .const import SYMBOL_DOT
+from .const import SYMBOL_EMPTY
+from .const import SYMBOL_FORWARD_SLASH
+from .const import SYMBOL_HYPHEN
+from .const import SYMBOL_LOWER_HYPHEN
+from .const import SYMBOL_NEWLINE
+from .const import SYMBOL_TRUNCATION
+from .const import SYMBOL_WHITESPACE
+
+
+__all__ = [
+    "SYMBOL_ASTERISK",
+    "SYMBOL_COLON",
+    "SYMBOL_COMMA",
+    "SYMBOL_DASH",
+    "SYMBOL_DOT",
+    "SYMBOL_EMPTY",
+    "SYMBOL_FORWARD_SLASH",
+    "SYMBOL_HYPHEN",
+    "SYMBOL_LOWER_HYPHEN",
+    "SYMBOL_NEWLINE",
+    "SYMBOL_TRUNCATION",
+    "SYMBOL_WHITESPACE",
+]
+"""
+
+[[files]]
+path = "src/common/keyboard/collections/const/__init__.py"
+mode = "w"
+content = """
+from .symbols import SYMBOL_ASTERISK
+from .symbols import SYMBOL_COLON
+from .symbols import SYMBOL_COMMA
+from .symbols import SYMBOL_DASH
+from .symbols import SYMBOL_DOT
+from .symbols import SYMBOL_EMPTY
+from .symbols import SYMBOL_FORWARD_SLASH
+from .symbols import SYMBOL_HYPHEN
+from .symbols import SYMBOL_LOWER_HYPHEN
+from .symbols import SYMBOL_NEWLINE
+from .symbols import SYMBOL_TRUNCATION
+from .symbols import SYMBOL_WHITESPACE
+
+
+__all__ = [
+    "SYMBOL_ASTERISK",
+    "SYMBOL_COLON",
+    "SYMBOL_COMMA",
+    "SYMBOL_DASH",
+    "SYMBOL_DOT",
+    "SYMBOL_EMPTY",
+    "SYMBOL_FORWARD_SLASH",
+    "SYMBOL_HYPHEN",
+    "SYMBOL_LOWER_HYPHEN",
+    "SYMBOL_NEWLINE",
+    "SYMBOL_TRUNCATION",
+    "SYMBOL_WHITESPACE",
+]
+"""
+
+[[files]]
+path = "src/common/keyboard/collections/const/symbols.py"
+mode = "w"
+content = """
+SYMBOL_EMPTY = ""
+SYMBOL_COMMA = ","
+SYMBOL_DOT = "."
+SYMBOL_WHITESPACE = " "
+SYMBOL_LOWER_HYPHEN = "_"
+SYMBOL_HYPHEN = "-"
+SYMBOL_NEWLINE = "\n"
+SYMBOL_TRUNCATION = "..."
+SYMBOL_FORWARD_SLASH = "/"
+SYMBOL_COLON = ":"
+SYMBOL_DASH = "-"
+SYMBOL_ASTERISK = "*"
+"""
+
+[[files]]
+path = "src/common/os/__init__.py"
+mode = "w"
+content = """
+
+"""
+
+[[files]]
+path = "src/common/os/collections/__init__.py"
+mode = "w"
+content = """
+from .const import KB
+from .const import MB
+
+
+__all__ = [
+    "KB",
+    "MB",
+]
+"""
+
+[[files]]
+path = "src/common/os/collections/const/__init__.py"
+mode = "w"
+content = """
+from .memory import KB
+from .memory import MB
+
+
+__all__ = [
+    "KB",
+    "MB",
+]
+"""
+
+[[files]]
+path = "src/common/os/collections/const/memory.py"
+mode = "w"
+content = """
+KB = 1024
+MB = 1048576
+"""
+
+[[files]]
+path = "src/common/os/utils/__init__.py"
+mode = "w"
+content = """
+from .memory import kilobytes
+from .memory import megabytes
+
+
+__all__ = [
+    "kilobytes",
+    "megabytes",
+]
+"""
+
+[[files]]
+path = "src/common/os/utils/memory.py"
+mode = "w"
+content = """
+from src.common.os.collections import KB
+from src.common.os.collections import MB
+
+
+def megabytes(number: int) -> int:
+    return number * MB
+
+
+def kilobytes(number: int) -> int:
+    return number * KB
+"""
+
+[[files]]
+path = "src/common/typings/__init__.py"
+mode = "w"
+content = """
+
+"""
+
+[[files]]
+path = "src/common/typings/validators/__init__.py"
+mode = "w"
+content = """
+from .database import IntRef
+from .database import StrRef
+from .date import Year
+from .number import Number
+from .string import Search
+from .string import String
+from .string import Text
+from .urls import Link
+
+
+__all__ = [
+    "IntRef",
+    "Link",
+    "Number",
+    "Search",
+    "StrRef",
+    "String",
+    "Text",
+    "Year",
+]
+"""
+
+[[files]]
+path = "src/common/typings/validators/database.py"
+mode = "w"
+content = """
+import typing
+
+from pydantic import Field
+from pydantic import StringConstraints
+
+
+IntRef = typing.Annotated[int, Field(ge=1)]
+StrRef = typing.Annotated[
+    str,
+    StringConstraints(
+        min_length=1,
+        max_length=256,
+        strip_whitespace=True,
+    ),
+]
+"""
+
+[[files]]
+path = "src/common/typings/validators/date.py"
+mode = "w"
+content = """
+import typing
+
+from pydantic import Field
+
+
+Year = typing.Annotated[int, Field(ge=1970)]
+"""
+
+[[files]]
+path = "src/common/typings/validators/number.py"
+mode = "w"
+content = """
+import typing
+
+from pydantic import Field
+
+
+Number = typing.Annotated[int, Field(ge=0)]
+"""
+
+[[files]]
+path = "src/common/typings/validators/string.py"
+mode = "w"
+content = """
+import typing
+
+from pydantic import StringConstraints
+
+
+Text = typing.Annotated[str, StringConstraints(min_length=1, max_length=4096, strip_whitespace=True)]
+String = typing.Annotated[str, StringConstraints(min_length=1, max_length=2048, strip_whitespace=True)]
+Search = typing.Annotated[str, StringConstraints(to_lower=True, min_length=1, max_length=256, strip_whitespace=True)]
+"""
+
+[[files]]
+path = "src/common/typings/validators/urls.py"
+mode = "w"
+content = """
+import typing
+
+from pydantic import StringConstraints
+
+
+Link = typing.Annotated[
+    str,
+    StringConstraints(
+        min_length=1,
+        max_length=8192,
+        strip_whitespace=True,
+    ),
+]
+"""
+
+[[files]]
+path = "src/common/typings/variables/__init__.py"
+mode = "w"
+content = """
+from .error import Error
+
+
+__all__ = [
+    "Error",
+]
+"""
+
+[[files]]
+path = "src/common/typings/variables/error.py"
+mode = "w"
+content = """
+import typing
+
+
+Error = typing.TypeVar("Error", bound=Exception)
+"""
+
+[[files]]
+path = "src/configuration/__init__.py"
+mode = "w"
+content = """
+from .setup import Settings
+from .setup import settings
+
+
+__all__ = [
+    "Settings",
+    "settings",
+]
+"""
+
+[[files]]
+path = "src/configuration/setup.py"
+mode = "w"
+content = """
+from pydantic_settings import BaseSettings
+from pydantic_settings import SettingsConfigDict
+
+
+class Authentication(BaseSettings):
+    AUTHENTICATION: bool = False
+    AUTHENTICATION_HTTP_BASIC_USERNAME: str | None = None
+    AUTHENTICATION_HTTP_BASIC_PASSWORD: str | None = None
+
+
+class Cryptography(BaseSettings):
+    CRYPTOGRAPHY: bool = False
+    CRYPTOGRAPHY_SECRET_KEY: str | None = None
+
+
+class Postgres(BaseSettings):
+    POSTGRES: bool = False
+    POSTGRES_HOST: str | None = None
+
+    @property
+    def psycopg(self) -> str | None:
+        return self.POSTGRES_HOST.replace("asyncpg", "psycopg2") if self.POSTGRES_HOST else None
+
+    @property
+    def asyncpg(self) -> str | None:
+        return self.POSTGRES_HOST
+
+
+class Redis(BaseSettings):
+    REDIS: bool = False
+    REDIS_HOST: str | None = None
+
+
+class Jwt(BaseSettings):
+    JWT: bool = False
+    JWT_ALGORITHM: str | None = "HS256"
+    JWT_SECRET_KEY: str | None = None
+    JWT_ACCESS_EXPIRED_SECONDS: int | None = 43200  # 12h
+    JWT_REFRESH_EXPIRED_SECONDS: int | None = 2592000  # 30d
+
+
+class Logging(BaseSettings):
+    LOGGING: bool = True
+
+
+configs = [
+    Authentication,
+    Cryptography,
+    Logging,
+    Postgres,
+    Redis,
+    Jwt,
+]
+
+
+class Settings(*configs):  # type:ignore
+    model_config = SettingsConfigDict(env_file=".env", case_sensitive=True, extra="ignore")
+
+
+settings = Settings()
+"""
+
+[[files]]
+path = "src/decorators/__init__.py"
+mode = "w"
+content = """
+from .usecases import SessionMaker
+from .usecases import sessionmaker
+
+
+__all__ = [
+    "SessionMaker",
+    "sessionmaker",
+]
+"""
+
+[[files]]
+path = "src/decorators/usecases/__init__.py"
+mode = "w"
+content = """
+from .session import SessionMaker
+from .session import sessionmaker
+
+
+__all__ = [
+    "SessionMaker",
+    "sessionmaker",
+]
+"""
+
+[[files]]
+path = "src/decorators/usecases/session.py"
+mode = "w"
+content = """
+import functools
+import typing
+
+from src.infrastructure.databases.postgres import postgres
+
+
+Callable = typing.Callable[..., typing.Awaitable[typing.Any]]
+
+
+class SessionMaker:
+    def write(self, function: Callable) -> Callable:
+        @functools.wraps(function)
+        async def wrapper(self: typing.Any, *args: typing.Any, **kwargs: typing.Any) -> typing.Any:
+            async with postgres.orm.write() as database_session:
+                return await function(self, database_session, *args, **kwargs)
+
+        return wrapper
+
+    def read(self, function: Callable) -> Callable:
+        @functools.wraps(function)
+        async def wrapper(self: typing.Any, *args: typing.Any, **kwargs: typing.Any) -> typing.Any:
+            async with postgres.orm.read() as database_session:
+                return await function(self, database_session, *args, **kwargs)
+
+        return wrapper
+
+
+sessionmaker = SessionMaker()
+"""
+
+[[files]]
+path = "src/domain/__init__.py"
+mode = "w"
+content = """
+from . import collections
+from . import models
+
+
+__all__ = ["collections", "models"]
+"""
+
+[[files]]
+path = "src/domain/collections/__init__.py"
+mode = "w"
+content = """
+__all__: list[str] = []
+"""
+
+[[files]]
+path = "src/domain/collections/enums/__init__.py"
+mode = "w"
+content = """
+
+"""
+
+[[files]]
+path = "src/domain/collections/exceptions/__init__.py"
+mode = "w"
+content = """
+from .account import AccountAlreadyExists
+from .account import AccountBlocked
+from .account import AccountNotFound
+
+
+__all__ = [
+    "AccountAlreadyExists",
+    "AccountBlocked",
+    "AccountNotFound",
+]
+"""
+
+[[files]]
+path = "src/domain/models/__init__.py"
+mode = "w"
+content = """
+from .base import Model
+
+
+__all__ = ["Model"]
+"""
+
+[[files]]
+path = "src/domain/models/base.py"
+mode = "w"
+content = """
+import typing
+
+from pydantic import BaseModel
+from pydantic import ConfigDict
+
+
+class Base(BaseModel):
+    __encrypted__: list[str] = []
+
+    model_config = ConfigDict(from_attributes=True, extra="allow")
+
+    @classmethod
+    def init(cls, *args: typing.Any, **kwargs: typing.Any) -> typing.Self:
+        raise NotImplementedError
+
+    @classmethod
+    def encrypt(cls, encrypter: typing.Callable[..., typing.Any], **kwargs: typing.Any) -> dict[str, typing.Any]:
+        payload = dict()
+
+        for key, value in kwargs.items():
+            if key in cls.__encrypted__:
+                if value:
+                    payload[key] = encrypter(value)
+                else:
+                    payload[key] = None
+
+        return payload
+
+    @classmethod
+    def decrypt(cls, decrypter: typing.Callable[..., typing.Any], **kwargs: typing.Any) -> dict[str, typing.Any]:
+        payload = dict()
+
+        for key, value in kwargs.items():
+            if key in cls.__encrypted__:
+                if value:
+                    payload[key] = decrypter(value)
+                else:
+                    payload[key] = None
+        return payload
+
+
+Model = typing.TypeVar("Model", bound=Base)
+"""
+
+[[files]]
+path = "src/entrypoints/__init__.py"
+mode = "w"
+content = """
+
+"""
+
+[[files]]
+path = "src/entrypoints/http/__init__.py"
+mode = "w"
+content = """
+from .registry import router
+
+
+__all__ = [
+    "router",
+]
+"""
+
+[[files]]
+path = "src/entrypoints/http/common/__init__.py"
+mode = "w"
+content = """
+
+"""
+
+[[files]]
+path = "src/entrypoints/http/common/collections/__init__.py"
+mode = "w"
+content = """
+from .errors import AUTHORIZATION_ERRORS
+
+
+__all__ = [
+    "AUTHORIZATION_ERRORS",
+]
+"""
+
+[[files]]
+path = "src/entrypoints/http/common/collections/errors/__init__.py"
+mode = "w"
+content = """
+from .security import AUTHORIZATION_ERRORS
+
+
+__all__ = [
+    "AUTHORIZATION_ERRORS",
+]
+"""
+
+[[files]]
+path = "src/entrypoints/http/common/collections/errors/security.py"
+mode = "w"
+content = """
+from src.common.http.collections import Forbidden
+from src.infrastructure.security.jwt.collections import TokenInvalid
+
+
+AUTHORIZATION_ERRORS = [
+    Forbidden,
+    TokenInvalid,
+]
+"""
+
+[[files]]
+path = "src/entrypoints/http/common/deps/__init__.py"
+mode = "w"
+content = """
+from .security import basic
+from .security import jwt
+
+
+__all__ = ["basic", "jwt"]
+"""
+
+[[files]]
+path = "src/entrypoints/http/common/deps/security/__init__.py"
+mode = "w"
+content = """
+from .basic import dependency as basic
+from .jwt import dependency as jwt
+
+
+__all__ = [
+    "basic",
+    "jwt",
+]
+"""
+
+[[files]]
+path = "src/entrypoints/http/common/deps/security/basic.py"
+mode = "w"
+content = """
+import typing
+
+from fastapi import Depends
+from fastapi import HTTPException
+from fastapi import status
+from fastapi.security import HTTPBasic
+from fastapi.security import HTTPBasicCredentials
+
+from src.configuration import settings
+
+
+def dependency(authenticate: typing.Annotated[HTTPBasicCredentials, Depends(HTTPBasic())]) -> None:
+    if settings.AUTHENTICATION:
+        if not (
+            (authenticate.username == settings.AUTHENTICATION_HTTP_BASIC_USERNAME)
+            and (authenticate.password == settings.AUTHENTICATION_HTTP_BASIC_PASSWORD)
+        ):
+            raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, headers={"WWW-Authenticate": "Basic"})
+"""
+
+[[files]]
+path = "src/entrypoints/http/common/deps/security/jwt.py"
+mode = "w"
+content = """
+import typing
+
+from fastapi import Depends
+from fastapi.security import HTTPAuthorizationCredentials
+from fastapi.security import HTTPBearer
+
+
+def dependency(
+    authorization: typing.Annotated[HTTPAuthorizationCredentials, Depends(HTTPBearer(bearerFormat="JWT"))],
+) -> str:
+    return authorization.credentials
+"""
+
+[[files]]
+path = "src/entrypoints/http/common/schemas/__init__.py"
+mode = "w"
+content = """
+from .cqrs import Command
+from .cqrs import Query
+from .dates import DateRange
+from .http import Request
+from .http import Response
+from .model import ID
+from .pagination import Paginated
+from .pagination import Pagination
+from .sorting import Sorted
+from .urls import URL
+from .urls import Photo
+
+
+__all__ = [
+    "Command",
+    "DateRange",
+    "ID",
+    "Paginated",
+    "Pagination",
+    "Photo",
+    "Query",
+    "Request",
+    "Response",
+    "Sorted",
+    "URL",
+]
+"""
+
+[[files]]
+path = "src/entrypoints/http/common/schemas/cqrs.py"
+mode = "w"
+content = """
+from src.framework.openapi.models import Affix
+
+
+class Command(Affix):
+    __affix__ = "Command:"
+
+
+class Query(Affix):
+    __affix__ = "Query:"
+"""
+
+[[files]]
+path = "src/entrypoints/http/common/schemas/dates.py"
+mode = "w"
+content = """
+import datetime
+import typing
+
+from datetime import date
+
+from pydantic import BaseModel
+from pydantic import field_validator
+from pydantic import model_validator
+
+
+class DateRange(BaseModel):
+    started: datetime.date
+    ended: datetime.date | None = None
+
+    @field_validator("started")
+    @classmethod
+    def validate_started_not_future(cls, value: datetime.date) -> datetime.date:
+        if value > date.today():
+            raise ValueError("started date cannot be in the future")
+        return value
+
+    @field_validator("ended")
+    @classmethod
+    def validate_ended_not_future(cls, value: datetime.date | None) -> datetime.date | None:
+        if value and value > date.today():
+            raise ValueError("ended date cannot be in the future")
+        return value
+
+    @model_validator(mode="after")
+    def validate_date_order(self) -> typing.Self:
+        if self.ended and self.started > self.ended:
+            raise ValueError("started date must be before ended date")
+        return self
+"""
+
+[[files]]
+path = "src/entrypoints/http/common/schemas/http.py"
+mode = "w"
+content = """
+import typing
+
+from src.framework.openapi.models import Affix
+
+
+class Request(Affix):
+    __affix__ = "Request:"
+
+    def deserialize(self, *args: typing.Any, **kwargs: typing.Any) -> dict[str, typing.Any]:
+        return self.model_dump()
+
+
+class Response(Affix):
+    __affix__ = "Response:"
+
+    def serialize(self, *args: typing.Any, **kwargs: typing.Any) -> typing.Any:
+        raise NotImplementedError
+"""
+
+[[files]]
+path = "src/entrypoints/http/common/schemas/model.py"
+mode = "w"
+content = """
+import typing
+
+from src.domain.models import Model
+
+from .http import Response
+
+
+class ID(Response):
+    id: int | str
+
+    @classmethod
+    def serialize(cls, model: Model) -> typing.Self:
+        if not hasattr(model, "id"):
+            raise ValueError
+        return cls(id=model.id)
+"""
+
+[[files]]
+path = "src/entrypoints/http/common/schemas/pagination.py"
+mode = "w"
+content = """
+import typing
+
+from pydantic import BaseModel
+from pydantic import Field
+
+
+class Pagination(BaseModel):
+    page: typing.Annotated[int, Field(gt=0, le=1000)]
+    size: typing.Annotated[int, Field(gt=0, le=100)]
+
+    @property
+    def convert(self) -> dict[str, int]:
+        return dict(limit=self.size, offset=(self.page - 1) * self.size if self.page > 0 else 0)
+
+
+class Paginated(BaseModel):
+    total: int
+    items: list[typing.Any]
+"""
+
+[[files]]
+path = "src/entrypoints/http/common/schemas/sorting.py"
+mode = "w"
+content = """
+import uuid
+
+from pydantic import BaseModel
+
+
+class Sorted(BaseModel):
+    seed: uuid.UUID
+"""
+
+[[files]]
+path = "src/entrypoints/http/common/schemas/urls.py"
+mode = "w"
+content = """
+from pydantic import BaseModel
+from pydantic import field_validator
+
+from src.common.formats.utils import urls
+from src.common.typings.validators import Link
+
+
+class URL(BaseModel):
+    url: Link
+
+    @field_validator("url")
+    @classmethod
+    def check_url(cls, value: str) -> str:
+        if not urls.safe(value):
+            raise ValueError
+        return value
+
+
+class Photo(BaseModel):
+    photo: Link
+
+    @field_validator("photo")
+    @classmethod
+    def check_url(cls, value: str) -> str:
+        if not urls.safe(value):
+            raise ValueError
+        return value
+"""
+
+[[files]]
+path = "src/entrypoints/http/public/__init__.py"
+mode = "w"
+content = """
+from .routers import router
+
+
+__all__ = [
+    "router",
+]
+"""
+
+[[files]]
+path = "src/entrypoints/http/public/deps/__init__.py"
+mode = "w"
+content = """
+
+"""
+
+[[files]]
+path = "src/entrypoints/http/public/routers/__init__.py"
+mode = "w"
+content = """
+from .registry import router
+
+
+__all__ = [
+    "router",
+]
+"""
+
+[[files]]
+path = "src/entrypoints/http/public/routers/registry.py"
+mode = "w"
+content = """
+from src.framework.routing import APIRouter
+
+
+router = APIRouter(prefix="/api")
+"""
+
+[[files]]
+path = "src/entrypoints/http/public/schemas/__init__.py"
+mode = "w"
+content = """
+__all__: list[str] = []
+"""
+
+[[files]]
+path = "src/entrypoints/http/public/schemas/base.py"
+mode = "w"
+content = """
+from src.framework.openapi.models import Affix
+
+
+class Public(Affix): ...
+"""
+
+[[files]]
+path = "src/entrypoints/http/registry.py"
+mode = "w"
+content = """
+from src.framework.routing import APIRouter
+
+from . import public
+from . import system
+
+
+router = APIRouter()
+
+router.include_router(public.router)
+router.include_router(system.router)
+"""
+
+[[files]]
+path = "src/entrypoints/http/system/__init__.py"
+mode = "w"
+content = """
+from .routers import router
+
+
+__all__ = [
+    "router",
+]
+"""
+
+[[files]]
+path = "src/entrypoints/http/system/deps/__init__.py"
+mode = "w"
+content = """
+
+"""
+
+[[files]]
+path = "src/entrypoints/http/system/routers/__init__.py"
+mode = "w"
+content = """
+from .registry import router
+
+
+__all__ = [
+    "router",
+]
+"""
+
+[[files]]
+path = "src/entrypoints/http/system/routers/registry.py"
+mode = "w"
+content = """
+from src.framework.routing import APIRouter
+
+
+router = APIRouter(prefix="/api/-")
+"""
+
+[[files]]
+path = "src/entrypoints/http/system/schemas/__init__.py"
+mode = "w"
+content = """
+__all__: list[str] = []
+"""
+
+[[files]]
+path = "src/entrypoints/http/system/schemas/base.py"
+mode = "w"
+content = """
+from src.framework.openapi.models import Affix
+
+
+class System(Affix):
+    __affix__ = "_:"
+"""
+
+[[files]]
+path = "src/framework/__init__.py"
+mode = "w"
+content = """
+
+"""
+
+[[files]]
+path = "src/framework/background/__init__.py"
+mode = "w"
+content = """
+from .client import Background
+from .setup import background
+
+
+__all__ = [
+    "Background",
+    "background",
+]
+"""
+
+[[files]]
+path = "src/framework/background/client.py"
+mode = "w"
+content = """
+import asyncio
+import typing
+
+
+class Background:
+    def __init__(self) -> None:
+        self._tasks: list[asyncio.Task[typing.Any]] = []
+        self._coroutines: list[typing.Callable[..., typing.Any]] = []
+
+    def add(self, func: typing.Callable[..., typing.Any]) -> None:
+        self._coroutines.append(func)
+
+    def start(self) -> None:
+        self._tasks = [asyncio.create_task(coro()) for coro in self._coroutines]
+
+    def shutdown(self) -> None:
+        for task in self._tasks:
+            task.cancel()
+"""
+
+[[files]]
+path = "src/framework/background/setup.py"
+mode = "w"
+content = """
+from .client import Background
+
+
+background = Background()
+"""
+
+[[files]]
+path = "src/framework/collections/__init__.py"
+mode = "w"
+content = """
+from .exceptions import ModuleDisabled
+
+
+__all__ = [
+    "ModuleDisabled",
+]
+"""
+
+[[files]]
+path = "src/framework/collections/exceptions/__init__.py"
+mode = "w"
+content = """
+from .module import ModuleDisabled
+
+
+__all__ = [
+    "ModuleDisabled",
+]
+"""
+
+[[files]]
+path = "src/framework/collections/exceptions/module.py"
+mode = "w"
+content = """
+class ModuleDisabled(Exception):
+    module: str
+
+    def __str__(self) -> str:
+        return f"{self.module} is disabled"
+"""
+
+[[files]]
+path = "src/framework/openapi/__init__.py"
+mode = "w"
+content = """
+from .client import OpenAPI
+
+
+__all__ = [
+    "OpenAPI",
+]
+"""
+
+[[files]]
+path = "src/framework/openapi/client.py"
+mode = "w"
+content = """
+import typing
+
+from . import handlers
+
+
+class OpenAPI:
+    def __init__(self, app: typing.Any) -> None:
+        self.app = app
+
+    def generate(self) -> dict[str, typing.Any]:
+        schema = typing.cast(dict[str, typing.Any], self.app.__class__.openapi(self.app))
+        for handler in [handlers.affix, handlers.operationid]:
+            _, schema = handler(self.app, schema)  # type: ignore
+        return schema
+
+    def __call__(self) -> dict[str, typing.Any]:
+        return self.generate()
+"""
+
+[[files]]
+path = "src/framework/openapi/collections/__init__.py"
+mode = "w"
+content = """
+from .const import FASTAPI_ROUTE_PATH
+from .const import SPECIFICATION_COMPONENTS
+from .const import SPECIFICATION_COMPONENTS_SCHEMAS
+from .const import SPECIFICATION_COMPONENTS_SCHEMAS_REF_KEY
+from .const import SPECIFICATION_COMPONENTS_SCHEMAS_REF_PATH
+from .const import SPECIFICATION_COMPONENTS_SCHEMAS_TITLE
+from .const import SPECIFICATION_ENDPOINT
+from .const import SPECIFICATION_OPERATION_ID
+from .const import SPECIFICATION_PATHS
+from .const import SPECIFICATION_PATHS_RESPONSES_CONTENT
+from .const import SPECIFICATION_PATHS_RESPONSES_CONTENT_APPLICATION_JSON
+from .const import SPECIFICATION_PATHS_RESPONSES_CONTENT_APPLICATION_JSON_EXAMPLE
+from .const import SPECIFICATION_ROUTES
+
+
+__all__ = [
+    "FASTAPI_ROUTE_PATH",
+    "SPECIFICATION_COMPONENTS",
+    "SPECIFICATION_COMPONENTS_SCHEMAS",
+    "SPECIFICATION_COMPONENTS_SCHEMAS_REF_KEY",
+    "SPECIFICATION_COMPONENTS_SCHEMAS_REF_PATH",
+    "SPECIFICATION_COMPONENTS_SCHEMAS_TITLE",
+    "SPECIFICATION_ENDPOINT",
+    "SPECIFICATION_OPERATION_ID",
+    "SPECIFICATION_PATHS",
+    "SPECIFICATION_PATHS_RESPONSES_CONTENT",
+    "SPECIFICATION_PATHS_RESPONSES_CONTENT_APPLICATION_JSON",
+    "SPECIFICATION_PATHS_RESPONSES_CONTENT_APPLICATION_JSON_EXAMPLE",
+    "SPECIFICATION_ROUTES",
+]
+"""
+
+[[files]]
+path = "src/framework/openapi/collections/const/__init__.py"
+mode = "w"
+content = """
+from .fastapi import FASTAPI_ROUTE_PATH
+from .specification import SPECIFICATION_COMPONENTS
+from .specification import SPECIFICATION_COMPONENTS_SCHEMAS
+from .specification import SPECIFICATION_COMPONENTS_SCHEMAS_REF_KEY
+from .specification import SPECIFICATION_COMPONENTS_SCHEMAS_REF_PATH
+from .specification import SPECIFICATION_COMPONENTS_SCHEMAS_TITLE
+from .specification import SPECIFICATION_ENDPOINT
+from .specification import SPECIFICATION_OPERATION_ID
+from .specification import SPECIFICATION_PATHS
+from .specification import SPECIFICATION_PATHS_RESPONSES_CONTENT
+from .specification import SPECIFICATION_PATHS_RESPONSES_CONTENT_APPLICATION_JSON
+from .specification import SPECIFICATION_PATHS_RESPONSES_CONTENT_APPLICATION_JSON_EXAMPLE
+from .specification import SPECIFICATION_ROUTES
+
+
+__all__ = [
+    "FASTAPI_ROUTE_PATH",
+    "SPECIFICATION_COMPONENTS",
+    "SPECIFICATION_COMPONENTS_SCHEMAS",
+    "SPECIFICATION_COMPONENTS_SCHEMAS_REF_KEY",
+    "SPECIFICATION_COMPONENTS_SCHEMAS_REF_PATH",
+    "SPECIFICATION_COMPONENTS_SCHEMAS_TITLE",
+    "SPECIFICATION_ENDPOINT",
+    "SPECIFICATION_OPERATION_ID",
+    "SPECIFICATION_PATHS",
+    "SPECIFICATION_PATHS_RESPONSES_CONTENT",
+    "SPECIFICATION_PATHS_RESPONSES_CONTENT_APPLICATION_JSON",
+    "SPECIFICATION_PATHS_RESPONSES_CONTENT_APPLICATION_JSON_EXAMPLE",
+    "SPECIFICATION_ROUTES",
+]
+"""
+
+[[files]]
+path = "src/framework/openapi/collections/const/fastapi.py"
+mode = "w"
+content = """
+FASTAPI_ROUTE_PATH = "path"
+"""
+
+[[files]]
+path = "src/framework/openapi/collections/const/specification.py"
+mode = "w"
+content = """
+SPECIFICATION_ROUTES = "routes"
+SPECIFICATION_PATHS = "paths"
+SPECIFICATION_ENDPOINT = "endpoint"
+SPECIFICATION_OPERATION_ID = "operationId"
+SPECIFICATION_COMPONENTS = "components"
+SPECIFICATION_COMPONENTS_SCHEMAS = "schemas"
+SPECIFICATION_COMPONENTS_SCHEMAS_REF_KEY = "$ref"
+SPECIFICATION_COMPONENTS_SCHEMAS_REF_PATH = "#/components/schemas/"
+SPECIFICATION_COMPONENTS_SCHEMAS_TITLE = "title"
+SPECIFICATION_PATHS_RESPONSES_CONTENT = "content"
+SPECIFICATION_PATHS_RESPONSES_CONTENT_APPLICATION_JSON = "application/json"
+SPECIFICATION_PATHS_RESPONSES_CONTENT_APPLICATION_JSON_EXAMPLE = "example"
+"""
+
+[[files]]
+path = "src/framework/openapi/handlers/__init__.py"
+mode = "w"
+content = """
+from .affix import handler as affix
+from .operationid import handler as operationid
+
+
+__all__ = [
+    "affix",
+    "operationid",
+]
+"""
+
+[[files]]
+path = "src/framework/openapi/handlers/affix.py"
+mode = "w"
+content = """
+import typing
+
+from fastapi import FastAPI
+
+from src.framework.openapi.collections import SPECIFICATION_COMPONENTS
+from src.framework.openapi.collections import SPECIFICATION_COMPONENTS_SCHEMAS
+from src.framework.openapi.collections import SPECIFICATION_COMPONENTS_SCHEMAS_TITLE
+from src.framework.openapi.utils import findrefs
+
+
+def handler(app: FastAPI, openapi: dict[str, typing.Any]) -> tuple[FastAPI, dict[str, typing.Any]]:
+    updated: dict[str, typing.Any] = {}
+    mapped: dict[str, str] = {}
+
+    if not (components := openapi.get(SPECIFICATION_COMPONENTS)):
+        return app, openapi
+
+    schemas = components.get(SPECIFICATION_COMPONENTS_SCHEMAS, {})
+
+    for key, schema in schemas.items():
+        title = schema.get(SPECIFICATION_COMPONENTS_SCHEMAS_TITLE, key)
+        if title != key:
+            mapped[key] = title
+        updated[title] = schema
+
+    components[SPECIFICATION_COMPONENTS_SCHEMAS] = dict(sorted(updated.items()))
+
+    for key, title in mapped.items():
+        findrefs(openapi, key, title)
+
+    return app, openapi
+"""
+
+[[files]]
+path = "src/framework/openapi/handlers/operationid.py"
+mode = "w"
+content = """
+import collections.abc
+import typing
+
+from collections import Counter
+
+from fastapi import FastAPI
+
+from src.common.formats.utils import string
+from src.framework.openapi.collections import FASTAPI_ROUTE_PATH
+from src.framework.openapi.collections import SPECIFICATION_ENDPOINT
+from src.framework.openapi.collections import SPECIFICATION_OPERATION_ID
+from src.framework.openapi.collections import SPECIFICATION_PATHS
+from src.framework.openapi.collections import SPECIFICATION_ROUTES
+
+
+def handler(
+    app: FastAPI,
+    openapi: dict[str, typing.Any],
+    exclude: collections.abc.Sequence[str] = (),
+) -> tuple[FastAPI, dict[str, typing.Any]]:
+    if not (routes := getattr(app, SPECIFICATION_ROUTES, [])):
+        return app, openapi
+
+    for route in routes:
+        if not (_ := getattr(route, SPECIFICATION_ENDPOINT, None)):
+            continue
+
+        if path := getattr(route, FASTAPI_ROUTE_PATH, None):
+            if path in exclude:
+                continue
+
+        if not (paths := openapi.get(SPECIFICATION_PATHS, {})):
+            continue
+
+        if not (methods := paths.get(path, {})):
+            continue
+
+        for method in methods:
+            methods[method][SPECIFICATION_OPERATION_ID] = string.kebab(methods[method].get("description"))
+
+    operations = []
+
+    for path, methods in openapi.get(SPECIFICATION_PATHS, {}).items():
+        for method, operation in methods.items():
+            if isinstance(operation, dict):
+                operations.append(methods[method][SPECIFICATION_OPERATION_ID])
+
+    if len(operations) != len(set(operations)):
+        duplicates = [operation for operation, count in Counter(operations).items() if count > 1]
+        raise ValueError(f"Duplicate operationIds found: {duplicates}")
+
+    return app, openapi
+"""
+
+[[files]]
+path = "src/framework/openapi/models/__init__.py"
+mode = "w"
+content = """
+from .affix import Affix
+
+
+__all__ = [
+    "Affix",
+]
+"""
+
+[[files]]
+path = "src/framework/openapi/models/affix.py"
+mode = "w"
+content = """
+import inspect
+import typing
+
+from pydantic import BaseModel
+from pydantic import ConfigDict
+
+
+class Affix(BaseModel):
+    __affix__ = ""
+
+    def __init_subclass__(cls, **kwargs: typing.Any):
+        super().__init_subclass__(**kwargs)
+
+        prefixes, postfixes = [], []
+
+        for base in inspect.getmro(cls):
+            if base in (Affix, BaseModel):
+                continue
+            affix = getattr(base, "__affix__", None)
+            if affix:
+                if affix.endswith(":"):
+                    if affix[:-1] not in prefixes:
+                        prefixes.append(affix[:-1])
+                elif affix.startswith(":"):
+                    if affix[1:] not in postfixes:
+                        postfixes.append(affix[1:])
+
+        if prefixes or postfixes:
+            config = dict(cls.model_config)
+            config.pop("title", None)
+            config["title"] = f"{''.join(prefixes)}{cls.__name__}{''.join(postfixes)}"
+            cls.model_config = typing.cast(ConfigDict, config)
+"""
+
+[[files]]
+path = "src/framework/openapi/utils/__init__.py"
+mode = "w"
+content = """
+from .specification import errors
+from .specification import findrefs
+
+
+__all__ = [
+    "errors",
+    "findrefs",
+]
+"""
+
+[[files]]
+path = "src/framework/openapi/utils/specification.py"
+mode = "w"
+content = """
+import typing
+
+from src.framework.openapi.collections import SPECIFICATION_COMPONENTS_SCHEMAS_REF_KEY
+from src.framework.openapi.collections import SPECIFICATION_COMPONENTS_SCHEMAS_REF_PATH
+from src.framework.openapi.collections import SPECIFICATION_PATHS_RESPONSES_CONTENT
+from src.framework.openapi.collections import SPECIFICATION_PATHS_RESPONSES_CONTENT_APPLICATION_JSON
+from src.framework.openapi.collections import SPECIFICATION_PATHS_RESPONSES_CONTENT_APPLICATION_JSON_EXAMPLE
+
+
+def findrefs(openapi: dict[str, typing.Any] | list[dict[str, typing.Any]], find: str, replace: str) -> None:
+    if isinstance(openapi, dict):
+        for key, value in openapi.items():
+            if (
+                key == SPECIFICATION_COMPONENTS_SCHEMAS_REF_KEY
+                and value == f"{SPECIFICATION_COMPONENTS_SCHEMAS_REF_PATH}{find}"
+            ):
+                openapi[key] = f"{SPECIFICATION_COMPONENTS_SCHEMAS_REF_PATH}{replace}"
+            else:
+                findrefs(value, find, replace)
+    elif isinstance(openapi, list):
+        for item in openapi:
+            findrefs(item, find, replace)
+
+
+def errors(*args: typing.Any) -> dict[int | str, dict[str, typing.Any]]:
+    _responses, _grouped = {}, {}
+
+    for error in [arg() for arg in args]:
+        if error.code not in _grouped:
+            _grouped[error.code] = []
+        _grouped[error.code].append(error.http)
+
+    for code, examples in _grouped.items():
+        _responses[code] = {
+            SPECIFICATION_PATHS_RESPONSES_CONTENT: {
+                SPECIFICATION_PATHS_RESPONSES_CONTENT_APPLICATION_JSON: {
+                    SPECIFICATION_PATHS_RESPONSES_CONTENT_APPLICATION_JSON_EXAMPLE: examples
+                    if len(examples) > 1
+                    else examples[0]
+                }
+            }
+        }
+
+    return _responses
+"""
+
+[[files]]
+path = "src/framework/routing/__init__.py"
+mode = "w"
+content = """
+from .router import Route as APIRoute
+from .router import Router as APIRouter
+
+
+__all__ = [
+    "APIRoute",
+    "APIRouter",
+]
+"""
+
+[[files]]
+path = "src/framework/routing/collections/__init__.py"
+mode = "w"
+content = """
+from .enums import Field
+
+
+__all__ = [
+    "Field",
+]
+"""
+
+[[files]]
+path = "src/framework/routing/collections/enums/__init__.py"
+mode = "w"
+content = """
+from .field import Field
+
+
+__all__ = [
+    "Field",
+]
+"""
+
+[[files]]
+path = "src/framework/routing/collections/enums/field.py"
+mode = "w"
+content = """
+import enum
+
+
+class Field(enum.StrEnum):
+    debug = "debug"
+    service = "service"
+    version = "version"
+    http_version = "http-version"
+    ip = "ip"
+    method = "method"
+    url = "url"
+    headers = "headers"
+    query = "query"
+    body = "body"
+    response = "response"
+    code = "code"
+    started = "started"
+    ended = "ended"
+    elapsed = "elapsed"
+"""
+
+[[files]]
+path = "src/framework/routing/router.py"
+mode = "w"
+content = """
+import contextlib
+import functools
+import logging
+import typing
+
+from fastapi import Request
+from fastapi import Response
+from fastapi import status
+from fastapi.exceptions import HTTPException
+from fastapi.exceptions import ValidationException
+from fastapi.routing import APIRoute
+from fastapi.routing import APIRouter
+
+from src.common.formats.utils import binary
+from src.common.formats.utils import date
+from src.common.formats.utils import json
+from src.common.keyboard.collections import SYMBOL_DASH
+from src.common.os.utils import kilobytes
+from src.framework.routing.collections import Field
+
+
+logger = logging.getLogger("fastapi.route")
+
+
+class Logging:
+    def __init__(self, request: Request) -> None:
+        self.message = self.context(request)
+
+    @classmethod
+    def context(cls, request: Request) -> dict[str, typing.Any]:
+        headers = dict(request.headers.items())
+
+        return {
+            Field.debug: request.app.debug,
+            Field.service: request.app.title,
+            Field.version: request.app.version,
+            Field.http_version: request.scope.get("http_version", None),
+            Field.ip: f"{request.client.host}:{request.client.port}" if request.client else None,
+            Field.method: request.method.upper(),
+            Field.url: str(request.url),
+            Field.headers: headers,
+            Field.query: dict(request.query_params),
+            Field.body: {},
+            Field.response: {},
+            Field.code: None,
+            Field.started: date.now(),
+            Field.ended: None,
+            Field.elapsed: None,
+        }
+
+    @property
+    def endpoint(self) -> str:
+        return f"{self.message[Field.method]} {self.message[Field.url]}"
+
+    def timing(self) -> None:
+        self.message[Field.ended] = date.now()
+        self.message[Field.elapsed] = (self.message[Field.ended] - self.message[Field.started]).total_seconds()
+
+    def accepted(self) -> None:
+        _logger = logger.critical if self.message.get(Field.body) == SYMBOL_DASH else logger.info
+        _logger(f"Request accepted - {self.endpoint}", extra=self.message)
+
+    def processed(self) -> None:
+        _logger = logger.critical if self.message.get(Field.response) == SYMBOL_DASH else logger.info
+        _logger(f"Request processed - {self.endpoint}", extra=self.message)
+
+    def error(self) -> None:
+        logger.error(f"Request error - {self.endpoint}", extra=self.message, exc_info=True)
+
+
+class Json:
+    @classmethod
+    def parse(cls, raw: bytes) -> typing.Any | str:
+        with contextlib.suppress(Exception):
+            return json.fromstring(binary.tostring(raw))
+        return SYMBOL_DASH
+
+    @classmethod
+    def parseresponse(cls, response: Response) -> typing.Any | str:
+        return cls.parse(response.body)
+
+    @classmethod
+    async def parsebody(cls, request: Request) -> typing.Any | str:
+        return cls.parse(await request.body())
+
+
+class Route(APIRoute):
+    def get_route_handler(self) -> typing.Callable[[Request], typing.Coroutine[typing.Any, typing.Any, Response]]:
+        original_route_handler = super().get_route_handler()
+
+        async def custom_route_handler(request: Request) -> Response:
+            if route := request.scope.get("route", None):  # noqa:SIM102
+                if exclude_paths := getattr(request.app, "exclude_paths", None):  # noqa:SIM102
+                    if route.path_format in exclude_paths:
+                        return await original_route_handler(request)
+
+            log = Logging(request)
+
+            if request.headers.get("Content-Type") == "application/json":
+                with contextlib.suppress(ValueError):
+                    log.message[Field.body] = (
+                        await Json.parsebody(request)
+                        if int(request.headers.get("Content-Length", 0)) < kilobytes(16)
+                        else SYMBOL_DASH
+                    )
+
+            log.accepted()
+
+            try:
+                response = await original_route_handler(request)
+                log.message[Field.code] = response.status_code
+            except HTTPException as e:
+                log.message[Field.code] = e.status_code
+                log.message[Field.response] = e.detail
+                log.timing()
+                log.processed()
+                raise e
+            except ValidationException as e:
+                log.message[Field.code] = status.HTTP_422_UNPROCESSABLE_ENTITY
+                log.message[Field.response] = str(e)
+                log.timing()
+                log.processed()
+                raise e
+            except Exception as e:
+                log.message[Field.code] = status.HTTP_500_INTERNAL_SERVER_ERROR
+                log.timing()
+                log.error()
+                raise e
+
+            if response.headers.get("Content-Type") == "application/json":
+                log.message[Field.response] = (
+                    Json.parseresponse(response) if len(response.body) < kilobytes(64) else SYMBOL_DASH
+                )
+
+            log.timing()
+            log.processed()
+
+            return response
+
+        return custom_route_handler
+
+
+Router = functools.partial(APIRouter, route_class=Route)
+"""
+
+[[files]]
+path = "src/infrastructure/__init__.py"
+mode = "w"
+content = """
+
+"""
+
+[[files]]
+path = "src/infrastructure/databases/__init__.py"
+mode = "w"
+content = """
+
+"""
+
+[[files]]
+path = "src/infrastructure/databases/orm/__init__.py"
+mode = "w"
+content = """
+
+"""
+
+[[files]]
+path = "src/infrastructure/databases/orm/sqlalchemy/__init__.py"
+mode = "w"
+content = """
+from .client import SQLAlchemy
+
+
+__all__ = [
+    "SQLAlchemy",
+]
+"""
+
+[[files]]
+path = "src/infrastructure/databases/orm/sqlalchemy/builders/__init__.py"
+mode = "w"
+content = """
+from .filter import Builder as Filter
+from .function import Builder as Function
+from .pagination import Builder as Pagination
+from .sorting import Builder as Sorting
+
+
+__all__ = [
+    "Filter",
+    "Function",
+    "Pagination",
+    "Sorting",
+]
+"""
+
+[[files]]
+path = "src/infrastructure/databases/orm/sqlalchemy/builders/filter.py"
+mode = "w"
+content = """
+import typing
+
+from sqlalchemy import and_
+from sqlalchemy import or_
+
+from src.infrastructure.databases.orm.sqlalchemy.models import And
+from src.infrastructure.databases.orm.sqlalchemy.models import Filter
+from src.infrastructure.databases.orm.sqlalchemy.models import Or
+
+
+class Builder:
+    @classmethod
+    def build(cls, table: typing.Any, model: typing.Union[Filter, And, Or]) -> typing.Any:
+        if isinstance(model, And):
+            return and_(*[cls.build(table, _model) for _model in model.filters])
+
+        elif isinstance(model, Or):
+            return or_(*[cls.build(table, _model) for _model in model.filters])
+
+        elif isinstance(model, Filter):
+            keys = model.key.split(".")
+
+            if len(keys) > 1:
+                column = getattr(table, keys[0])[keys[1]]
+                method = getattr(column.astext, model.operator.value)
+            else:
+                column = getattr(table, keys[0])
+                method = getattr(column, model.operator.value)
+
+            if isinstance(model.value, tuple):
+                return method(*model.value)
+            else:
+                return method(model.value)
+
+        else:
+            raise NotImplementedError
+"""
+
+[[files]]
+path = "src/infrastructure/databases/orm/sqlalchemy/builders/function.py"
+mode = "w"
+content = """
+import typing
+
+from src.infrastructure.databases.orm.sqlalchemy.models import Function
+
+
+class Builder:
+    @classmethod
+    def build(cls, table: typing.Any, model: Function) -> typing.Any:
+        column = getattr(table, model.filter.key)
+        function = model.method(column)
+        method = getattr(function, model.filter.operator.value)
+        return method(model.filter.value)
+"""
+
+[[files]]
+path = "src/infrastructure/databases/orm/sqlalchemy/builders/pagination.py"
+mode = "w"
+content = """
+import typing
+
+from src.infrastructure.databases.orm.sqlalchemy.models import Pagination
+
+
+class Builder:
+    @classmethod
+    def build(cls, statement: typing.Any, model: Pagination) -> typing.Any:
+        return statement.limit(model.limit).offset(model.offset)
+"""
+
+[[files]]
+path = "src/infrastructure/databases/orm/sqlalchemy/builders/sorting.py"
+mode = "w"
+content = """
+import typing
+
+from sqlalchemy import asc
+from sqlalchemy import desc
+
+from src.infrastructure.databases.orm.sqlalchemy.collections import Direction
+from src.infrastructure.databases.orm.sqlalchemy.models import Sorting
+
+
+class Builder:
+    @classmethod
+    def build(cls, table: typing.Any, model: Sorting) -> typing.Any:
+        return asc(getattr(table, model.key)) if model.direction is Direction.asc else desc(getattr(table, model.key))
+"""
+
+[[files]]
+path = "src/infrastructure/databases/orm/sqlalchemy/client.py"
+mode = "w"
+content = """
+import contextlib
+import functools
+import json
+import typing
+
+from sqlalchemy.ext.asyncio import AsyncEngine
+from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy.ext.asyncio import async_sessionmaker
+from sqlalchemy.ext.asyncio import create_async_engine
+
+from src.common.formats.encoders import JSONEncoder
+
+from . import profilers
+from .collections import ClientDisabled
+from .collections import Isolation
+
+
+class SQLAlchemy:
+    def __init__(self, url: str) -> None:
+        self.engine: AsyncEngine = create_async_engine(
+            url,
+            echo=False,
+            future=True,
+            isolation_level=Isolation.read_committed,
+            json_serializer=functools.partial(json.dumps, cls=JSONEncoder, ensure_ascii=False),
+        )
+        self.sessionmaker: async_sessionmaker[AsyncSession] = async_sessionmaker(self.engine, expire_on_commit=False)
+
+    @contextlib.asynccontextmanager
+    async def read(self) -> typing.AsyncGenerator[AsyncSession, None]:
+        if not self.sessionmaker:
+            raise ClientDisabled
+
+        async with self.sessionmaker() as session:
+            profilers.execute(session)
+            yield session
+
+    @contextlib.asynccontextmanager
+    async def write(self) -> typing.AsyncGenerator[AsyncSession, None]:
+        if not self.sessionmaker:
+            raise ClientDisabled
+
+        async with self.sessionmaker() as session:
+            profilers.execute(session)
+            async with session.begin():
+                yield session
+"""
+
+[[files]]
+path = "src/infrastructure/databases/orm/sqlalchemy/collections/__init__.py"
+mode = "w"
+content = """
+from .enums import Direction
+from .enums import Isolation
+from .enums import Operator
+from .exceptions import ClientDisabled
+from .exceptions import ObjectNotFound
+
+
+__all__ = [
+    "ClientDisabled",
+    "Direction",
+    "Isolation",
+    "ObjectNotFound",
+    "Operator",
+]
+"""
+
+[[files]]
+path = "src/infrastructure/databases/orm/sqlalchemy/collections/enums/__init__.py"
+mode = "w"
+content = """
+from .engine import Isolation
+from .statement import Direction
+from .statement import Operator
+
+
+__all__ = [
+    "Direction",
+    "Isolation",
+    "Operator",
+]
+"""
+
+[[files]]
+path = "src/infrastructure/databases/orm/sqlalchemy/collections/enums/engine.py"
+mode = "w"
+content = """
+import enum
+
+
+class Isolation(enum.StrEnum):
+    autocommit = "AUTOCOMMIT"
+    read_committed = "READ COMMITTED"
+    read_uncommitted = "READ UNCOMMITTED"
+    repeatable_read = "REPEATABLE READ"
+    serializable = "SERIALIZABLE"
+"""
+
+[[files]]
+path = "src/infrastructure/databases/orm/sqlalchemy/collections/enums/statement.py"
+mode = "w"
+content = """
+import enum
+
+
+class Operator(enum.StrEnum):
+    eq = "__eq__"
+    ne = "__ne__"
+    gt = "__gt__"
+    gte = "__ge__"
+    lt = "__lt__"
+    lte = "__le__"
+    in_ = "in_"
+    int_ = "not_in"
+    like = "like"
+    between = "between"
+    is_ = "is_"
+    ist_ = "is_not"
+
+
+class Direction(enum.StrEnum):
+    asc = "asc"
+    desc = "desc"
+"""
+
+[[files]]
+path = "src/infrastructure/databases/orm/sqlalchemy/collections/exceptions/__init__.py"
+mode = "w"
+content = """
+from .client import ClientDisabled
+from .execute import ObjectNotFound
+
+
+__all__ = [
+    "ClientDisabled",
+    "ObjectNotFound",
+]
+"""
+
+[[files]]
+path = "src/infrastructure/databases/orm/sqlalchemy/collections/exceptions/client.py"
+mode = "w"
+content = """
+from src.framework.collections import ModuleDisabled
+
+
+class ClientDisabled(ModuleDisabled):
+    module = "sqlalchemy"
+"""
+
+[[files]]
+path = "src/infrastructure/databases/orm/sqlalchemy/collections/exceptions/execute.py"
+mode = "w"
+content = """
+class ObjectNotFound(Exception): ...
+"""
+
+[[files]]
+path = "src/infrastructure/databases/orm/sqlalchemy/crud/__init__.py"
+mode = "w"
+content = """
+from .base import Base
+from .base import Crud
+
+
+__all__ = [
+    "Base",
+    "Crud",
+]
+"""
+
+[[files]]
+path = "src/infrastructure/databases/orm/sqlalchemy/crud/base.py"
+mode = "w"
+content = """
+import typing
+
+from sqlalchemy import Select
+from sqlalchemy import bindparam
+from sqlalchemy import delete
+from sqlalchemy import exists
+from sqlalchemy import select
+from sqlalchemy import text
+from sqlalchemy import update
+
+from src.infrastructure.databases.orm.sqlalchemy import builders
+from src.infrastructure.databases.orm.sqlalchemy import models
+from src.infrastructure.databases.orm.sqlalchemy import tables
+from src.infrastructure.databases.orm.sqlalchemy.session import Session
+from src.infrastructure.databases.orm.sqlalchemy.utils import fetchall
+from src.infrastructure.databases.orm.sqlalchemy.utils import fetchcount
+from src.infrastructure.databases.orm.sqlalchemy.utils import fetchone
+
+
+class Base(typing.Generic[tables.Table]):
+    table: type[tables.Table]
+
+    @classmethod
+    def build(
+        cls,
+        statement: typing.Any,
+        functions: list[models.Function] | None = None,
+        filters: list[typing.Union[models.Filter, models.And, models.Or]] | None = None,
+        sorting: list[models.Sorting] | None = None,
+        pagination: models.Pagination | None = None,
+    ) -> typing.Any:
+        functions = [builders.Function.build(cls.table, model) for model in functions] if functions else []
+        filters = [builders.Filter.build(cls.table, model) for model in filters] if filters else []
+        sorting = [builders.Sorting.build(cls.table, model) for model in sorting] if sorting else []
+        statement = builders.Pagination.build(statement, pagination) if pagination else statement
+        statement = statement.order_by(*sorting) if isinstance(statement, Select) else statement  # type:ignore
+        statement = statement.where(*filters, *functions)
+        return statement
+
+    @classmethod
+    async def id(cls, session: Session) -> int:
+        sequence = f"{cls.table.__tablename__}_id_seq"
+        statement = text("SELECT nextval(:sequence)")
+        return typing.cast(int, (await session.execute(statement, {"sequence": sequence})).scalar())
+
+    @classmethod
+    async def one(cls, session: Session, *filters: typing.Union[models.Filter, models.And, models.Or]) -> tables.Table:
+        statement = cls.build(select(cls.table), filters=list(filters))
+        return await fetchone(session, statement)
+
+    @classmethod
+    async def relations(
+        cls,
+        session: Session,
+        *filters: typing.Union[models.Filter, models.And, models.Or],
+    ) -> tables.Table:
+        statement = cls.build(select(cls.table), filters=list(filters))
+        return await fetchone(session, statement)
+
+    @classmethod
+    async def all(
+        cls,
+        session: Session,
+        *filters: typing.Union[models.Filter, models.And, models.Or],
+    ) -> list[tables.Table]:
+        statement = cls.build(select(cls.table), filters=list(filters))
+        return await fetchall(session, statement)
+
+    @classmethod
+    async def paginated(
+        cls,
+        session: Session,
+        filters: list[typing.Union[models.Filter, models.And, models.Or]],
+        sorting: list[models.Sorting],
+        pagination: models.Pagination,
+    ) -> tuple[list[tables.Table], int]:
+        statement = cls.build(select(cls.table), filters=filters, sorting=sorting)
+        rows = await fetchall(session, cls.build(statement, pagination=pagination))
+        count = await fetchcount(session, statement)
+        return rows, count
+
+    @classmethod
+    async def count(cls, session: Session, *filters: typing.Union[models.Filter, models.And, models.Or]) -> int:
+        statement = cls.build(select(cls.table), filters=list(filters))
+        return await fetchcount(session, statement)
+
+    @classmethod
+    async def exists(cls, session: Session, *filters: typing.Union[models.Filter, models.And, models.Or]) -> bool:
+        statement = cls.build(exists(select(cls.table)), filters=list(filters))
+        return bool((await session.execute(statement.select())).scalar())
+
+    @classmethod
+    async def create(cls, session: Session, row: dict[str, typing.Any]) -> tables.Table:
+        columns = {k: v for k, v in row.items() if getattr(cls.table, k, None) is not None}
+        instance = cls.table(**columns)
+        session.add(instance)
+        await session.flush()
+        return instance
+
+    @classmethod
+    async def update(cls, session: Session, id: typing.Union[str, int], **kwargs: typing.Any) -> None:
+        values = {key: bindparam(key) for key in kwargs if getattr(cls.table, key, None) is not None}
+        statement = update(cls.table).where(cls.table.id == id).values(**values)  # type:ignore
+        await session.execute(statement, kwargs)
+        await session.flush()
+
+    @classmethod
+    async def delete(cls, session: Session, *filters: typing.Union[models.Filter, models.And, models.Or]) -> None:
+        statement = cls.build(delete(cls.table), filters=list(filters))
+        await session.execute(statement)
+        await session.flush()
+
+
+Crud = typing.TypeVar("Crud", bound=Base[typing.Any])
+"""
+
+[[files]]
+path = "src/infrastructure/databases/orm/sqlalchemy/models/__init__.py"
+mode = "w"
+content = """
+from .statement import And
+from .statement import Filter
+from .statement import Function
+from .statement import Or
+from .statement import Pagination
+from .statement import Sorting
+
+
+__all__ = [
+    "And",
+    "Filter",
+    "Function",
+    "Or",
+    "Pagination",
+    "Sorting",
+]
+"""
+
+[[files]]
+path = "src/infrastructure/databases/orm/sqlalchemy/models/statement.py"
+mode = "w"
+content = """
+import typing
+
+from pydantic import BaseModel
+from sqlalchemy.sql.visitors import Visitable
+
+from src.infrastructure.databases.orm.sqlalchemy.collections import Direction
+from src.infrastructure.databases.orm.sqlalchemy.collections import Operator
+
+
+class Sorting(BaseModel):
+    key: str
+    direction: Direction
+
+
+class Pagination(BaseModel):
+    limit: int
+    offset: int
+
+
+class Filter(BaseModel):
+    key: str
+    value: typing.Any
+    operator: Operator
+
+
+class And(BaseModel):
+    filters: list[typing.Union[Filter, "And", "Or"]]
+
+
+class Or(BaseModel):
+    filters: list[typing.Union[Filter, "And", "Or"]]
+
+
+class Function(BaseModel):
+    filter: Filter
+    method: typing.Callable[[Visitable], Visitable]
+"""
+
+[[files]]
+path = "src/infrastructure/databases/orm/sqlalchemy/profilers/__init__.py"
+mode = "w"
+content = """
+from .execute import profiler as execute
+
+
+__all__ = [
+    "execute",
+]
+"""
+
+[[files]]
+path = "src/infrastructure/databases/orm/sqlalchemy/profilers/execute.py"
+mode = "w"
+content = """
+import logging
+import time
+import typing
+
+from sqlalchemy import Executable
+from sqlalchemy import Result
+from sqlalchemy.ext.asyncio import AsyncSession
+
+
+logger = logging.getLogger("postgres.profiler")
+
+
+def profiler(session: AsyncSession) -> None:
+    execute = session.execute
+
+    async def _execute(statement: Executable, *args: typing.Any, **kwargs: typing.Any) -> Result[typing.Any] | None:
+        start = time.perf_counter()
+        try:
+            return await execute(statement, *args, **kwargs)
+        finally:
+            if hasattr(statement, "compile"):
+                compiled = statement.compile(dialect=session.bind.dialect, compile_kwargs={"literal_binds": True})
+                logger.info(str(compiled), extra={"elapsed": time.perf_counter() - start})
+
+    setattr(session, "execute", _execute)
+"""
+
+[[files]]
+path = "src/infrastructure/databases/orm/sqlalchemy/queries/__init__.py"
+mode = "w"
+content = """
+from .statement import And
+from .statement import Filter
+from .statement import JSONBArray
+from .statement import Or
+from .statement import Pagination
+from .statement import Sorting
+
+
+__all__ = [
+    "And",
+    "Filter",
+    "JSONBArray",
+    "Or",
+    "Pagination",
+    "Sorting",
+]
+"""
+
+[[files]]
+path = "src/infrastructure/databases/orm/sqlalchemy/queries/statement.py"
+mode = "w"
+content = """
+import typing
+
+from sqlalchemy import func
+
+from src.infrastructure.databases.orm.sqlalchemy import models
+from src.infrastructure.databases.orm.sqlalchemy.collections import Direction
+from src.infrastructure.databases.orm.sqlalchemy.collections import Operator
+
+
+class JSONBArray:
+    @classmethod
+    def gt(cls, key: str, value: typing.Any) -> models.Function:
+        return models.Function(filter=Comparison.gt(key=key, value=value), method=func.jsonb_array_length)
+
+
+class Array:
+    @staticmethod
+    def in_(key: str, values: list[typing.Any]) -> models.Filter:
+        return models.Filter(key=key, operator=Operator.in_, value=list(values))
+
+    @staticmethod
+    def int_(key: str, values: list[typing.Any]) -> models.Filter:
+        return models.Filter(key=key, operator=Operator.int_, value=list(values))
+
+
+class Range:
+    @staticmethod
+    def between(key: str, value: tuple[typing.Any, typing.Any]) -> models.Filter:
+        return models.Filter(key=key, operator=Operator.between, value=value)
+
+
+class Search:
+    @staticmethod
+    def like(key: str, value: str) -> models.Filter:
+        return models.Filter(key=key, operator=Operator.like, value=value)
+
+
+class Comparison:
+    @staticmethod
+    def eq(key: str, value: typing.Any) -> models.Filter:
+        return models.Filter(key=key, operator=Operator.eq, value=value)
+
+    @staticmethod
+    def ne(key: str, value: typing.Any) -> models.Filter:
+        return models.Filter(key=key, operator=Operator.ne, value=value)
+
+    @staticmethod
+    def gt(key: str, value: typing.Any) -> models.Filter:
+        return models.Filter(key=key, operator=Operator.gt, value=value)
+
+    @staticmethod
+    def gte(key: str, value: typing.Any) -> models.Filter:
+        return models.Filter(key=key, operator=Operator.gte, value=value)
+
+    @staticmethod
+    def lt(key: str, value: typing.Any) -> models.Filter:
+        return models.Filter(key=key, operator=Operator.lt, value=value)
+
+    @staticmethod
+    def lte(key: str, value: typing.Any) -> models.Filter:
+        return models.Filter(key=key, operator=Operator.lte, value=value)
+
+    @staticmethod
+    def is_(key: str, value: typing.Any) -> models.Filter:
+        return models.Filter(key=key, operator=Operator.is_, value=value)
+
+    @staticmethod
+    def ist_(key: str, value: typing.Any) -> models.Filter:
+        return models.Filter(key=key, operator=Operator.ist_, value=value)
+
+
+class Filter(Array, Range, Search, Comparison): ...
+
+
+class Pagination:
+    @staticmethod
+    def page(limit: int, offset: int = 0) -> models.Pagination:
+        return models.Pagination(limit=limit, offset=offset)
+
+
+class Sorting:
+    @staticmethod
+    def asc(key: str) -> models.Sorting:
+        return models.Sorting(key=key, direction=Direction.asc)
+
+    @staticmethod
+    def desc(key: str) -> models.Sorting:
+        return models.Sorting(key=key, direction=Direction.desc)
+
+
+class And:
+    @classmethod
+    def combine(cls, *filters: typing.Union[models.Filter, models.And, models.Or]) -> models.And:
+        return models.And(filters=list(filters))
+
+
+class Or:
+    @classmethod
+    def combine(cls, *filters: typing.Union[models.Filter, models.And, models.Or]) -> models.Or:
+        return models.Or(filters=list(filters))
+"""
+
+[[files]]
+path = "src/infrastructure/databases/orm/sqlalchemy/session.py"
+mode = "w"
+content = """
+from sqlalchemy.ext.asyncio import AsyncSession as Session
+
+
+__all__ = ["Session"]
+"""
+
+[[files]]
+path = "src/infrastructure/databases/orm/sqlalchemy/tables/__init__.py"
+mode = "w"
+content = """
+from .base import Base
+from .base import Table
+
+
+__all__ = [
+    "Base",
+    "Table",
+]
+"""
+
+[[files]]
+path = "src/infrastructure/databases/orm/sqlalchemy/tables/base.py"
+mode = "w"
+content = """
+import typing
+
+from sqlalchemy.orm import DeclarativeBase
+
+
+class Base(DeclarativeBase):
+    pass
+
+
+Table = typing.TypeVar("Table", bound=Base)
+"""
+
+[[files]]
+path = "src/infrastructure/databases/orm/sqlalchemy/utils/__init__.py"
+mode = "w"
+content = """
+from .execute import fetchall
+from .execute import fetchcount
+from .execute import fetchone
+
+
+__all__ = [
+    "fetchall",
+    "fetchcount",
+    "fetchone",
+]
+"""
+
+[[files]]
+path = "src/infrastructure/databases/orm/sqlalchemy/utils/execute.py"
+mode = "w"
+content = """
+import typing
+
+from sqlalchemy import func
+from sqlalchemy import select
+from sqlalchemy.exc import NoResultFound
+
+from src.infrastructure.databases.orm.sqlalchemy.collections import ObjectNotFound
+from src.infrastructure.databases.orm.sqlalchemy.session import Session
+from src.infrastructure.databases.orm.sqlalchemy.tables import Table
+
+
+async def fetchcount(session: Session, statement: typing.Any) -> int:
+    return (await session.execute(select(func.count()).select_from(statement.subquery()))).scalars().one()
+
+
+async def fetchone(session: Session, statement: typing.Any) -> Table:
+    try:
+        return typing.cast(Table, (await session.execute(statement)).scalars().one())
+    except NoResultFound:
+        raise ObjectNotFound
+
+
+async def fetchall(session: Session, statement: typing.Any) -> list[Table]:
+    return typing.cast(list[Table], (await session.execute(statement)).scalars().all())
+"""
+
+[[files]]
+path = "src/infrastructure/databases/postgres/__init__.py"
+mode = "w"
+content = """
+from .client import Postgres
+from .setup import postgres
+
+
+__all__ = [
+    "Postgres",
+    "postgres",
+]
+"""
+
+[[files]]
+path = "src/infrastructure/databases/postgres/adapters/__init__.py"
+mode = "w"
+content = """
+from . import repositories
+
+
+__all__ = ["repositories"]
+"""
+
+[[files]]
+path = "src/infrastructure/databases/postgres/adapters/repositories/__init__.py"
+mode = "w"
+content = """
+from .base import Base
+
+
+__all__ = ["Base"]
+"""
+
+[[files]]
+path = "src/infrastructure/databases/postgres/adapters/repositories/base.py"
+mode = "w"
+content = """
+import typing
+
+from src.common.formats.utils import date
+from src.common.typings.variables import Error
+from src.domain.models import Model
+from src.infrastructure.databases.orm.sqlalchemy.collections import ObjectNotFound
+from src.infrastructure.databases.orm.sqlalchemy.crud import Crud
+from src.infrastructure.databases.orm.sqlalchemy.models import And
+from src.infrastructure.databases.orm.sqlalchemy.models import Filter
+from src.infrastructure.databases.orm.sqlalchemy.models import Or
+from src.infrastructure.databases.orm.sqlalchemy.models import Pagination
+from src.infrastructure.databases.orm.sqlalchemy.models import Sorting
+from src.infrastructure.databases.orm.sqlalchemy.session import Session
+from src.infrastructure.databases.orm.sqlalchemy.tables import Table
+
+
+class Base(typing.Generic[Crud, Table, Model, Error]):
+    crud: type[Crud]
+    table: type[Table]
+    model: type[Model]
+    error: type[Error]
+
+    def __init__(self, session: Session):
+        self.session = session
+
+    def convert(self, table: Table) -> Model:
+        return self.model(**table.__dict__)
+
+    async def one(self, *filters: typing.Union[Filter, And, Or]) -> Model:
+        try:
+            row = await self.crud.one(self.session, *filters)
+        except ObjectNotFound:
+            raise self.error
+        return self.convert(row)
+
+    async def relations(self, *filters: typing.Union[Filter, And, Or]) -> Model:
+        try:
+            row = await self.crud.relations(self.session, *filters)
+        except ObjectNotFound:
+            raise self.error
+        return self.convert(row)
+
+    async def all(self, *filters: typing.Union[Filter, And, Or]) -> list[Model]:
+        rows = await self.crud.all(self.session, *filters)
+        return [self.convert(row) for row in rows]
+
+    async def paginated(
+        self,
+        filters: list[typing.Union[Filter, And, Or]],
+        sorting: list[Sorting],
+        pagination: Pagination,
+    ) -> tuple[list[Model], int]:
+        rows, total = await self.crud.paginated(self.session, filters, sorting, pagination)
+        return [self.convert(row) for row in rows], total
+
+    async def count(self, *filters: typing.Union[Filter, And, Or]) -> int:
+        return await self.crud.count(self.session, *filters)
+
+    async def exists(self, *filters: typing.Union[Filter, And, Or]) -> bool:
+        return await self.crud.exists(self.session, *filters)
+
+    async def create(self, model: Model) -> Model:
+        row = await self.crud.create(self.session, row=model.model_dump())
+        return self.convert(row)
+
+    async def update(self, id: typing.Union[str, int], **kwargs: typing.Any) -> None:
+        await self.crud.update(session=self.session, id=id, updated=date.now(), **kwargs)
+
+    async def delete(self, *filters: typing.Union[Filter, And, Or]) -> None:
+        return await self.crud.delete(self.session, *filters)
+"""
+
+[[files]]
+path = "src/infrastructure/databases/postgres/client.py"
+mode = "w"
+content = """
+from src.configuration import settings
+from src.infrastructure.databases.orm.sqlalchemy import SQLAlchemy
+
+from .collections import ClientDisabled
+
+
+class Postgres:
+    def __init__(self) -> None:
+        self._orm: SQLAlchemy | None = None
+
+    def start(self) -> None:
+        if not settings.POSTGRES:
+            return
+
+        self._orm = SQLAlchemy(url=settings.asyncpg)
+
+    def shutdown(self) -> None: ...
+
+    @property
+    def orm(self) -> SQLAlchemy:
+        if not self._orm:
+            raise ClientDisabled
+
+        return self._orm
+"""
+
+[[files]]
+path = "src/infrastructure/databases/postgres/collections/__init__.py"
+mode = "w"
+content = """
+from .const import LENGTH_LARGE_STR
+from .const import LENGTH_MIDDLE_STR
+from .const import LENGTH_PK_STR
+from .const import LENGTH_SMALL_STR
+from .const import LENGTH_TEXT
+from .exceptions import ClientDisabled
+
+
+__all__ = [
+    "ClientDisabled",
+    "LENGTH_LARGE_STR",
+    "LENGTH_MIDDLE_STR",
+    "LENGTH_PK_STR",
+    "LENGTH_SMALL_STR",
+    "LENGTH_TEXT",
+]
+"""
+
+[[files]]
+path = "src/infrastructure/databases/postgres/collections/const/__init__.py"
+mode = "w"
+content = """
+from .column import LENGTH_LARGE_STR
+from .column import LENGTH_MIDDLE_STR
+from .column import LENGTH_PK_STR
+from .column import LENGTH_SMALL_STR
+from .column import LENGTH_TEXT
+
+
+__all__ = [
+    "LENGTH_LARGE_STR",
+    "LENGTH_MIDDLE_STR",
+    "LENGTH_PK_STR",
+    "LENGTH_SMALL_STR",
+    "LENGTH_TEXT",
+]
+"""
+
+[[files]]
+path = "src/infrastructure/databases/postgres/collections/const/column.py"
+mode = "w"
+content = """
+LENGTH_PK_STR = 256
+LENGTH_SMALL_STR = 1024
+LENGTH_MIDDLE_STR = 2048
+LENGTH_LARGE_STR = 8192
+LENGTH_TEXT = 16384
+"""
+
+[[files]]
+path = "src/infrastructure/databases/postgres/collections/exceptions/__init__.py"
+mode = "w"
+content = """
+from .client import ClientDisabled
+
+
+__all__ = [
+    "ClientDisabled",
+]
+"""
+
+[[files]]
+path = "src/infrastructure/databases/postgres/collections/exceptions/client.py"
+mode = "w"
+content = """
+from src.framework.collections import ModuleDisabled
+
+
+class ClientDisabled(ModuleDisabled):
+    module = "postgres"
+"""
+
+[[files]]
+path = "src/infrastructure/databases/postgres/crud/__init__.py"
+mode = "w"
+content = """
+__all__: list[str] = []
+"""
+
+[[files]]
+path = "src/infrastructure/databases/postgres/setup.py"
+mode = "w"
+content = """
+from .client import Postgres
+
+
+postgres = Postgres()
+"""
+
+[[files]]
+path = "src/infrastructure/databases/postgres/tables/__init__.py"
+mode = "w"
+content = """
+__all__: list[str] = []
+"""
+
+[[files]]
+path = "src/infrastructure/monitoring/__init__.py"
+mode = "w"
+content = """
+
+"""
+
+[[files]]
+path = "src/infrastructure/monitoring/asyncio/__init__.py"
+mode = "w"
+content = """
+
+"""
+
+[[files]]
+path = "src/infrastructure/monitoring/asyncio/detector/__init__.py"
+mode = "w"
+content = """
+from .client import Detector
+from .setup import detector
+
+
+__all__ = [
+    "Detector",
+    "detector",
+]
+"""
+
+[[files]]
+path = "src/infrastructure/monitoring/asyncio/detector/client.py"
+mode = "w"
+content = """
+import asyncio
+import logging
+import signal
+import traceback
+import types
+
+from .handles import Signal
+
+
+logger = logging.getLogger("asyncio.detector")
+
+
+class Detector:
+    def __init__(self, timeout: int = 30) -> None:
+        self._timeout = timeout
+        self._original_handle_class: type[asyncio.Handle] | None = None
+
+    def start(self) -> None:
+        if self._original_handle_class is not None:
+            return
+        Signal._timeout = self._timeout
+        self._original_handle_class = asyncio.Handle
+        setattr(asyncio.events, "Handle", Signal)
+        signal.signal(signal.SIGALRM, self._message)
+
+    def shutdown(self) -> None:
+        if self._original_handle_class:
+            setattr(asyncio.events, "Handle", self._original_handle_class)
+            self._original_handle_class = None
+        signal.signal(signal.SIGALRM, signal.SIG_IGN)
+
+    def _message(self, _: int, frame: types.FrameType | None) -> None:
+        stack = [stack for stack in reversed(traceback.extract_stack(frame))][0]
+        func, file, lineno, code = stack.name, stack.filename, stack.lineno, stack.line.strip() if stack.line else ""
+        logger.critical(
+            f"Event loop is blocked for {self._timeout} sec in location {file}:{lineno} in {func}() → {code}"
+        )
+"""
+
+[[files]]
+path = "src/infrastructure/monitoring/asyncio/detector/handles/__init__.py"
+mode = "w"
+content = """
+from .signal import Handle as Signal
+
+
+__all__ = [
+    "Signal",
+]
+"""
+
+[[files]]
+path = "src/infrastructure/monitoring/asyncio/detector/handles/signal.py"
+mode = "w"
+content = """
+import asyncio
+import signal
+import typing
+
+
+class Handle(asyncio.Handle):
+    _timeout: int = 30
+    _orig_run: typing.Callable[[asyncio.Handle], None]
+
+    def _run(self) -> None:
+        signal.alarm(self._timeout)
+        try:
+            super()._run()
+        finally:
+            signal.alarm(0)
+"""
+
+[[files]]
+path = "src/infrastructure/monitoring/asyncio/detector/setup.py"
+mode = "w"
+content = """
+from .client import Detector
+
+
+detector = Detector(timeout=1)
+"""
+
+[[files]]
+path = "src/infrastructure/monitoring/health/__init__.py"
+mode = "w"
+content = """
+from .client import Health
+from .setup import health
+
+
+__all__ = [
+    "Health",
+    "health",
+]
+"""
+
+[[files]]
+path = "src/infrastructure/monitoring/health/client.py"
+mode = "w"
+content = """
+import collections.abc
+import inspect
+import typing
+
+from fastapi import APIRouter
+from fastapi import Depends
+from fastapi import Response
+from fastapi import status
+
+
+Dependency: typing.TypeAlias = typing.Callable[..., typing.Any]
+Endpoint: typing.TypeAlias = tuple[str] | tuple[str, list[Dependency]]
+
+
+class Health:
+    def __init__(self, *endpoints: Endpoint) -> None:
+        self.router = APIRouter(tags=["Health"])
+        self.setup(endpoints)
+
+    def setup(self, endpoints: collections.abc.Sequence[Endpoint]) -> None:
+        for endpoint in endpoints:
+            path = endpoint[0]
+            depends = list(endpoint[1]) if len(endpoint) > 1 else []
+
+            name = path.strip("/").split("/")[-1]
+
+            self.router.add_api_route(
+                path,
+                self.endpoint(depends),
+                description=f"Health {name} probe",
+                operation_id=f"{name}_probe",
+            )
+
+    @staticmethod
+    def endpoint(depends: list[Dependency]) -> typing.Callable[..., typing.Awaitable[Response]]:
+        async def _endpoint(**dependencies: dict[str, typing.Any]) -> Response:
+            return Response(
+                status_code=status.HTTP_200_OK
+                if all(bool(result) for result in dependencies.values())
+                else status.HTTP_503_SERVICE_UNAVAILABLE
+            )
+
+        params = [
+            inspect.Parameter(
+                name=depend.__name__,
+                kind=inspect.Parameter.POSITIONAL_OR_KEYWORD,
+                annotation=bool,
+                default=Depends(depend),
+            )
+            for depend in depends
+        ]
+
+        setattr(_endpoint, "__signature__", inspect.Signature(params))
+        return _endpoint
+"""
+
+[[files]]
+path = "src/infrastructure/monitoring/health/setup.py"
+mode = "w"
+content = """
+from .client import Health
+
+
+health = Health(
+    ("/api/-/health/readiness",),
+    ("/api/-/health/liveness",),
+    ("/api/-/health/startup",),
+)
+"""
+
+[[files]]
+path = "src/infrastructure/monitoring/logging/__init__.py"
+mode = "w"
+content = """
+from .setup import logger
+
+
+__all__ = [
+    "logger",
+]
+"""
+
+[[files]]
+path = "src/infrastructure/monitoring/logging/collections/__init__.py"
+mode = "w"
+content = """
+from .const import FIELD_HIDDEN
+from .const import FIELD_NONE
+from .const import FIELDS_RESERVED
+
+
+__all__ = [
+    "FIELDS_RESERVED",
+    "FIELD_HIDDEN",
+    "FIELD_NONE",
+]
+"""
+
+[[files]]
+path = "src/infrastructure/monitoring/logging/collections/const/__init__.py"
+mode = "w"
+content = """
+from .field import FIELD_HIDDEN
+from .field import FIELD_NONE
+from .field import FIELDS_RESERVED
+
+
+__all__ = [
+    "FIELDS_RESERVED",
+    "FIELD_HIDDEN",
+    "FIELD_NONE",
+]
+"""
+
+[[files]]
+path = "src/infrastructure/monitoring/logging/collections/const/field.py"
+mode = "w"
+content = """
+FIELD_NONE = "NOTSET"
+FIELD_HIDDEN = "HIDDEN"
+FIELDS_RESERVED = [
+    "name",
+    "msg",
+    "args",
+    "levelname",
+    "levelno",
+    "pathname",
+    "filename",
+    "module",
+    "exc_info",
+    "exc_text",
+    "stack_info",
+    "lineno",
+    "funcName",
+    "created",
+    "msecs",
+    "relativeCreated",
+    "thread",
+    "threadName",
+    "processName",
+    "process",
+    "message",
+    "taskName",
+]
+"""
+
+[[files]]
+path = "src/infrastructure/monitoring/logging/formatters/__init__.py"
+mode = "w"
+content = """
+from .base import Formatter
+from .json import Formatter as JSONFormatter
+from .plain import Formatter as PlainFormatter
+
+
+__all__ = [
+    "Formatter",
+    "JSONFormatter",
+    "PlainFormatter",
+]
+"""
+
+[[files]]
+path = "src/infrastructure/monitoring/logging/formatters/base.py"
+mode = "w"
+content = """
+import logging
+import typing
+
+from src.infrastructure.monitoring.logging.collections import FIELDS_RESERVED
+from src.infrastructure.monitoring.logging.mappers import Message
+from src.infrastructure.monitoring.logging.parsers import sethidden
+from src.infrastructure.monitoring.logging.parsers import setnone
+
+
+class Formatter(logging.Formatter):
+    def __init__(
+        self,
+        message: list[tuple[str, typing.Callable[[logging.LogRecord], typing.Any]]] | None = None,
+        hidden: list[str] | None = None,
+        context: typing.Callable[[], dict[str, typing.Any]] | None = None,
+    ) -> None:
+        super().__init__()
+        self.message = message if message else Message
+        self.hidden = hidden if hidden else []
+        self.context = context if context else lambda: {}
+
+    def enrich(self, record: logging.LogRecord) -> None:
+        for field, func in self.message:
+            setattr(record, field, func(record))
+
+        for key, value in self.context().items():
+            setattr(record, key, value)
+
+        if record.levelno >= logging.WARNING and record.exc_info:
+            setattr(record, "stacktrace", self.formatException(record.exc_info))
+            setattr(record, "exception", str(record.exc_info[1]))
+
+        if self.hidden:
+            for key, value in record.__dict__.items():
+                if key not in FIELDS_RESERVED:
+                    setattr(record, key, sethidden(value, self.hidden))
+
+        for key, value in record.__dict__.items():
+            if key not in FIELDS_RESERVED:
+                setattr(record, key, setnone(value))
+"""
+
+[[files]]
+path = "src/infrastructure/monitoring/logging/formatters/json.py"
+mode = "w"
+content = """
+import logging
+
+from src.common.formats.utils import json
+from src.infrastructure.monitoring.logging.collections import FIELDS_RESERVED
+
+from .base import Formatter as _Formatter
+
+
+class Formatter(_Formatter):
+    def format(self, record: logging.LogRecord) -> str:
+        self.enrich(record)
+
+        root = {field: getattr(record, field) for field, _ in self.message}
+
+        context = {
+            key: value
+            for key, value in record.__dict__.items()
+            if key not in root.keys() and key not in FIELDS_RESERVED
+        }
+
+        if context:
+            root["context"] = context
+
+        return json.tostring(root)
+"""
+
+[[files]]
+path = "src/infrastructure/monitoring/logging/formatters/plain.py"
+mode = "w"
+content = """
+import logging
+
+from src.infrastructure.monitoring.logging.utils import string
+
+from .base import Formatter as _Formatter
+
+
+class Formatter(_Formatter):
+    def format(self, record: logging.LogRecord) -> str:
+        self.enrich(record)
+        context = ", ".join(
+            [
+                f"{key}: {string.wrap(key)}"
+                for key, _ in self.message
+                if key not in {"timestamp", "level", "logger", "message"}
+            ]
+        )
+        self._style._fmt = " ".join(
+            [
+                string.wrap("timestamp"),
+                f"[{string.wrap('level')}]",
+                string.wrap("logger"),
+                string.wrap("message"),
+                "{" + context + "}",
+            ]
+        )
+        return super().format(record)
+"""
+
+[[files]]
+path = "src/infrastructure/monitoring/logging/mappers/__init__.py"
+mode = "w"
+content = """
+from .message import Mapper as Message
+
+
+__all__ = [
+    "Message",
+]
+"""
+
+[[files]]
+path = "src/infrastructure/monitoring/logging/mappers/message.py"
+mode = "w"
+content = """
+import datetime
+import logging
+import os
+import typing
+
+from src.common.formats.utils import date
+
+
+Mapper: list[tuple[str, typing.Callable[[logging.LogRecord], typing.Any]]] = [
+    (
+        "timestamp",
+        lambda record: date.iso(datetime.datetime.fromtimestamp(record.created, tz=datetime.timezone.utc)),
+    ),
+    ("level", lambda record: record.levelname),
+    ("logger", lambda record: record.name),
+    ("message", lambda record: record.getMessage()),
+    ("trace_id", lambda record: getattr(record, "trace_id", None)),
+    ("span_id", lambda record: getattr(record, "span_id", None)),
+    ("user_id", lambda record: getattr(record, "user_id", None)),
+    ("request_id", lambda record: getattr(record, "request_id", None)),
+    ("url", lambda record: getattr(record, "url", None)),
+    ("location", lambda record: f"{record.pathname}:{record.funcName}:{record.lineno}"),
+    ("elapsed", lambda record: getattr(record, "elapsed", None)),
+    ("ip", lambda record: getattr(record, "ip", None)),
+    ("debug", lambda record: getattr(record, "debug", None)),
+    ("service", lambda record: os.getenv("SERVICE", None)),
+    ("environment", lambda record: os.getenv("ENVIRONMENT", None)),
+    ("version", lambda record: os.getenv("VERSION", None)),
+    ("pod", lambda record: os.getenv("POD")),
+    ("namespace", lambda record: os.getenv("NAMESPACE")),
+    ("container", lambda record: os.getenv("CONTAINER")),
+    ("process", lambda record: record.process),
+    ("thread", lambda record: record.thread),
+    ("stacktrace", lambda record: getattr(record, "stacktrace", None)),
+    ("exception", lambda record: getattr(record, "exception", None)),
+]
+"""
+
+[[files]]
+path = "src/infrastructure/monitoring/logging/models/__init__.py"
+mode = "w"
+content = """
+from .logger import Logger
+
+
+__all__ = [
+    "Logger",
+]
+"""
+
+[[files]]
+path = "src/infrastructure/monitoring/logging/models/logger.py"
+mode = "w"
+content = """
+import dataclasses
+import hashlib
+import json
+import sys
+import types
+import typing
+
+
+@dataclasses.dataclass
+class Logger:
+    name: str
+    level: int
+    module: types.ModuleType | None = None
+    stream: typing.TextIO | None = sys.stdout
+    kwargs: dict[str, typing.Any] = dataclasses.field(default_factory=dict)
+
+    @property
+    def id(self) -> str:
+        return hashlib.md5(
+            json.dumps(
+                {
+                    "name": self.name,
+                    "level": self.level,
+                    "stream": str(self.stream),
+                    "module": str(self.module),
+                    "kwargs": {k: v.__name__ if callable(v) else v for k, v in (self.kwargs or {}).items()},
+                },
+                sort_keys=True,
+                ensure_ascii=False,
+            ).encode("utf-8")
+        ).hexdigest()
+"""
+
+[[files]]
+path = "src/infrastructure/monitoring/logging/parsers/__init__.py"
+mode = "w"
+content = """
+from .hide import parser as sethidden
+from .none import parser as setnone
+
+
+__all__ = [
+    "sethidden",
+    "setnone",
+]
+"""
+
+[[files]]
+path = "src/infrastructure/monitoring/logging/parsers/hide.py"
+mode = "w"
+content = """
+import typing
+
+from src.infrastructure.monitoring.logging.collections import FIELD_HIDDEN
+
+
+def parser(data: typing.Any, hidden: list[str]) -> typing.Any:
+    if isinstance(data, dict):
+        return {k: (FIELD_HIDDEN if k.lower() in hidden else parser(v, hidden)) for k, v in data.items()}
+    elif isinstance(data, list):
+        return [parser(i, hidden) for i in data]
+    return data
+"""
+
+[[files]]
+path = "src/infrastructure/monitoring/logging/parsers/none.py"
+mode = "w"
+content = """
+import typing
+
+from src.infrastructure.monitoring.logging.collections import FIELD_NONE
+
+
+def parser(data: typing.Any) -> typing.Any:
+    if isinstance(data, dict):
+        return {k: parser(v) for k, v in data.items()}
+    elif isinstance(data, list):
+        return [parser(i) for i in data]
+    return FIELD_NONE if data is None else data
+"""
+
+[[files]]
+path = "src/infrastructure/monitoring/logging/setup.py"
+mode = "w"
+content = """
+import logging
+import logging.config
+import sys
+import typing
+
+from src.common.formats.utils import modules
+from src.configuration import settings
+from src.infrastructure.monitoring.logging.formatters import JSONFormatter
+from src.infrastructure.monitoring.logging.formatters import PlainFormatter
+from src.infrastructure.monitoring.logging.models import Logger
+
+
+def setup(*loggers: Logger) -> None:
+    if not settings.LOGGING:
+        return
+
+    config: dict[str, typing.Any] = {
+        "version": 1,
+        "disable_existing_loggers": False,
+        "formatters": {},
+        "handlers": {},
+        "loggers": {},
+        "root": {},
+    }
+
+    for logger in loggers:
+        formatter: type[PlainFormatter] | type[JSONFormatter] = PlainFormatter
+        formattername = "plain"
+
+        if logger.module:
+            formattername = modules.define(logger.module)
+            if formattername == "json":
+                formatter = JSONFormatter
+
+        if formattername not in config["formatters"]:
+            config["formatters"][formattername] = {"()": formatter, **logger.kwargs}
+
+        config["handlers"][logger.id] = {
+            "class": "logging.StreamHandler",
+            "stream": logger.stream or sys.stdout,
+            "formatter": formattername,
+        }
+
+        if logger.name == "root":
+            config["root"] = {
+                "handlers": [logger.id],
+                "level": logger.level,
+            }
+        else:
+            config["loggers"][logger.name] = {
+                "handlers": [logger.id],
+                "level": logger.level,
+                "propagate": False,
+            }
+
+    logging.config.dictConfig(config)
+
+
+setup(Logger("root", logging.INFO, None, sys.stdout))
+
+logger = logging.getLogger()
+"""
+
+[[files]]
+path = "src/infrastructure/monitoring/logging/utils/__init__.py"
+mode = "w"
+content = """
+
+"""
+
+[[files]]
+path = "src/infrastructure/monitoring/logging/utils/string.py"
+mode = "w"
+content = """
+import typing
+
+
+def wrap(value: typing.Any) -> str:
+    return f"%({value})s"
+"""
+
+[[files]]
+path = "src/infrastructure/security/__init__.py"
+mode = "w"
+content = """
+
+"""
+
+[[files]]
+path = "src/infrastructure/security/encryption/__init__.py"
+mode = "w"
+content = """
+from .client import Encryption
+from .setup import encryption
+
+
+__all__ = [
+    "Encryption",
+    "encryption",
+]
+"""
+
+[[files]]
+path = "src/infrastructure/security/encryption/client.py"
+mode = "w"
+content = """
+import binascii
+import hashlib
+
+from Crypto.Cipher import AES
+from Crypto.Util.Padding import pad
+from Crypto.Util.Padding import unpad
+
+from src.configuration import settings
+
+from .collections import ClientDisabled
+
+
+class Encryption:
+    @property
+    def hash(self) -> bytes:
+        return hashlib.sha256(settings.CRYPTOGRAPHY_SECRET_KEY.encode()).digest()
+
+    def encrypt(self, data: str) -> str:
+        if not settings.CRYPTOGRAPHY:
+            raise ClientDisabled
+
+        cipher = AES.new(self.hash[:16], AES.MODE_CBC, self.hash[16:32])
+
+        return binascii.hexlify(cipher.encrypt(pad(data.encode(), AES.block_size))).decode()
+
+    def decrypt(self, data: str) -> str:
+        if not settings.CRYPTOGRAPHY:
+            raise ClientDisabled
+
+        cipher = AES.new(self.hash[:16], AES.MODE_CBC, self.hash[16:32])
+
+        return unpad(cipher.decrypt(binascii.unhexlify(data)), AES.block_size).decode()
+"""
+
+[[files]]
+path = "src/infrastructure/security/encryption/collections/__init__.py"
+mode = "w"
+content = """
+from .exceptions import ClientDisabled
+
+
+__all__ = [
+    "ClientDisabled",
+]
+"""
+
+[[files]]
+path = "src/infrastructure/security/encryption/collections/exceptions/__init__.py"
+mode = "w"
+content = """
+from .client import ClientDisabled
+
+
+__all__ = [
+    "ClientDisabled",
+]
+"""
+
+[[files]]
+path = "src/infrastructure/security/encryption/collections/exceptions/client.py"
+mode = "w"
+content = """
+from src.framework.collections import ModuleDisabled
+
+
+class ClientDisabled(ModuleDisabled):
+    module = "encryption"
+"""
+
+[[files]]
+path = "src/infrastructure/security/encryption/setup.py"
+mode = "w"
+content = """
+from .client import Encryption
+
+
+encryption = Encryption()
+"""
+
+[[files]]
+path = "src/infrastructure/security/jwt/__init__.py"
+mode = "w"
+content = """
+from .client import JWT
+from .setup import jwt
+
+
+__all__ = [
+    "JWT",
+    "jwt",
+]
+"""
+
+[[files]]
+path = "src/infrastructure/security/jwt/client.py"
+mode = "w"
+content = """
+import jwt
+
+from src.common.formats.utils import date
+from src.common.formats.utils import uuid
+from src.configuration import settings
+
+from .collections import ClientDisabled
+from .collections import TokenInvalid
+from .collections import TokenPurpose
+from .models import Token
+from .models import Tokens
+
+
+class JWT:
+    @classmethod
+    def encode(cls, subject: str) -> Tokens:
+        if not settings.JWT:
+            raise ClientDisabled
+
+        jti = uuid.unique()
+
+        access = Token(
+            sub=subject,
+            purpose=TokenPurpose.access,
+            exp=int(date.shift(seconds=settings.JWT_ACCESS_EXPIRED_SECONDS).timestamp()),
+            jti=jti,
+        ).model_dump()
+
+        refresh = Token(
+            sub=subject,
+            purpose=TokenPurpose.refresh,
+            exp=int(date.shift(seconds=settings.JWT_REFRESH_EXPIRED_SECONDS).timestamp()),
+            jti=jti,
+        ).model_dump()
+
+        return Tokens(
+            access=jwt.encode(payload=access, key=settings.JWT_SECRET_KEY, algorithm=settings.JWT_ALGORITHM),
+            refresh=jwt.encode(payload=refresh, key=settings.JWT_SECRET_KEY, algorithm=settings.JWT_ALGORITHM),
+        )
+
+    @classmethod
+    def decode(cls, token: str, purpose: TokenPurpose) -> Token:
+        if not settings.JWT:
+            raise ClientDisabled
+
+        try:
+            signature = Token(**jwt.decode(token, key=settings.JWT_SECRET_KEY, algorithms=[settings.JWT_ALGORITHM]))
+            if signature.purpose is not purpose:
+                raise jwt.PyJWTError
+        except jwt.PyJWTError:
+            raise TokenInvalid
+        return signature
+"""
+
+[[files]]
+path = "src/infrastructure/security/jwt/collections/__init__.py"
+mode = "w"
+content = """
+from .enums import TokenPurpose
+from .exceptions import ClientDisabled
+from .exceptions import TokenInvalid
+
+
+__all__ = [
+    "ClientDisabled",
+    "TokenInvalid",
+    "TokenPurpose",
+]
+"""
+
+[[files]]
+path = "src/infrastructure/security/jwt/collections/enums/__init__.py"
+mode = "w"
+content = """
+from .token import TokenPurpose
+
+
+__all__ = [
+    "TokenPurpose",
+]
+"""
+
+[[files]]
+path = "src/infrastructure/security/jwt/collections/enums/token.py"
+mode = "w"
+content = """
+import enum
+
+
+class TokenPurpose(enum.StrEnum):
+    access = "access"
+    refresh = "refresh"
+"""
+
+[[files]]
+path = "src/infrastructure/security/jwt/collections/exceptions/__init__.py"
+mode = "w"
+content = """
+from .client import ClientDisabled
+from .token import TokenInvalid
+
+
+__all__ = [
+    "ClientDisabled",
+    "TokenInvalid",
+]
+"""
+
+[[files]]
+path = "src/infrastructure/security/jwt/collections/exceptions/client.py"
+mode = "w"
+content = """
+from src.framework.collections import ModuleDisabled
+
+
+class ClientDisabled(ModuleDisabled):
+    module = "jwt"
+"""
+
+[[files]]
+path = "src/infrastructure/security/jwt/collections/exceptions/token.py"
+mode = "w"
+content = """
+from src.common.http.collections import HTTPCode
+from src.common.http.collections import HTTPError
+
+
+class TokenInvalid(HTTPError):
+    code = HTTPCode.UNAUTHORIZED
+"""
+
+[[files]]
+path = "src/infrastructure/security/jwt/models/__init__.py"
+mode = "w"
+content = """
+from .token import Token
+from .token import Tokens
+
+
+__all__ = [
+    "Token",
+    "Tokens",
+]
+"""
+
+[[files]]
+path = "src/infrastructure/security/jwt/models/token.py"
+mode = "w"
+content = """
+from pydantic import BaseModel
+
+from src.infrastructure.security.jwt.collections import TokenPurpose
+
+
+class Token(BaseModel):
+    sub: str
+    purpose: TokenPurpose
+    exp: int
+    jti: str
+
+
+class Tokens(BaseModel):
+    access: str
+    refresh: str
+"""
+
+[[files]]
+path = "src/infrastructure/security/jwt/setup.py"
+mode = "w"
+content = """
+from .client import JWT
+
+
+jwt = JWT()
+"""
+
+[[files]]
+path = "src/infrastructure/storages/__init__.py"
+mode = "w"
+content = """
+
+"""
+
+[[files]]
+path = "src/infrastructure/storages/redis/__init__.py"
+mode = "w"
+content = """
+from .client import Redis
+from .setup import redis
+
+
+__all__ = [
+    "Redis",
+    "redis",
+]
+"""
+
+[[files]]
+path = "src/infrastructure/storages/redis/client.py"
+mode = "w"
+content = """
+import datetime
+import functools
+import typing
+
+import redis.asyncio as redis
+
+from src.common.formats.utils import hashes
+from src.common.formats.utils import json
+from src.common.keyboard.collections import SYMBOL_ASTERISK
+from src.configuration import settings
+from src.framework.routing import APIRouter
+
+from .collections import ClientDisabled
+from .collections import Namespace
+from .collections import Operation
+
+
+class Redis:
+    def __init__(self) -> None:
+        self.client: redis.Redis | None = None
+        self.router = APIRouter(tags=["Cache"])
+        self.endpoints()
+
+    async def start(self) -> None:
+        if not settings.REDIS:
+            return
+
+        self.client = redis.from_url(settings.REDIS_HOST, encoding="utf8", decode_responses=True)
+
+        await self.client.ping()  # type:ignore
+
+    async def shutdown(self) -> None:
+        if not self.client:
+            return
+
+        await self.client.close()
+
+    async def set(self, key: str, value: typing.Any, expire: int | None = None) -> None:
+        if not self.client:
+            raise ClientDisabled
+
+        await self.client.set(key, json.tostring(value), ex=expire)
+
+    async def get(self, key: str) -> dict[str, typing.Any]:
+        if not self.client:
+            raise ClientDisabled
+
+        data = {}
+
+        if SYMBOL_ASTERISK in key:
+            if keys := [key async for _key in self.client.scan_iter(match=key)]:
+                if values := await self.client.mget(*keys):
+                    for key, value in zip(keys, values):
+                        if value:
+                            data[key] = json.fromstring(value)
+        else:
+            if value := await self.client.get(key):
+                data[key] = json.fromstring(value)
+
+        return data
+
+    async def delete(self, key: str) -> None:
+        if not self.client:
+            raise ClientDisabled
+
+        if SYMBOL_ASTERISK in key:
+            async for _key in self.client.scan_iter(match=key):
+                await self.client.delete(_key)
+        else:
+            await self.client.delete(key)
+
+    def endpoints(self) -> None:
+        @self.router.get("/api/-/cache/{key}", description="Get cache")
+        async def query(key: str) -> dict[str, typing.Any]:
+            return await self.get(key)
+
+        @self.router.delete("/api/-/cache/{key}", description="Delete cache")
+        async def command(key: str) -> None:
+            await self.delete(key)
+
+    def __call__(
+        self,
+        operation: Operation,
+        namespace: Namespace,
+        ttl: datetime.timedelta = datetime.timedelta(minutes=5),
+        id: str | None = None,
+    ) -> typing.Callable[..., typing.Callable[..., typing.Any]]:
+        def decorator(func: typing.Any) -> typing.Callable[..., typing.Awaitable[typing.Any]]:
+            @functools.wraps(func)
+            async def wrapper(*args: typing.Any, **kwargs: typing.Any) -> typing.Any:
+                account = kwargs.get("account")
+                context = {key: value for key, value in kwargs.items() if key not in ["account", "usecase"]}
+                key = f"{f'{account.id}:' if account else ''}{namespace}:{operation}:{f'{id}:' if id else ''}{hashes.deterministic(func, context)}"
+                if cached := await self.get(key):
+                    return cached[key]
+                else:
+                    if (value := await func(*args, **kwargs)) is not None:
+                        await self.set(key, value, expire=int(ttl.total_seconds()))
+                    return value
+
+            return wrapper
+
+        return decorator
+
+    def invalidate(self, *namespaces: Namespace) -> typing.Callable[..., typing.Callable[..., typing.Any]]:
+        def decorator(func: typing.Any) -> typing.Callable[..., typing.Awaitable[typing.Any]]:
+            @functools.wraps(func)
+            async def wrapper(*args: typing.Any, **kwargs: typing.Any) -> typing.Any:
+                user = kwargs.get("user")
+                value = await func(*args, **kwargs)
+                for namespace in namespaces:
+                    await self.delete(f"{namespace}*")
+                    await self.delete(f"{user.id if user else ''}:{namespace}*")
+                return value
+
+            return wrapper
+
+        return decorator
+"""
+
+[[files]]
+path = "src/infrastructure/storages/redis/collections/__init__.py"
+mode = "w"
+content = """
+from .enums import Namespace
+from .enums import Operation
+from .exceptions import ClientDisabled
+
+
+__all__ = [
+    "ClientDisabled",
+    "Namespace",
+    "Operation",
+]
+"""
+
+[[files]]
+path = "src/infrastructure/storages/redis/collections/enums/__init__.py"
+mode = "w"
+content = """
+from .namespace import Namespace
+from .operation import Operation
+
+
+__all__ = [
+    "Namespace",
+    "Operation",
+]
+"""
+
+[[files]]
+path = "src/infrastructure/storages/redis/collections/enums/namespace.py"
+mode = "w"
+content = """
+import enum
+
+
+class Namespace(enum.StrEnum): ...
+"""
+
+[[files]]
+path = "src/infrastructure/storages/redis/collections/enums/operation.py"
+mode = "w"
+content = """
+import enum
+
+
+class Operation(enum.StrEnum):
+    page = "page"
+    count = "count"  # type:ignore
+    search = "search"
+"""
+
+[[files]]
+path = "src/infrastructure/storages/redis/collections/exceptions/__init__.py"
+mode = "w"
+content = """
+from .client import ClientDisabled
+
+
+__all__ = [
+    "ClientDisabled",
+]
+"""
+
+[[files]]
+path = "src/infrastructure/storages/redis/collections/exceptions/client.py"
+mode = "w"
+content = """
+from src.framework.collections import ModuleDisabled
+
+
+class ClientDisabled(ModuleDisabled):
+    module = "redis"
+"""
+
+[[files]]
+path = "src/infrastructure/storages/redis/setup.py"
+mode = "w"
+content = """
+from .client import Redis
+
+
+redis = Redis()
+"""
+
+[[files]]
+path = "tests/__init__.py"
+mode = "w"
+content = """
+
+"""
+
+[[files]]
+path = "tests/conftest.py"
+mode = "w"
+content = """
+import asyncio
+import typing
+
+import pytest
+
+
+@pytest.fixture(scope="session")
+def event_loop() -> typing.Generator[asyncio.AbstractEventLoop, None, None]:
+    loop = asyncio.get_event_loop()
+    yield loop
+    loop.close()
+"""
+
+[[files]]
+path = "tests/const.py"
+mode = "w"
+content = """
+
+"""
+
+[[files]]
+path = "tests/factories/__init__.py"
+mode = "w"
+content = """
+
+"""
+
+[[files]]
+path = "tests/factories/domain/__init__.py"
+mode = "w"
+content = """
+
+"""
+
+[[files]]
+path = "tests/factories/domain/models/__init__.py"
+mode = "w"
+content = """
+__all__: list[str] = []
+"""
+
+[[files]]
+path = "tests/factories/infrastructure/__init__.py"
+mode = "w"
+content = """
+
+"""
+
+[[files]]
+path = "tests/factories/infrastructure/databases/__init__.py"
+mode = "w"
+content = """
+
+"""
+
+[[files]]
+path = "tests/factories/infrastructure/databases/postgres/__init__.py"
+mode = "w"
+content = """
+
+"""
+
+[[files]]
+path = "tests/factories/infrastructure/databases/postgres/tables/__init__.py"
+mode = "w"
+content = """
+from .base import Table
+
+
+__all__ = ["Table"]
+"""
+
+[[files]]
+path = "tests/factories/infrastructure/databases/postgres/tables/base.py"
+mode = "w"
+content = """
+import typing
+
+import factory
+
+
+class Table(factory.alchemy.SQLAlchemyModelFactory):  # type:ignore
+    class Meta:
+        abstract = True
+        sqlalchemy_session = None
+        sqlalchemy_session_persistence = "flush"
+
+    @classmethod
+    async def init(cls, model: dict[str, typing.Any]) -> typing.Any:
+        instance = cls.create(**model)
+        await cls._meta.sqlalchemy_session.flush()  # type:ignore
+        return instance
+"""
+
+[[files]]
+path = "tests/faker.py"
+mode = "w"
+content = """
+import faker
+
+
+fake = faker.Faker()
+"""
+
+[[files]]
+path = "tests/mocking/__init__.py"
+mode = "w"
+content = """
+
+"""
+
+[[files]]
+path = "tests/mocking/infrastructure/__init__.py"
+mode = "w"
+content = """
+
+"""
+
+[[files]]
+path = "tests/mocking/infrastructure/storages/__init__.py"
+mode = "w"
+content = """
+
+"""
+
+[[files]]
+path = "tests/mocking/infrastructure/storages/redis/__init__.py"
+mode = "w"
+content = """
+
+"""
+
+[[files]]
+path = "tests/mocking/infrastructure/storages/redis/client.py"
+mode = "w"
+content = """
+import datetime
+import functools
+import typing
+
+
+class Redis:
+    def __init__(self) -> None:
+        self.client = None
+        self.router = None
+
+    async def start(self) -> None:
+        pass
+
+    async def shutdown(self) -> None:
+        pass
+
+    async def set(self, *args: typing.Any, **kwargs: typing.Any) -> None:
+        pass
+
+    async def get(self, _: str) -> dict[str, typing.Any]:
+        return {}
+
+    async def delete(self, key: str) -> None:
+        pass
+
+    def endpoints(self) -> None:
+        pass
+
+    def __call__(
+        self,
+        namespace: str,
+        ttl: datetime.timedelta,
+    ) -> typing.Callable[..., typing.Callable[..., typing.Any]]:
+        def decorator(func: typing.Any) -> typing.Callable[..., typing.Awaitable[typing.Any]]:
+            @functools.wraps(func)
+            async def wrapper(*args: typing.Any, **kwargs: typing.Any) -> typing.Any:
+                return await func(*args, **kwargs)
+
+            return wrapper
+
+        return decorator
+
+    def invalidate(self, *_: str) -> typing.Callable[..., typing.Callable[..., typing.Any]]:
+        def decorator(func: typing.Any) -> typing.Callable[..., typing.Awaitable[typing.Any]]:
+            @functools.wraps(func)
+            async def wrapper(*args: typing.Any, **kwargs: typing.Any) -> typing.Any:
+                return await func(*args, **kwargs)
+
+            return wrapper
+
+        return decorator
+"""
+
+[[files]]
+path = "tests/test_integrations/__init__.py"
+mode = "w"
+content = """
+
+"""
+
+[[files]]
+path = "tests/test_integrations/conftest.py"
+mode = "w"
+content = """
+import typing
+
+import pytest
+
+from fastapi import FastAPI
+from httpx import ASGITransport
+from httpx import AsyncClient
+
+from src.entrypoints.http import router
+
+
+@pytest.fixture(scope="module", autouse=True)
+def app() -> FastAPI:
+    application = FastAPI()
+    application.include_router(router)
+    return application
+
+
+@pytest.fixture(scope="function")
+async def client(app: FastAPI) -> typing.AsyncGenerator[AsyncClient, None]:
+    async with AsyncClient(transport=ASGITransport(app=app), base_url="http://test") as _client:
+        yield _client
+    app.dependency_overrides.clear()
+"""
+
+[[files]]
+path = "tests/test_integrations/test_entrypoints/__init__.py"
+mode = "w"
+content = """
+
+"""
+
+[[files]]
+path = "tests/test_integrations/test_entrypoints/test_http/__init__.py"
+mode = "w"
+content = """
+
+"""
+
+[[files]]
+path = "tests/test_integrations/test_entrypoints/test_http/test_public/__init__.py"
+mode = "w"
+content = """
+
+"""
+
+[[files]]
+path = "tests/test_integrations/test_entrypoints/test_http/test_system/__init__.py"
+mode = "w"
+content = """
+
+"""
+
+[[files]]
+path = "tests/test_loads/__init__.py"
+mode = "w"
+content = """
+
+"""
+
+[[files]]
+path = "tests/test_units/__init__.py"
+mode = "w"
+content = """
+
+"""
+
+[[files]]
+path = "tests/tools/__init__.py"
+mode = "w"
+content = """
+
+"""
+
+[[files]]
+path = "tests/tools/profiler/__init__.py"
+mode = "w"
+content = """
+from tests.tools.profiler.profilers import SqlalchemyProfiler
+
+
+__all__ = [
+    "SqlalchemyProfiler",
+]
+"""
+
+[[files]]
+path = "tests/tools/profiler/contextmanagers/__init__.py"
+mode = "w"
+content = """
+from .time import timer
+from .tracemalloc import allocation
+
+
+__all__ = [
+    "allocation",
+    "timer",
+]
+"""
+
+[[files]]
+path = "tests/tools/profiler/contextmanagers/time.py"
+mode = "w"
+content = """
+import contextlib
+import time
+import typing
+
+
+@contextlib.contextmanager
+def timer() -> typing.Generator[typing.Callable[[], float], typing.Any, None]:
+    start = time.perf_counter()
+    yield lambda: time.perf_counter() - start
+"""
+
+[[files]]
+path = "tests/tools/profiler/contextmanagers/tracemalloc.py"
+mode = "w"
+content = """
+import contextlib
+import tracemalloc
+import typing
+
+
+@contextlib.contextmanager
+def allocation() -> typing.Generator[None]:
+    tracemalloc.start()
+    try:
+        yield
+    finally:
+        tracemalloc.stop()
+"""
+
+[[files]]
+path = "tests/tools/profiler/models/__init__.py"
+mode = "w"
+content = """
+from .profilers import SqlalchemyProfiling
+from .reports import Allocation
+from .reports import GarbageCollector
+from .reports import PostgresExplain
+from .reports import SqlalchemyQuery
+from .reports import Statistics
+
+
+__all__ = [
+    "Allocation",
+    "GarbageCollector",
+    "PostgresExplain",
+    "SqlalchemyProfiling",
+    "SqlalchemyQuery",
+    "Statistics",
+]
+"""
+
+[[files]]
+path = "tests/tools/profiler/models/profilers/__init__.py"
+mode = "w"
+content = """
+from .extensions import SqlalchemyProfiling
+
+
+__all__ = [
+    "SqlalchemyProfiling",
+]
+"""
+
+[[files]]
+path = "tests/tools/profiler/models/profilers/extensions/__init__.py"
+mode = "w"
+content = """
+from .sqlalchemy import SqlalchemyProfiling
+
+
+__all__ = [
+    "SqlalchemyProfiling",
+]
+"""
+
+[[files]]
+path = "tests/tools/profiler/models/profilers/extensions/sqlaclhemy.py"
+mode = "w"
+content = """
+from pydantic import BaseModel
+
+from tests.tools.profiler.models.reports.extensions.sqlalchemy import SqlalchemyQuery
+from tests.tools.profiler.models.reports.python.garbage import GarbageCollector
+from tests.tools.profiler.models.reports.python.tracemalloc import Allocation
+
+
+class SqlalchemyProfiling(BaseModel):
+    query: SqlalchemyQuery
+    allocation: Allocation
+    garbage: GarbageCollector
+"""
+
+[[files]]
+path = "tests/tools/profiler/models/reports/__init__.py"
+mode = "w"
+content = """
+from .extensions import PostgresExplain
+from .extensions import SqlalchemyQuery
+from .python import Allocation
+from .python import GarbageCollector
+from .python import Statistics
+
+
+__all__ = [
+    "Allocation",
+    "GarbageCollector",
+    "PostgresExplain",
+    "SqlalchemyQuery",
+    "Statistics",
+]
+"""
+
+[[files]]
+path = "tests/tools/profiler/models/reports/extensions/__init__.py"
+mode = "w"
+content = """
+from .postgres import PostgresExplain
+from .sqlalchemy import SqlalchemyQuery
+
+
+__all__ = [
+    "PostgresExplain",
+    "SqlalchemyQuery",
+]
+"""
+
+[[files]]
+path = "tests/tools/profiler/models/reports/extensions/postgres.py"
+mode = "w"
+content = """
+from pydantic import BaseModel
+from pydantic import Field
+
+
+class PostgresExplain(BaseModel):
+    class PostgresExplainPlan(BaseModel):
+        class PostgresExplainPlanBuffer(BaseModel):
+            hit: int | None = Field(None, alias="Shared Hit Blocks")
+            read: int | None = Field(None, alias="Shared Read Blocks")
+            write: int | None = Field(None, alias="Shared Written Blocks")
+
+        type: str = Field(..., alias="Node Type")
+        name: str | None = Field(None, alias="Relation Name")
+        alias: str | None = Field(None, alias="Alias")
+        startup: float | None = Field(None, alias="Startup Cost")
+        total: float | None = Field(None, alias="Total Cost")
+
+        plan_rows: int | None = Field(None, alias="Plan Rows")
+        plan_width: int | None = Field(None, alias="Plan Width")
+
+        actual_rows: int | None = Field(None, alias="Actual Rows")
+        actual_loops: int | None = Field(None, alias="Actual Loops")
+        actual_startup_time: float | None = Field(None, alias="Actual Startup Time")
+        actual_total_time: float | None = Field(None, alias="Actual Total Time")
+
+        buffers: PostgresExplainPlanBuffer | None = Field(None, alias="Buffers")
+        plans: list["PostgresExplainPlan"] = Field(default_factory=list, alias="Plans")  # type:ignore
+
+        filter: str | None = Field(None, alias="Filter")
+        index: str | None = Field(None, alias="Index Cond")
+        join: str | None = Field(None, alias="Join Type")
+
+        class Config:
+            allow_population_by_field_name = True
+            arbitrary_types_allowed = True
+
+    plan: PostgresExplainPlan = Field(..., alias="Plan")
+    planning: float | None = Field(None, alias="Planning Time")
+    execution: float | None = Field(None, alias="Execution Time")
+
+    class Config:
+        allow_population_by_field_name = True
+"""
+
+[[files]]
+path = "tests/tools/profiler/models/reports/extensions/sqlalchemy.py"
+mode = "w"
+content = """
+from pydantic import BaseModel
+
+from tests.tools.profiler.models.reports.python.statistics import Statistics
+
+from .postgres import PostgresExplain
+
+
+class SqlalchemyQuery(BaseModel):
+    class SqlalchemyQueryDetail(BaseModel):
+        execute: Statistics
+        fetch: Statistics
+        scalar: Statistics
+
+    sql: SqlalchemyQueryDetail
+    orm: SqlalchemyQueryDetail
+    explains: list[PostgresExplain]
+"""
+
+[[files]]
+path = "tests/tools/profiler/models/reports/python/__init__.py"
+mode = "w"
+content = """
+from .garbage import GarbageCollector
+from .statistics import Statistics
+from .tracemalloc import Allocation
+
+
+__all__ = [
+    "Allocation",
+    "GarbageCollector",
+    "Statistics",
+]
+"""
+
+[[files]]
+path = "tests/tools/profiler/models/reports/python/garbage.py"
+mode = "w"
+content = """
+from pydantic import BaseModel
+
+
+class GarbageCollector(BaseModel):
+    collected: int
+    uncollectable: int
+"""
+
+[[files]]
+path = "tests/tools/profiler/models/reports/python/statistics.py"
+mode = "w"
+content = """
+from pydantic import BaseModel
+
+
+class Statistics(BaseModel):
+    mean: float
+    median: float
+    stdev: float
+    min: float
+    max: float
+"""
+
+[[files]]
+path = "tests/tools/profiler/models/reports/python/tracemalloc.py"
+mode = "w"
+content = """
+from pydantic import BaseModel
+
+
+class Allocation(BaseModel):
+    current: float
+    peak: float
+"""
+
+[[files]]
+path = "tests/tools/profiler/profilers/__init__.py"
+mode = "w"
+content = """
+from .extensions import SqlalchemyProfiler
+
+
+__all__ = [
+    "SqlalchemyProfiler",
+]
+"""
+
+[[files]]
+path = "tests/tools/profiler/profilers/extensions/__init__.py"
+mode = "w"
+content = """
+from .sqlalchemy import SqlalchemyProfiler
+
+
+__all__ = [
+    "SqlalchemyProfiler",
+]
+"""
+
+[[files]]
+path = "tests/tools/profiler/profilers/extensions/sqlaclhemy.py"
+mode = "w"
+content = """
+import asyncio
+import typing
+
+from sqlalchemy.dialects.postgresql import dialect
+from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy.sql import Executable
+from sqlalchemy.sql import text
+
+from tests.tools.profiler import contextmanagers
+from tests.tools.profiler import models
+from tests.tools.profiler import reports
+
+
+class SqlalchemyProfiler:
+    def __init__(self, session: AsyncSession, query: Executable, runs: int = 1, users: int | None = None) -> None:
+        self._session = session
+        self._orm = query
+        self._sql = query.compile(dialect=dialect(), compile_kwargs={"literal_binds": True})  # type:ignore
+        self._runs = runs
+        self._users = users
+
+    async def tables(self) -> typing.Any:
+        return (await self._session.execute(self._orm)).scalars().all()
+
+    async def sql(self) -> tuple[float, float, float]:
+        with contextmanagers.timer() as timer:
+            rows = await self._session.execute(text(str(self._sql)))
+        execute = timer()
+
+        with contextmanagers.timer() as timer:
+            rows.fetchall()
+        fetch = timer()
+
+        with contextmanagers.timer() as timer:
+            rows.scalars().all()
+        scalar = timer()
+
+        return execute, fetch, scalar
+
+    async def orm(self) -> tuple[float, float, float]:
+        with contextmanagers.timer() as timer:
+            rows = await self._session.execute(self._orm)
+        execute = timer()
+
+        with contextmanagers.timer() as timer:
+            rows.fetchall()
+        fetch = timer()
+
+        with contextmanagers.timer() as timer:
+            rows.scalars().all()
+        scalar = timer()
+
+        return execute, fetch, scalar
+
+    async def once(self) -> tuple[typing.Any, tuple[float, float, float], tuple[float, float, float]]:
+        return (
+            await self.tables(),
+            await self.sql(),
+            await self.orm(),
+        )
+
+    async def iterate(self) -> tuple[list[tuple[float, float, float]], list[tuple[float, float, float]]]:
+        sql, orm = [], []
+        for _ in range(self._runs):
+            _, _sql, _orm = await self.once()
+            sql.append(_sql)
+            orm.append(_orm)
+        return sql, orm
+
+    async def parallel(self) -> tuple[list[tuple[float, float, float]], list[tuple[float, float, float]]]:
+        sql, orm = [], []
+        for _ in range(self._runs):
+            tasks = [self.once() for _ in range(self._users)]  # type:ignore
+            results = await asyncio.gather(*tasks)
+            for _, _sql, _orm in results:
+                sql.append(_sql)
+                orm.append(_orm)
+        return sql, orm
+
+    async def explain(self) -> list[dict[str, typing.Any]]:
+        return (  # type:ignore
+            await self._session.execute(
+                text(f"EXPLAIN (ANALYZE, VERBOSE, COSTS, BUFFERS, TIMING, SUMMARY, FORMAT JSON) {self._sql}")
+            )
+        ).scalar()
+
+    async def analyze(self) -> tuple[typing.Any, models.SqlalchemyProfiling]:  # type:ignore
+        with (
+            contextmanagers.timer(),
+            contextmanagers.allocation(),
+        ):
+            explains = await self.explain()
+
+            tables, sql, orm = await self.once()
+
+            if self._users:
+                sql, orm = await self.parallel()  # type:ignore
+            elif self._runs > 1:
+                sql, orm = await self.iterate()  # type:ignore
+            else:
+                sql, orm = [sql], [orm]  # type:ignore
+
+            execute, fetch, scalar = list(zip(*sql))  # type:ignore
+            sql = (  # type:ignore
+                reports.statistics.generate(list(execute)),
+                reports.statistics.generate(list(fetch)),
+                reports.statistics.generate(list(scalar)),
+            )
+
+            execute, fetch, scalar = list(zip(*orm))  # type:ignore
+            orm = (  # type:ignore
+                reports.statistics.generate(list(execute)),
+                reports.statistics.generate(list(fetch)),
+                reports.statistics.generate(list(scalar)),
+            )
+
+            report = models.SqlalchemyProfiling(
+                query=reports.sqlalchemy.generate(
+                    sql=sql,  # type:ignore
+                    orm=orm,  # type:ignore
+                    explains=reports.postgres.generate(explains),
+                ),
+                allocation=reports.tracemalloc.generate(),
+                garbage=reports.garbage.generate(),
+            )
+
+        return tables, report
+"""
+
+[[files]]
+path = "tests/tools/profiler/reports/__init__.py"
+mode = "w"
+content = """
+from .extensions import postgres
+from .extensions import sqlalchemy
+from .python import garbage
+from .python import statistics
+from .python import tracemalloc
+
+
+__all__ = [
+    "garbage",
+    "postgres",
+    "sqlalchemy",
+    "statistics",
+    "tracemalloc",
+]
+"""
+
+[[files]]
+path = "tests/tools/profiler/reports/extensions/__init__.py"
+mode = "w"
+content = """
+from . import postgres
+from . import sqlalchemy
+
+
+__all__ = [
+    "postgres",
+    "sqlalchemy",
+]
+"""
+
+[[files]]
+path = "tests/tools/profiler/reports/extensions/postgres.py"
+mode = "w"
+content = """
+import typing
+
+from tests.tools.profiler.models import PostgresExplain
+
+
+def generate(explains: list[dict[str, typing.Any]]) -> list[PostgresExplain]:
+    return [PostgresExplain(**explain) for explain in explains]
+"""
+
+[[files]]
+path = "tests/tools/profiler/reports/extensions/sqlalchemy.py"
+mode = "w"
+content = """
+from tests.tools.profiler.models import PostgresExplain
+from tests.tools.profiler.models import SqlalchemyQuery
+from tests.tools.profiler.models import Statistics
+
+
+def generate(
+    sql: tuple[Statistics, Statistics, Statistics],
+    orm: tuple[Statistics, Statistics, Statistics],
+    explains: list[PostgresExplain],
+) -> SqlalchemyQuery:
+    return SqlalchemyQuery(
+        sql=SqlalchemyQuery.SqlalchemyQueryDetail(execute=sql[0], fetch=sql[1], scalar=sql[2]),
+        orm=SqlalchemyQuery.SqlalchemyQueryDetail(execute=orm[0], fetch=orm[1], scalar=orm[2]),
+        explains=explains,
+    )
+"""
+
+[[files]]
+path = "tests/tools/profiler/reports/python/__init__.py"
+mode = "w"
+content = """
+from . import garbage
+from . import statistics
+from . import tracemalloc
+
+
+__all__ = [
+    "garbage",
+    "statistics",
+    "tracemalloc",
+]
+"""
+
+[[files]]
+path = "tests/tools/profiler/reports/python/garbage.py"
+mode = "w"
+content = """
+import gc
+
+from tests.tools.profiler.models import GarbageCollector
+
+
+def generate() -> GarbageCollector:
+    collected, uncollectable, _ = gc.get_count()
+    return GarbageCollector(collected=collected, uncollectable=uncollectable)
+"""
+
+[[files]]
+path = "tests/tools/profiler/reports/python/statistics.py"
+mode = "w"
+content = """
+import statistics
+
+from tests.tools.profiler.models import Statistics
+
+
+def generate(durations: list[float]) -> Statistics:
+    return Statistics(
+        mean=statistics.mean(durations),
+        median=statistics.median(durations),
+        stdev=statistics.stdev(durations) if len(durations) > 1 else 0.0,
+        min=min(durations),
+        max=max(durations),
+    )
+"""
+
+[[files]]
+path = "tests/tools/profiler/reports/python/tracemalloc.py"
+mode = "w"
+content = """
+import tracemalloc
+
+from tests.tools.profiler.models import Allocation
+
+
+def generate() -> Allocation:
+    current, peak = tracemalloc.get_traced_memory()
+    return Allocation(current=current, peak=peak)
+"""
+
+[[scripts]]
+command = "isort {{workdir}}"
+check = false

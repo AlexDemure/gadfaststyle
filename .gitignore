@@ -102,3 +102,4 @@ pytestdebug.log
 result
 secrets.*
 settings_local.py
+/.venv/

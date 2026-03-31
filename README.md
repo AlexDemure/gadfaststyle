@@ -14,7 +14,15 @@
 
 `gadfaststyle` — проект на `FastAPI` с модульной структурой backend-приложения.
 
-Репозиторий содержит базовые инфраструктурные компоненты и интеграции, используемые при разработке API-сервисов и фоновых процессов.
+Репозиторий теперь разделен на четыре уровня:
+
+- `src/` — production-код сервиса.
+- `tests/` — тесты проекта.
+- `.instructions/` — общие инструкции по архитектуре, стилю и правилам разработки.
+- `.specs/` — spec prompt-ы, по которым генерируется код и тесты.
+- `.codex/agents/` — роли Codex-агентов.
+- `.codex/commands/` — команды Codex и описание orchestration-логики.
+- `.codex/tasks/` — артефакты выполнения задач и отчеты.
 
 На текущем этапе в приложение уже интегрированы:
 
@@ -31,56 +39,19 @@
 - `Redis` для кэширования и вспомогательных runtime-механизмов.
 - `JWT-аутентификация` для управления пользовательскими сессиями и токенами доступа.
 
-# Использование
+# Codegen Pipeline
 
-## Мультипроцессный codegen через tmux
+Полный цикл описан в [`.codex/commands/codegen/README.md`](/home/alex/git/gadfaststyle/.codex/commands/codegen/README.md).
 
-Если нужно видеть работу ролей как отдельных процессов, запускай внешний runner, а не `/codegen` внутри одной opencode-сессии:
+Коротко pipeline работает так:
 
-```bash
-bash .scripts/ai/codegen-multiprocess.sh "Задача: добавить новый endpoint"
-```
+1. Пользователь ставит бизнес-задачу.
+2. `system-analyst` читает `.instructions/` и генерирует spec prompt-ы в `.specs/tasks/<task-slug>/`.
+3. `backend` пишет production-код по spec prompt-ам и текущему стилю проекта.
+4. `tester` пишет тесты по spec prompt-ам и текущему стилю проекта.
+5. `team-lead` принимает результат и пишет отчет в `.codex/tasks/<YYYY-MM-DD>_<slug>/`.
 
-Для запуска без мгновенного attach к `tmux`:
-
-```bash
-bash .scripts/ai/codegen-multiprocess.sh --no-attach "Задача: добавить новый endpoint"
-```
-
-Что делает runner:
-
-- создает `.ai/runtime/tasks/<YYYY-MM-DD>_<slug>/`
-- запускает отдельных `opencode run --agent ...` процессов для `delivery-manager`, `project-architect`, `task-orchestrator`, `code-implementer`, `test-writer`, `code-reviewer`, `report-compiler`
-- синхронизирует этапы через runtime-артефакты в папке задачи
-- открывает `tmux`-сессию с окнами `plan`, `loop`, `final`, `overview`
-
-Важно: это отдельный shell/tmux runner поверх существующих агентов из `.opencode/agents/`. Обычная команда `/codegen` по-прежнему остается односессионной оркестрацией внутри одного агента.
-
-## tmux-наблюдение за агентами
-
-Если нужно видеть весь агентный pipeline одновременно в терминале, можно поднять `tmux`-сессию, которая следит за runtime-артефактами в `.ai/runtime/tasks`.
-
-Запуск для последней задачи:
-
-```bash
-python3 .scripts/ai/tmux_runtime.py launch
-```
-
-Запуск для конкретной задачи:
-
-```bash
-python3 .scripts/ai/tmux_runtime.py launch --task 2026-03-31_update-accounts-endpoint
-```
-
-Что делает launcher:
-
-- создает `tmux`-сессию `codegen-<task>`
-- открывает окно `build` с pane для `delivery-manager`, `project-architect`, `task-orchestrator`, `code-implementer`
-- открывает окно `qa` с pane для `test-writer`, `code-reviewer`, `report-compiler`
-- открывает окно `overview` со статусом всех артефактов
-- автоматически обновляет содержимое при появлении новых файлов вроде `41-code-implementer.md`, `51-test-writer.md`, `61-code-reviewer.md`
-
-Важно: этот режим показывает живые артефакты pipeline, а не внутренние шаги встроенных subagent'ов среды.
+# Пример архитектуры
 
 Ниже показана цепочка прохождения данных для эндпоинта `entrypoints.http.public.accounts.create` без полной реализации деталей.
 
@@ -218,171 +189,4 @@ class Account(Base):
             blocked=None,
             authorization=None,
         )
-
-
-# =========================
-# DOMAIN ERRORS
-# file: src/domain/collections/exceptions/account.py
-# =========================
-from src.common.http.collections import HTTPError
-
-
-class AccountNotFound(HTTPError): ...
-class AccountBlocked(HTTPError): ...
-class AccountAlreadyExists(HTTPError): ...
-
-
-# =========================
-# ADAPTER
-# file: src/infrastructure/databases/postgres/adapters/repositories/account.py
-# =========================
-from src.infrastructure.databases.postgres import crud, tables
-
-
-class Account:
-    crud = crud.Account
-    table = tables.Account
-
-    # exists(...) -> delegating to crud.Account.exists(...)
-    # create(...) -> delegating to crud.Account.create(...)
-
-
-# =========================
-# CRUD
-# file: src/infrastructure/databases/postgres/crud/account.py
-# =========================
-from src.infrastructure.databases.orm.sqlalchemy.crud import Base
-from src.infrastructure.databases.postgres import tables
-
-
-class Account(Base[tables.Account]):
-    table = tables.Account
-    # Base.create(session, row) -> INSERT account ...
-    # Base.exists(session, filters...) -> SELECT EXISTS(...)
-
-
-# =========================
-# TABLE
-# file: src/infrastructure/databases/postgres/tables/account.py
-# =========================
-from sqlalchemy import BigInteger, Column, DateTime, String
-from src.infrastructure.databases.orm.sqlalchemy.tables import Base
-
-
-class Account(Base):
-    __tablename__ = "account"
-
-    id = Column(BigInteger, primary_key=True)
-    external_id = Column(String, nullable=False, unique=True)
-    created = Column(DateTime(timezone=True), nullable=False)
-    updated = Column(DateTime(timezone=True), nullable=False)
-    blocked = Column(DateTime(timezone=True), nullable=True)
-    authorization = Column(DateTime(timezone=True), nullable=True)
-```
-
-# Развертывание module.toml
-
-Пример генерации модуля по шаблону `.templates/module.toml`:
-
-```bash
-uv add gadcodegenerator
-
-# Add module
-uv run gadcodegenerator -f https://raw.githubusercontent.com/AlexDemure/gadfaststyle/refs/heads/main/.templates/module.toml --context '{"module": {"snake": {"single": "user", "many": "users"}, "pascal": {"single": "User", "many": "Users"}, "kebab": {"single": "user", "many": "users"}}}'
-```
-
-# Дерево папок проекта
-
-```text
-.
-├── .ai
-│   ├── agents
-│   │   ├── 10-delivery-manager.md
-│   │   ├── 20-project-architect.md
-│   │   ├── 30-task-orchestrator.md
-│   │   ├── 40-code-implementer.md
-│   │   ├── 50-test-writer.md
-│   │   ├── 60-code-reviewer.md
-│   │   └── 70-report-compiler.md
-│   └── rules
-├── .compose
-├── .scripts
-│   └── lints
-│       └── configs
-├── .templates
-├── src
-│   ├── application
-│   │   ├── usecases
-│   │   │   └── accounts
-│   │   │       └── get
-│   │   └── utils
-│   ├── bootstrap
-│   ├── common
-│   │   ├── calendar
-│   │   ├── formats
-│   │   ├── http
-│   │   ├── human
-│   │   ├── keyboard
-│   │   ├── locales
-│   │   ├── os
-│   │   ├── socials
-│   │   └── typings
-│   ├── configuration
-│   ├── domain
-│   │   ├── collections
-│   │   │   ├── enums
-│   │   │   └── exceptions
-│   │   └── models
-│   ├── entrypoints
-│   │   ├── cron
-│   │   ├── http
-│   │   │   ├── common
-│   │   │   ├── public
-│   │   │   └── system
-│   │   └── workers
-│   │       └── telegram
-│   │           └── aiogram
-│   ├── framework
-│   │   ├── background
-│   │   ├── collections
-│   │   ├── openapi
-│   │   └── routing
-│   ├── infrastructure
-│   │   ├── databases
-│   │   │   ├── orm
-│   │   │   │   └── sqlalchemy
-│   │   │   └── postgres
-│   │   │       ├── adapters
-│   │   │       ├── collections
-│   │   │       ├── crud
-│   │   │       ├── migrations
-│   │   │       │   └── versions
-│   │   │       └── tables
-│   │   ├── integrations
-│   │   │   └── telegram
-│   │   │       └── telethon
-│   │   ├── monitoring
-│   │   │   ├── asyncio
-│   │   │   ├── health
-│   │   │   ├── logging
-│   │   │   └── sentry
-│   │   ├── scheduling
-│   │   │   └── apscheduler
-│   │   ├── security
-│   │   │   ├── encryption
-│   │   │   └── jwt
-│   │   └── storages
-│   │       └── redis
-│   ├── localization
-│   │   └── models
-│   ├── representation
-│   └── static
-│       └── localizations
-└── tests
-    ├── factories
-    ├── mocking
-    ├── test_integrations
-    ├── test_loads
-    ├── test_units
-    └── tools
 ```
