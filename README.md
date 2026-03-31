@@ -33,6 +33,55 @@
 
 # Использование
 
+## Мультипроцессный codegen через tmux
+
+Если нужно видеть работу ролей как отдельных процессов, запускай внешний runner, а не `/codegen` внутри одной opencode-сессии:
+
+```bash
+bash .scripts/ai/codegen-multiprocess.sh "Задача: добавить новый endpoint"
+```
+
+Для запуска без мгновенного attach к `tmux`:
+
+```bash
+bash .scripts/ai/codegen-multiprocess.sh --no-attach "Задача: добавить новый endpoint"
+```
+
+Что делает runner:
+
+- создает `.ai/runtime/tasks/<YYYY-MM-DD>_<slug>/`
+- запускает отдельных `opencode run --agent ...` процессов для `delivery-manager`, `project-architect`, `task-orchestrator`, `code-implementer`, `test-writer`, `code-reviewer`, `report-compiler`
+- синхронизирует этапы через runtime-артефакты в папке задачи
+- открывает `tmux`-сессию с окнами `plan`, `loop`, `final`, `overview`
+
+Важно: это отдельный shell/tmux runner поверх существующих агентов из `.opencode/agents/`. Обычная команда `/codegen` по-прежнему остается односессионной оркестрацией внутри одного агента.
+
+## tmux-наблюдение за агентами
+
+Если нужно видеть весь агентный pipeline одновременно в терминале, можно поднять `tmux`-сессию, которая следит за runtime-артефактами в `.ai/runtime/tasks`.
+
+Запуск для последней задачи:
+
+```bash
+python3 .scripts/ai/tmux_runtime.py launch
+```
+
+Запуск для конкретной задачи:
+
+```bash
+python3 .scripts/ai/tmux_runtime.py launch --task 2026-03-31_update-accounts-endpoint
+```
+
+Что делает launcher:
+
+- создает `tmux`-сессию `codegen-<task>`
+- открывает окно `build` с pane для `delivery-manager`, `project-architect`, `task-orchestrator`, `code-implementer`
+- открывает окно `qa` с pane для `test-writer`, `code-reviewer`, `report-compiler`
+- открывает окно `overview` со статусом всех артефактов
+- автоматически обновляет содержимое при появлении новых файлов вроде `41-code-implementer.md`, `51-test-writer.md`, `61-code-reviewer.md`
+
+Важно: этот режим показывает живые артефакты pipeline, а не внутренние шаги встроенных subagent'ов среды.
+
 Ниже показана цепочка прохождения данных для эндпоинта `entrypoints.http.public.accounts.create` без полной реализации деталей.
 
 ```python

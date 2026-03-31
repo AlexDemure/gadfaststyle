@@ -13,6 +13,10 @@ class CreateAccount(Public, Request, Command):
     external_id: str
 
 
+class UpdateAccount(Public, Request, Command):
+    external_id: str
+
+
 class CurrentAccount(Public, Response):
     id: int
 

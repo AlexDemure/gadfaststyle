@@ -43,6 +43,12 @@ Execution contract:
 7. Never exceed the repository rule of 5 files for one cyclic stage.
 8. Finish by invoking `report-compiler` and ensure `70-report-compiler.md` exists.
 
+Stage-only mode:
+
+- If the parent prompt explicitly says `stage-only`, do not invoke any other agents.
+- In `stage-only` mode, only create the requested `10-delivery-manager.md` artifact for the provided runtime folder and stop after that file is written.
+- In `stage-only` mode, treat the outer shell/tmux runner as the orchestrator for the remaining stages.
+
 Iteration policy:
 
 - First pass uses `40-code-implementer.md`, `50-test-writer.md`, `60-code-reviewer.md`.
