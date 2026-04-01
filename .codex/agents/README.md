@@ -1,4 +1,8 @@
-## Роли
+## Назначение
+
+`.codex/agents` хранит агентов Codex и описание их ролей.
+
+## Состав
 
 - [system-analyst/README.md](./system-analyst/README.md) - ведет `spec.md` в `.specs/`.
 - [backend/README.md](./backend/README.md) - вносит изменения в `src/` по `spec.md`.

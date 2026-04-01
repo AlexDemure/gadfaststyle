@@ -1,0 +1,1 @@
+FASTAPI_ROUTE_PATH = "path"

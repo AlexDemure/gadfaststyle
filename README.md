@@ -5,188 +5,125 @@
 </p>
 
 <p align="center">
-  File architecture for FastApi app
+  FastAPI backend with spec-driven development workflow
 </p>
 
 ---
 
-# О проекте
+# gadfaststyle
 
-`gadfaststyle` — проект на `FastAPI` с модульной структурой backend-приложения.
+`gadfaststyle` — backend-проект на `FastAPI`, в котором разработка ведется через `spec.md`.
 
-Репозиторий теперь разделен на четыре уровня:
+## Структура
 
 - `src/` — production-код сервиса.
 - `tests/` — тесты проекта.
-- `.instructions/` — общие инструкции по архитектуре, стилю и правилам разработки.
-- `.specs/` — spec prompt-ы, по которым генерируется код и тесты.
-- `.codex/agents/` — роли Codex-агентов.
-- `.codex/commands/` — команды Codex и описание orchestration-логики.
-- `.codex/tasks/` — артефакты выполнения задач и отчеты.
+- `.instructions/` — правила проекта, архитектура, code style и ограничения по слоям.
+- `.specs/` — спецификации файлов проекта.
+- `.codex/` — provider-specific слой для OpenAI/Codex: агенты, команды и runtime-артефакты.
+- `.templates/` — шаблон развертывания каркаса проекта.
 
-На текущем этапе в приложение уже интегрированы:
+## Как это работает
 
-- Модуль `Basic Auth` для защиты служебных и административных эндпоинтов.
-- Подсистема шифрования для безопасной обработки чувствительных данных.
-- `PostgreSQL` как основное транзакционное хранилище данных.
-- `SQLAlchemy` как ORM-слой для работы с моделями и запросами к базе данных.
-- `Alembic` для контроля версий схемы и управления миграциями базы данных.
-- `APScheduler` для выполнения фоновых и регулярных задач по расписанию.
-- `Telegram Bot`-контур для интеграции с пользовательскими и операционными сценариями.
-- `Jinja2` для шаблонизации и генерации динамического контента.
-- Централизованный модуль логгирования для мониторинга и диагностики.
-- Интеграция с `Sentry` для трекинга ошибок и анализа сбоев.
-- `Redis` для кэширования и вспомогательных runtime-механизмов.
-- `JWT-аутентификация` для управления пользовательскими сессиями и токенами доступа.
+В проекте один файл кода соответствует одному `spec.md`.
 
-# Codegen Pipeline
+- `.instructions/src/` и `.instructions/tests/` зеркалят структуру каталогов `src/` и `tests/`.
+- `.specs/src/` и `.specs/tests/` зеркалят файлы `src/` и `tests/`.
+- `spec.md` описывает, как должен работать конкретный файл, но без кода.
 
-Полный цикл описан в [`.codex/commands/codegen/README.md`](/home/alex/git/gadfaststyle/.codex/commands/codegen/README.md).
+Пример:
 
-Коротко pipeline работает так:
+- `src/application/usecases/accounts/current.py`
+- `.specs/src/application/usecases/accounts/current.py/spec.md`
 
-1. Пользователь ставит бизнес-задачу.
-2. `system-analyst` читает `.instructions/` и генерирует spec prompt-ы в `.specs/tasks/<task-slug>/`.
-3. `backend` пишет production-код по spec prompt-ам и текущему стилю проекта.
-4. `tester` пишет тесты по spec prompt-ам и текущему стилю проекта.
-5. `team-lead` принимает результат и пишет отчет в `.codex/tasks/<YYYY-MM-DD>_<slug>/`.
+## Команды
 
-# Пример архитектуры
+Для Codex команды описаны в [`.codex/README.md`](/home/alex/git/gadfaststyle/.codex/README.md).
 
-Ниже показана цепочка прохождения данных для эндпоинта `entrypoints.http.public.accounts.create` без полной реализации деталей.
+Основные команды:
 
-```python
-# schemas -> deps -> endpoint -> usecase -> adapter -> crud -> table
+- `code: <описание задачи>` — провести разработку через `spec.md`.
+- `sync` — синхронизировать `.specs/` с текущим состоянием `src/` и `tests/`.
 
-# =========================
-# SCHEMAS
-# file: src/entrypoints/http/public/schemas/accounts.py
-# =========================
-from src.entrypoints.http.common.schemas import Command, Request
-from src.entrypoints.http.public.schemas.base import Public
+## Поток разработки
 
-
-class CreateAccount(Public, Request, Command):
-    external_id: str
-
-
-# =========================
-# DEPS
-# file: src/entrypoints/http/public/deps/accounts/create.py
-# =========================
-from fastapi import Depends
-from src.application.usecases.accounts.create import Container, Repositories, Security, Usecase
-from src.entrypoints.http.common.deps import write
-from src.infrastructure.databases.orm.sqlalchemy.session import Session
-
-
-def dependency(session: Session = Depends(write)) -> Usecase:
-    return Usecase(container=Container(repositories=Repositories(session), security=Security()))
-
-
-# =========================
-# ENDPOINT
-# file: src/entrypoints/http/public/routers/accounts/create.py
-# =========================
-from fastapi import Body, Depends
-from src.entrypoints.http.public.schemas import CreateAccount
-from src.framework.routing import APIRouter
-from src.infrastructure.security.jwt.models import Tokens
-
-router = APIRouter()
-
-
-@router.post("/accounts:create")
-async def command(
-    usecase: Usecase = Depends(dependency),
-    body: CreateAccount = Body(...),
-) -> Tokens:
-    return await usecase(**body.deserialize())
-
-
-# =========================
-# USECASE
-# file: src/application/usecases/accounts/create.py
-# =========================
-from src.domain.collections import AccountAlreadyExists
-from src.domain.models import Account
-from src.infrastructure.databases.orm.sqlalchemy.queries import Filter
-from src.infrastructure.databases.postgres import adapters
-from src.infrastructure.security.encryption import encryption
-from src.infrastructure.security.jwt import jwt
-
-
-class Repositories:
-    def __init__(self, session: Session) -> None:
-        self.account = adapters.repositories.Account(session)
-
-
-class Security:
-    def __init__(self) -> None:
-        self.encryption = encryption
-        self.jwt = jwt
-
-
-class Container:
-    def __init__(self, repositories: Repositories, security: Security) -> None:
-        self.repositories = repositories
-        self.security = security
-
-
-class Usecase:
-    def __init__(self, container: Container) -> None:
-        self.container = container
-
-    async def __call__(self, external_id: str) -> Tokens:
-        exists = await self.container.repositories.account.exists(
-            Filter.eq(
-                key="external_id",
-                value=self.container.security.encryption.encrypt(external_id.lower()),
-            )
-        )
-        if exists:
-            raise AccountAlreadyExists
-
-        account = await self.container.repositories.account.create(
-            model=Account.init(
-                **Account.encrypt(
-                    encrypter=self.container.security.encryption.encrypt,
-                    external_id=external_id,
-                )
-            )
-        )
-        return self.container.security.jwt.encode(subject=str(account.id))
-
-
-# =========================
-# DOMAIN MODEL
-# file: src/domain/models/account.py
-# =========================
-import datetime
-
-from src.common.formats.utils import date
-from src.domain.models.base import Base
-
-
-class Account(Base):
-    __encrypted__ = ["external_id"]
-
-    id: int | None
-    external_id: str
-    created: datetime.datetime
-    updated: datetime.datetime
-    blocked: datetime.datetime | None
-    authorization: datetime.datetime | None
-
-    @classmethod
-    def init(cls, external_id: str) -> "Account":
-        created = updated = date.now()
-        return cls(
-            id=None,
-            external_id=external_id,
-            created=created,
-            updated=updated,
-            blocked=None,
-            authorization=None,
-        )
+```text
+Задача
+  -> system-analyst
+  -> .specs/**/*.md
+  -> backend -> src/
+  -> tester -> tests/
+  -> team-lead review
+  -> .codex/runtime/code/<timestamp>_<slug>.md
 ```
+
+Что делает `code`:
+
+1. Аналитик создает или обновляет затронутые `spec.md`.
+2. Backend реализует код в `src/` по этим `spec.md`.
+3. Tester реализует тесты в `tests/` по этим `spec.md`.
+4. Team lead проводит ревью, возвращает замечания или завершает задачу.
+5. Весь процесс пишется в один runtime-файл.
+
+## Поток синхронизации
+
+```text
+src/ + tests/
+  -> spec-sync
+  -> .specs/**/*.md
+  -> .codex/runtime/sync/<timestamp>_sync.md
+```
+
+Что делает `sync`:
+
+1. Сканирует `src/`, `tests/` и `.specs/`.
+2. Находит расхождения между кодом и спецификациями.
+3. Создает, обновляет, удаляет или перемещает `spec.md`.
+4. Пишет один runtime-файл синхронизации.
+
+Исключение:
+
+- `src/infrastructure/databases/postgres/migrations/` не документируется в `.specs/`.
+
+## Формат spec.md
+
+Каждый `spec.md` содержит:
+
+- `Статус`
+- `Назначение`
+- `Поведение`
+- `Входы`
+- `Выходы`
+- `Зависимости`
+- `Ограничения`
+
+В `Статус` хранятся даты и время с секундами:
+
+- `created_at`
+- `system_analyst_updated_at`
+- `team_lead_synced_at`
+- `backend_synced_at`
+- `tester_synced_at`
+- `spec_sync_synced_at`
+
+## Runtime-артефакты
+
+Каждый запуск команды пишет один файл:
+
+- `.codex/runtime/code/<YYYY-MM-DD_HH-MM-SS>_<slug>.md`
+- `.codex/runtime/sync/<YYYY-MM-DD_HH-MM-SS>_sync.md`
+
+В runtime-файлах фиксируются:
+
+- шаги агентов;
+- полное содержимое затронутых `spec.md`;
+- замечания ревью и итог работы.
+
+## Зачем это нужно
+
+Такая схема дает:
+
+- явный слой спецификаций между задачей и кодом;
+- воспроизводимую разработку через `spec.md`;
+- синхронизацию ручных изменений обратно в спецификации;
+- единый runtime-журнал работы агентов.

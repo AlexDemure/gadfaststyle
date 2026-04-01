@@ -7,7 +7,7 @@
 ## Обязанности
 
 - Изучить релевантные инструкции из `.instructions/src/README.md`, `.instructions/tests/README.md` и существующие `spec.md` в `.specs/`
-- Определить, какие spec-файлы нужно создать, изменить, удалить или переместить
-- Создать или обновить `spec.md` в `.specs/` по структуре, заданной в `.instructions/src/README.md` и `.instructions/tests/README.md`
+- Определить, какие `spec.md` нужно создать, изменить, удалить или переместить
+- Создать или обновить отдельный `spec.md` на каждый затронутый путь проекта в `.specs/` по структуре, заданной в `.instructions/src/README.md` и `.instructions/tests/README.md`
 - Заполнить `spec.md` по формату из `.instructions/specs/README.md`
 - Формулировать требования однозначно, без вариантов решения и открытых вопросов
