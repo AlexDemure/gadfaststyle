@@ -57,6 +57,19 @@
   -> .codex/runtime/code/<timestamp>_<slug>.md
 ```
 
+```mermaid
+flowchart LR
+    A[Бизнес-задача] --> B[System Analyst]
+    B --> C[.specs/**/*.md]
+    C --> D[Backend]
+    C --> E[Tester]
+    D --> F[src/]
+    E --> G[tests/]
+    F --> H[Team Lead]
+    G --> H
+    H --> I[.codex/runtime/code/<timestamp>_<slug>.md]
+```
+
 Что делает `code`:
 
 1. Аналитик создает или обновляет затронутые `spec.md`.
@@ -72,6 +85,14 @@ src/ + tests/
   -> spec-sync
   -> .specs/**/*.md
   -> .codex/runtime/sync/<timestamp>_sync.md
+```
+
+```mermaid
+flowchart LR
+    A[src/] --> C[Spec Sync]
+    B[tests/] --> C
+    C --> D[.specs/**/*.md]
+    C --> E[.codex/runtime/sync/<timestamp>_sync.md]
 ```
 
 Что делает `sync`:
