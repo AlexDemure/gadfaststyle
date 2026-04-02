@@ -3,7 +3,7 @@
 ## Статус
 
 - created_at: 2026-04-01 12:14:26
-- system_analyst_updated_at: 2026-04-01 12:52:43
+- system_analyst_updated_at: 2026-04-02 10:00:00
 - team_lead_synced_at: 2026-04-01 12:52:43
 - backend_synced_at: 2026-04-01 12:52:43
 - tester_synced_at: null
@@ -15,7 +15,7 @@
 
 ## Поведение
 
-Registry подключает router-ы `create` и `current` в общий account-контур public API.
+Registry подключает router-ы `create`, `current` и `delete` в общий account-контур public API.
 
 ## Входы
 
@@ -29,6 +29,7 @@ Registry подключает router-ы `create` и `current` в общий acco
 
 - `create: router`
 - `current: router`
+- `delete: router`
 - `src.framework.routing: APIRouter`
 
 ## Ограничения
