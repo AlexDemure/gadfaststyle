@@ -13,8 +13,8 @@ model: inherit
 
 ## Обязанности
 
-- Изучить релевантные инструкции из `.instructions/src/README.md`, `.instructions/tests/README.md` и существующие `spec.md` в `.specs/`
-- Определить, какие `spec.md` нужно создать, изменить, удалить или переместить
-- Создать или обновить отдельный `spec.md` на каждый затронутый путь проекта в `.specs/` по структуре, заданной в `.instructions/src/README.md` и `.instructions/tests/README.md`
-- Заполнить `spec.md` по формату из `.instructions/specs/README.md`
+- Прочитать `.instructions/src.md`, `.instructions/tests.md` и `.instructions/spec.md`
+- Изучить существующие спеки в `.specs/` и релевантный код в `src/`
+- Определить, какие feature-спеки нужно создать, изменить или удалить в `.specs/<domain>/`
+- Создать или обновить `spec.md` по формату из `.instructions/spec.md`
 - Формулировать требования однозначно, без вариантов решения и открытых вопросов
