@@ -1,24 +1,33 @@
 from httpx import AsyncClient
+from httpx import Response
 
-from src.entrypoints.http.public.deps.accounts.create import dependency
 from src.infrastructure.security.jwt.models import Tokens
 
 from tests.faker import fake
 
 
-class FakeUsecase:
-    async def __call__(self, external_id: str) -> Tokens:
-        assert external_id
-        return Tokens(access="access-token", refresh="refresh-token")
+class TestCreateAccount:
+    client: AsyncClient
 
+    async def setup(self) -> None: ...
 
-async def test_create_account(client: AsyncClient, app) -> None:
-    app.dependency_overrides[dependency] = lambda: FakeUsecase()
+    async def process(self) -> Response:
+        return await self.client.post("/api/accounts:create", json={"external_id": fake.uuid4()})
 
-    response = await client.post("/api/accounts:create", json={"external_id": fake.uuid4()})
+    @classmethod
+    async def check(cls, response: Response) -> None:
+        assert response.status_code == 201
 
-    assert response.status_code == 201
-    assert response.json() == {
-        "access": "access-token",
-        "refresh": "refresh-token",
-    }
+        tokens = Tokens.model_validate(response.json())
+
+        assert tokens.access
+        assert tokens.refresh
+
+    async def test(self, client: AsyncClient) -> None:
+        self.client = client
+
+        await self.setup()
+
+        response = await self.process()
+
+        await self.check(response)

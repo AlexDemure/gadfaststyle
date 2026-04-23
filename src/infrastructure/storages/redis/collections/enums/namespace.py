@@ -1,4 +1,5 @@
 import enum
 
 
-class Namespace(enum.StrEnum): ...
+class Namespace(enum.StrEnum):
+    account = "account"

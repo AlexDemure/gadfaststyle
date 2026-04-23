@@ -1,10 +1,8 @@
 import typing
 
-from src.common.http.collections.enums.response import HTTPCode
-
 
 class HTTPError(Exception):
-    code: int = HTTPCode.IM_A_TEAPOT
+    code: int
 
     def __str__(self) -> str:
         return self.__class__.__name__
@@ -15,7 +13,3 @@ class HTTPError(Exception):
             status_code=self.code,
             detail=dict(type=self.__class__.__name__),
         )
-
-
-class Forbidden(HTTPError):
-    code = HTTPCode.FORBIDDEN

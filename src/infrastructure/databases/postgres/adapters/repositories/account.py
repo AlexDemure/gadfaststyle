@@ -1,5 +1,5 @@
-from src.domain.collections import AccountNotFound
 from src.domain import models
+from src.domain.collections import AccountNotFound
 from src.infrastructure.databases.orm.sqlalchemy.models import And
 from src.infrastructure.databases.orm.sqlalchemy.models import Filter
 from src.infrastructure.databases.orm.sqlalchemy.models import Or

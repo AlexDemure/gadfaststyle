@@ -1,150 +1,217 @@
-<p align="center">
-  <a href="https://github.com/AlexDemure/gadfaststyle">
-    <a href="https://ibb.co/TqkGRPCN"><img src="https://i.ibb.co/sJ24QsBX/logo.png" alt="logo" border="0"></a>
-  </a>
-</p>
+## Архитектура
 
-<p align="center">
-  FastAPI backend with spec-driven development workflow
-</p>
+Проект использует луковичную архитектуру: внешние слои зависят от внутренних, но не наоборот.
+
+```mermaid
+flowchart TD
+    subgraph core["Ядро"]
+        DOM[domain]
+    end
+    subgraph app["Приложение"]
+        UC[application]
+        INFRA[infrastructure]
+    end
+    subgraph transport["Транспорт"]
+        EP[entrypoints/http]
+        FW[framework]
+    end
+    subgraph outer["Сборка"]
+        BS[bootstrap]
+        CFG[configuration]
+    end
+    CMN[common]
+
+    UC --> DOM
+    INFRA --> DOM
+    UC --> INFRA
+    EP --> UC
+    FW --> EP
+    BS --> EP
+    BS --> UC
+    BS --> INFRA
+    BS --> FW
+    CFG --> BS
+    CMN -.-> UC
+    CMN -.-> INFRA
+    CMN -.-> EP
+```
+
+## Структура проекта
+
+```text
+gadfaststyle/
+├── src/
+│   ├── application/
+│   ├── bootstrap/
+│   ├── common/
+│   ├── configuration/
+│   ├── domain/
+│   ├── entrypoints/http/
+│   ├── framework/
+│   ├── infrastructure/
+│   ├── localization/
+│   └── static/
+├── tests/
+│   ├── factories/
+│   ├── mocking/
+│   ├── test_integrations/
+│   └── tools/
+├── ARCHITECTURE.md
+├── CODESTYLE.md
+├── TESTING.md
+└── AGENTS.md
+```
+
+Распределение ответственности по основным каталогам:
+- `domain` хранит бизнес-сущности и ошибки;
+- `application` собирает сценарии;
+- `infrastructure` реализует доступ к БД, security и внешним клиентам;
+- `entrypoints` описывает входные точки в приложение;
+- `bootstrap` собирает приложение.
 
 ---
 
-# gadfaststyle
+## Обработка запроса
 
-`gadfaststyle` — backend-проект на `FastAPI`, в котором разработка ведется через `spec.md`.
-
-## Структура
-
-- `src/` — production-код сервиса.
-- `tests/` — тесты проекта.
-- `.instructions/` — правила проекта, архитектура, code style и ограничения по слоям.
-- `.specs/` — спецификации файлов проекта.
-- `.codex/` — provider-specific слой для OpenAI/Codex: агенты, команды и runtime-артефакты.
-- `.templates/` — шаблон развертывания каркаса проекта.
-
-## Как это работает
-
-В проекте один файл кода соответствует одному `spec.md`.
-
-- `.instructions/src/` и `.instructions/tests/` зеркалят структуру каталогов `src/` и `tests/`.
-- `.specs/src/` и `.specs/tests/` зеркалят файлы `src/` и `tests/`.
-- `spec.md` описывает, как должен работать конкретный файл, но без кода.
-
-Пример:
-
-- `src/application/usecases/accounts/current.py`
-- `.specs/src/application/usecases/accounts/current.py/spec.md`
-
-## Команды
-
-Для Codex команды описаны в [`.codex/README.md`](/home/alex/git/gadfaststyle/.codex/README.md).
-
-Основные команды:
-
-- `code: <описание задачи>` — провести разработку через `spec.md`.
-- `sync` — синхронизировать `.specs/` с текущим состоянием `src/` и `tests/`.
-
-## Поток разработки
-
-```text
-Задача
-  -> system-analyst
-  -> .specs/**/*.md
-  -> backend -> src/
-  -> tester -> tests/
-  -> team-lead review
-  -> .codex/runtime/code/<timestamp>_<slug>.md
-```
+Ниже приведён типовой сценарий обработки HTTP-команды:
 
 ```mermaid
-flowchart LR
-    A[Бизнес-задача] --> B[System Analyst]
-    B --> C[.specs/**/*.md]
-    C --> D[Backend]
-    C --> E[Tester]
-    D --> F[src/]
-    E --> G[tests/]
-    F --> H[Team Lead]
-    G --> H
-    H --> I[.codex/runtime/code/<timestamp>_<slug>.md]
+sequenceDiagram
+    participant C as Client
+    participant R as Router
+    participant U as Usecase
+    participant DB as Postgres
+
+    C->>R: POST /api/accounts:create
+    R->>U: body + dependencies
+    U->>DB: create account
+    DB-->>U: saved model
+    U-->>R: tokens
+    R-->>C: 201 Created
 ```
 
-Что делает `code`:
+Ниже приведён пример полного фрагмента реализации для команды создания аккаунта:
 
-1. Аналитик создает или обновляет затронутые `spec.md`.
-2. Backend реализует код в `src/` по этим `spec.md`.
-3. Tester реализует тесты в `tests/` по этим `spec.md`.
-4. Team lead проводит ревью, возвращает замечания или завершает задачу.
-5. Весь процесс пишется в один runtime-файл.
+```python
+# entrypoints/http/public/schemas/account.py
+class CreateAccount(Public, Request, Command):
+    external_id: str
 
-## Поток синхронизации
+
+# entrypoints/http/public/deps/accounts/create.py
+def dependency() -> Usecase:
+    return Usecase()
+
+
+# entrypoints/http/public/routers/accounts/create.py
+@router.post(
+    "/accounts:create",
+    status_code=status.HTTP_201_CREATED,
+    response_model=Tokens,
+    responses=errors(AccountAlreadyExists),
+)
+async def command(
+    usecase: Usecase = Depends(dependency),
+    body: CreateAccount = Body(...),
+) -> Tokens:
+    return await usecase(**body.deserialize())
+
+
+# application/usecases/accounts/create.py
+class Usecase:
+    container: types.SimpleNamespace
+
+    def build(self, session: Session) -> None:
+        self.container = types.SimpleNamespace(
+            repository=types.SimpleNamespace(
+                account=repositories.Account(session),
+            ),
+            security=types.SimpleNamespace(
+                encryption=encryption,
+                jwt=jwt,
+            ),
+        )
+
+    async def validate(self, external_id: str) -> None:
+        if await self.container.repository.account.exists(Filter.eq(key="external_id", value=external_id)):
+            raise AccountAlreadyExists
+
+    @sessionmaker.write
+    async def __call__(self, session: Session, external_id: str) -> Tokens:
+        self.build(session)
+        
+        encrypted = self.container.security.encryption.encrypt(external_id)
+        
+        await self.validate(external_id=encrypted)
+        
+        account = await self.container.repository.account.create(model=Account.init(external_id=encrypted))
+        
+        return self.container.security.jwt.encode(subject=str(account.id))
+```
+
+В этой структуре:
+- schema описывает контракт входных данных;
+- dependency создаёт экземпляр usecase;
+- router связывает HTTP endpoint с usecase;
+- usecase реализует прикладной сценарий и обращается к инфраструктуре.
+
+---
+
+## Тестирование
+
+Ниже приведён пример интеграционного endpoint-теста с использованием БД.
+
+Проверяемый маршрут:
 
 ```text
-src/ + tests/
-  -> spec-sync
-  -> .specs/**/*.md
-  -> .codex/runtime/sync/<timestamp>_sync.md
+HTTP client -> router -> dependency -> usecase -> repository -> database
 ```
 
-```mermaid
-flowchart LR
-    A[src/] --> C[Spec Sync]
-    B[tests/] --> C
-    C --> D[.specs/**/*.md]
-    C --> E[.codex/runtime/sync/<timestamp>_sync.md]
+Особенности подхода:
+- проверяется поведение endpoint как прикладной операции;
+- данные сценария подготавливаются напрямую через БД;
+- Redis при необходимости изолируется локальными mock-объектами;
+- тест оформляется как сценарий `setup -> process -> check`.
+
+Ниже приведён пример теста для команды создания аккаунта:
+
+```python
+class TestCreateAccount:
+    client: AsyncClient
+
+    async def setup(self) -> None: ...
+
+    async def process(self) -> Response:
+        return await self.client.post("/api/accounts:create", json={"external_id": fake.uuid4()})
+
+    @classmethod
+    async def check(cls, response: Response) -> None:
+        assert response.status_code == 201
+
+        tokens = Tokens.model_validate(response.json())
+
+        assert tokens.access
+        assert tokens.refresh
+
+    async def test(self, client: AsyncClient) -> None:
+        self.client = client
+
+        await self.setup()
+
+        response = await self.process()
+
+        await self.check(response)
 ```
 
-Что делает `sync`:
+---
 
-1. Сканирует `src/`, `tests/` и `.specs/`.
-2. Находит расхождения между кодом и спецификациями.
-3. Создает, обновляет, удаляет или перемещает `spec.md`.
-4. Пишет один runtime-файл синхронизации.
+## Документы проекта
 
-Исключение:
+Эти документы фиксируют правила проекта и используются как рабочая спецификация:
 
-- `src/infrastructure/databases/postgres/migrations/` не документируется в `.specs/`.
-
-## Формат spec.md
-
-Каждый `spec.md` содержит:
-
-- `Статус`
-- `Назначение`
-- `Поведение`
-- `Входы`
-- `Выходы`
-- `Зависимости`
-- `Ограничения`
-
-В `Статус` хранятся даты и время с секундами:
-
-- `created_at`
-- `system_analyst_updated_at`
-- `team_lead_synced_at`
-- `backend_synced_at`
-- `tester_synced_at`
-- `spec_sync_synced_at`
-
-## Runtime-артефакты
-
-Каждый запуск команды пишет один файл:
-
-- `.codex/runtime/code/<YYYY-MM-DD_HH-MM-SS>_<slug>.md`
-- `.codex/runtime/sync/<YYYY-MM-DD_HH-MM-SS>_sync.md`
-
-В runtime-файлах фиксируются:
-
-- шаги агентов;
-- полное содержимое затронутых `spec.md`;
-- замечания ревью и итог работы.
-
-## Зачем это нужно
-
-Такая схема дает:
-
-- явный слой спецификаций между задачей и кодом;
-- воспроизводимую разработку через `spec.md`;
-- синхронизацию ручных изменений обратно в спецификации;
-- единый runtime-журнал работы агентов.
+| Файл               | Назначение                                        |
+|--------------------|---------------------------------------------------|
+| `ARCHITECTURE.md`  | правила слоёв, структуры и зависимостей           |
+| `CODESTYLE.md`     | правила написания Python-кода                     |
+| `TESTING.md`       | тестовый подход и паттерны интеграционных тестов  |
+| `AGENTS.md`        | краткая карта того, какие документы читать агенту |

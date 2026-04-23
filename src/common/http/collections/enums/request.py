@@ -14,3 +14,4 @@ class HTTPHeader(enum.StrEnum):
     x_xsrf_token = "x-xsrf-token"
     x_auth_token = "x-auth-token"
     x_cache_hit = "x-cache-hit"
+    accept_language = "accept-language"

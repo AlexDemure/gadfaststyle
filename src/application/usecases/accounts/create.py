@@ -3,23 +3,21 @@ import types
 from src.decorators.usecases.session import sessionmaker
 from src.domain.collections import AccountAlreadyExists
 from src.domain.models import Account
-from src.infrastructure.databases.orm.sqlalchemy.collections import Operator
-from src.infrastructure.databases.orm.sqlalchemy.models import Filter
+from src.infrastructure.databases.orm.sqlalchemy.queries import Filter
 from src.infrastructure.databases.orm.sqlalchemy.session import Session
-from src.infrastructure.databases.postgres.adapters.repositories import Account as AccountRepository
+from src.infrastructure.databases.postgres.adapters import repositories
 from src.infrastructure.security.encryption import encryption
 from src.infrastructure.security.jwt import jwt
 from src.infrastructure.security.jwt.models import Tokens
 
 
 class Usecase:
-    def __init__(self) -> None:
-        self.container: types.SimpleNamespace | None = None
+    container: types.SimpleNamespace
 
     def build(self, session: Session) -> None:
         self.container = types.SimpleNamespace(
             repository=types.SimpleNamespace(
-                account=AccountRepository(session),
+                account=repositories.Account(session),
             ),
             security=types.SimpleNamespace(
                 encryption=encryption,
@@ -27,31 +25,17 @@ class Usecase:
             ),
         )
 
-    async def validate(self, external_id: str) -> str:
-        if not self.container:
-            raise ValueError("Container is not initialized")
-
-        encrypted = self.container.security.encryption.encrypt(external_id)
-
-        if await self.container.repository.account.exists(
-            Filter(
-                key="external_id",
-                value=encrypted,
-                operator=Operator.eq,
-            )
-        ):
+    async def validate(self, external_id: str) -> None:
+        if await self.container.repository.account.exists(Filter.eq(key="external_id", value=external_id)):
             raise AccountAlreadyExists
-
-        return encrypted
 
     @sessionmaker.write
     async def __call__(self, session: Session, external_id: str) -> Tokens:
         self.build(session)
 
-        if not self.container:
-            raise ValueError("Container is not initialized")
+        encrypted = self.container.security.encryption.encrypt(external_id)
 
-        encrypted = await self.validate(external_id=external_id)
+        await self.validate(external_id=encrypted)
 
         account = await self.container.repository.account.create(model=Account.init(external_id=encrypted))
 

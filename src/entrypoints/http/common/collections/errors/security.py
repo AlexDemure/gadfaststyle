@@ -1,4 +1,4 @@
-from src.common.http.collections import Forbidden
+from src.entrypoints.http.common.collections.exceptions import Forbidden
 from src.infrastructure.security.jwt.collections import TokenInvalid
 
 

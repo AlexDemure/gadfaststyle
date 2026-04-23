@@ -8,6 +8,8 @@ from src.entrypoints.http.common.deps import jwt
 from src.entrypoints.http.public.deps.accounts.delete import dependency
 from src.framework.openapi.utils.specification import errors
 from src.framework.routing import APIRouter
+from src.infrastructure.storages.redis import redis
+from src.infrastructure.storages.redis.collections import Namespace
 
 
 router = APIRouter()
@@ -20,6 +22,7 @@ router = APIRouter()
     description="Delete current account",
     responses=errors(*AUTHORIZATION_ERRORS, AccountNotFound),
 )
+@redis.invalidate(Namespace.account)
 async def command(
     usecase: Usecase = Depends(dependency),
     token: str = Depends(jwt),

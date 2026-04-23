@@ -1,41 +1,64 @@
+import pytest
+
 from httpx import AsyncClient
+from httpx import Response
+from sqlalchemy.ext.asyncio import AsyncSession
 
-from src.domain.models import Account
-from src.entrypoints.http.public.deps.accounts.current import dependency
 from src.entrypoints.http.public.schemas import CurrentAccount
+from src.infrastructure.security.encryption import encryption
+from src.infrastructure.security.jwt import jwt
+from src.infrastructure.security.jwt.models import Tokens
+from src.infrastructure.storages.redis import redis
+
+from tests.factories.infrastructure.databases.postgres.tables import Account as AccountFactory
+from tests.faker import fake
+from tests.mocking.infrastructure.storages.redis.client import Redis
 
 
-class FakeUsecase:
-    async def __call__(self, token: str) -> Account:
-        assert token == "access-token"
-        return Account(
-            id=1,
-            external_id="external-id",
-            created="2026-04-01T12:00:00+00:00",
-            updated="2026-04-01T12:00:00+00:00",
+class TestGetCurrentAccount:
+    client: AsyncClient
+    session: AsyncSession
+    tokens: Tokens
+    external_id: str
+
+    async def setup(self) -> None:
+        self.external_id = fake.uuid4()
+        account = await AccountFactory.init(
+            model={
+                "external_id": encryption.encrypt(self.external_id),
+            }
+        )
+        self.tokens = jwt.encode(str(account.id))
+
+    async def process(self) -> Response:
+        return await self.client.get(
+            "/api/accounts:current",
+            headers={"Authorization": f"Bearer {self.tokens.access}"},
         )
 
+    async def check(self, response: Response) -> None:
+        assert response.status_code == 200
 
-async def test_get_current_account(client: AsyncClient, app) -> None:
-    app.dependency_overrides[dependency] = lambda: FakeUsecase()
+        account = CurrentAccount.model_validate(response.json())
 
-    response = await client.get(
-        "/api/accounts:current",
-        headers={"Authorization": "Bearer access-token"},
-    )
+        assert account.external_id == self.external_id
+        assert account.id
 
-    assert response.status_code == 200
-    assert response.json() == CurrentAccount.serialize(
-        Account(
-            id=1,
-            external_id="external-id",
-            created="2026-04-01T12:00:00+00:00",
-            updated="2026-04-01T12:00:00+00:00",
-        )
-    ).model_dump(mode="json")
+    async def test(
+        self,
+        client: AsyncClient,
+        session: AsyncSession,
+        monkeypatch: pytest.MonkeyPatch,
+    ) -> None:
+        self.client = client
+        self.session = session
 
+        mocked = Redis()
+        monkeypatch.setattr(redis, "get", mocked.get)
+        monkeypatch.setattr(redis, "set", mocked.set)
 
-async def test_get_current_account_unauthorized(client: AsyncClient) -> None:
-    response = await client.get("/api/accounts:current")
+        await self.setup()
 
-    assert response.status_code == 403
+        response = await self.process()
+
+        await self.check(response)

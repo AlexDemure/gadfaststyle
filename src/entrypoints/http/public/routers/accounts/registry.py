@@ -1,12 +1,12 @@
 from src.framework.routing import APIRouter
 
-from .create import router as create
-from .current import router as current
-from .delete import router as delete
+from . import create
+from . import current
+from . import delete
 
 
 router = APIRouter()
 
-router.include_router(create)
-router.include_router(current)
-router.include_router(delete)
+router.include_router(create.router)
+router.include_router(current.router)
+router.include_router(delete.router)
