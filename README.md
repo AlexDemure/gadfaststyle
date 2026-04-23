@@ -39,7 +39,6 @@ flowchart TD
 ## Структура проекта
 
 ```text
-gadfaststyle/
 ├── src/
 │   ├── application/
 │   ├── bootstrap/
