@@ -16,3 +16,4 @@ redis
 rfc3986
 sqlalchemy
 uvicorn
+sentry-sdk
