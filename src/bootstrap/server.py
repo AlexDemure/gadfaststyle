@@ -28,12 +28,14 @@ from src.infrastructure.databases.postgres import postgres
 from src.infrastructure.monitoring.asyncio.detector import detector
 from src.infrastructure.monitoring.health import health
 from src.infrastructure.monitoring.logging import logger
+from src.infrastructure.monitoring.sentry import sentry
 from src.infrastructure.storages.redis import redis
 from src.localization import localization
 
 
 @contextlib.asynccontextmanager
 async def lifespan(_app: FastAPI) -> typing.Any:
+    sentry.start()
     postgres.start()
     await redis.start()
     detector.start()
@@ -45,6 +47,7 @@ async def lifespan(_app: FastAPI) -> typing.Any:
     detector.shutdown()
     await redis.shutdown()
     postgres.shutdown()
+    sentry.shutdown()
 
 
 app = FastAPI(

@@ -43,10 +43,17 @@ class Logging(BaseSettings):
     LOGGING: bool = True
 
 
+class Sentry(BaseSettings):
+    SENTRY: bool = False
+    SENTRY_ENV: str = "default"
+    SENTRY_DSN: str | None = None
+
+
 configs = [
     Authentication,
     Cryptography,
     Logging,
+    Sentry,
     Postgres,
     Redis,
     Jwt,
