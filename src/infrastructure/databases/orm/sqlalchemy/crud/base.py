@@ -62,7 +62,7 @@ class Base(typing.Generic[tables.Table]):
         cls,
         session: Session,
         filters: list[typing.Union[models.Filter, models.And, models.Or]],
-        sorting: list[models.Sorting] | None = None,
+        sorting: list[models.Sorting],
     ) -> list[tables.Table]:
         statement = cls.build(select(cls.table), filters=filters, sorting=sorting)
         return await fetchall(session, statement)

@@ -1,0 +1,15 @@
+import factory
+
+from src.common.formats.utils import date
+from src.infrastructure.databases.postgres import tables
+
+from .base import Table
+
+
+class {{ entity }}(Table):
+    class Meta:
+        model = tables.{{ entity }}
+
+    created = factory.LazyFunction(date.now)
+    updated = factory.LazyAttribute(lambda object_: object_.created)
+    # TODO: add business fields

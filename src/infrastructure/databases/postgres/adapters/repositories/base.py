@@ -45,7 +45,11 @@ class Base(typing.Generic[Crud, Table, Model, Error]):
         filters: list[typing.Union[Filter, And, Or]],
         sorting: list[Sorting],
     ) -> list[Model]:
-        rows = await self.crud.all(self.session, filters, sorting,)
+        rows = await self.crud.all(
+            self.session,
+            filters,
+            sorting,
+        )
         return [self.convert(row) for row in rows]
 
     async def paginated(

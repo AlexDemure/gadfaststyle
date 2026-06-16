@@ -1,0 +1,15 @@
+from fastapi import Depends
+from fastapi import Path
+
+from src.application.usecases.{{ collection }}.one import Usecase
+from src.entrypoints.http.public.deps.{{ collection }}.one import dependency
+from src.entrypoints.http.public.schemas import {{ entity }}
+from src.framework.routing import APIRouter
+
+
+router = APIRouter()
+
+
+@router.get("/{{ collection }}/{id}", response_model={{ entity }}, description="Get {{ singular }}")
+async def query(usecase: Usecase = Depends(dependency), id: int = Path(...)) -> {{ entity }}:
+    return {{ entity }}.serialize(await usecase(identifier=id))

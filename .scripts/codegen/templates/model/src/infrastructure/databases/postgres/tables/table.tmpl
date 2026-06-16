@@ -1,0 +1,14 @@
+from sqlalchemy import BigInteger
+from sqlalchemy import Column
+from sqlalchemy import DateTime
+
+from src.infrastructure.databases.orm.sqlalchemy.tables import Base
+
+
+class {{ entity }}(Base):
+    __tablename__ = "{{ singular }}"
+
+    id = Column(BigInteger, primary_key=True, autoincrement=True)
+    created = Column(DateTime(timezone=True), nullable=False)
+    updated = Column(DateTime(timezone=True), nullable=False)
+    # TODO: add business columns

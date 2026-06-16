@@ -1,0 +1,8 @@
+class Update{{ entity }}(Public, Request, Command):
+    id: IntRef
+    # TODO: add request fields
+
+    def deserialize(self, **kwargs: typing.Any) -> dict[str, typing.Any]:
+        data = self.model_dump(by_alias=True)
+        data.update(kwargs)
+        return data

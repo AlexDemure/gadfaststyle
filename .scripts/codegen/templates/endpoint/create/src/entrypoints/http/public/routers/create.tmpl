@@ -1,0 +1,25 @@
+from fastapi import Body
+from fastapi import Depends
+from fastapi import status
+
+from src.application.usecases.{{ collection }}.create import Usecase
+from src.entrypoints.http.public.deps.{{ collection }}.create import dependency
+from src.entrypoints.http.public.schemas import Create{{ entity }}
+from src.entrypoints.http.public.schemas import {{ entity }}
+from src.framework.routing import APIRouter
+
+
+router = APIRouter()
+
+
+@router.post(
+    "/{{ collection }}:create",
+    status_code=status.HTTP_201_CREATED,
+    response_model={{ entity }},
+    description="Create {{ singular }}",
+)
+async def command(
+    body: Create{{ entity }} = Body(...),
+    usecase: Usecase = Depends(dependency),
+) -> {{ entity }}:
+    return {{ entity }}.serialize(await usecase(**body.deserialize()))

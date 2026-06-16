@@ -11,8 +11,6 @@ from sqlalchemy.ext.asyncio import async_sessionmaker
 from src.entrypoints.http import router
 from src.infrastructure.databases.postgres import postgres
 
-from tests.factories.infrastructure.databases.postgres import tables
-
 
 @pytest.fixture(scope="module", autouse=True)
 def app() -> typing.Generator[FastAPI, None, None]:
@@ -42,7 +40,7 @@ async def session(app: FastAPI) -> typing.AsyncGenerator[AsyncSession, None]:
     monkeypatch.setattr(postgres.orm, "sessionmaker", sessionmaker)
 
     async with sessionmaker() as _session:
-        for table in [tables.Account]:
+        for table in []:
             table._meta.sqlalchemy_session = _session
 
         try:

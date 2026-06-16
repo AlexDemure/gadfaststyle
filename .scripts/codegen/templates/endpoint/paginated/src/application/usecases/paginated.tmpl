@@ -1,0 +1,36 @@
+import types
+import typing
+
+from src.decorators.usecases.session import sessionmaker
+from src.domain.models import {{ entity }}
+from src.infrastructure.databases.orm.sqlalchemy.session import Session
+from src.infrastructure.databases.postgres.adapters import repositories
+
+
+class Usecase:
+    container: types.SimpleNamespace
+
+    def build(self, session: Session) -> None:
+        self.container = types.SimpleNamespace(
+            repository=types.SimpleNamespace(
+                {{ singular }}=repositories.{{ entity }}(session),
+            ),
+        )
+
+    @sessionmaker.read
+    async def __call__(
+        self,
+        session: Session,
+        filters: dict[str, typing.Any],
+        sorting: dict[str, typing.Any],
+        pagination: dict[str, int],
+    ) -> tuple[list[{{ entity }}], int]:
+        self.build(session)
+
+        {{ collection }}, total = await self.container.repository.{{ singular }}.paginated(
+            filters=filters,
+            sorting=sorting,
+            pagination=pagination,
+        )
+
+        return {{ collection }}, total

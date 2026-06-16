@@ -1,0 +1,9 @@
+class Exists{{ entity }}(Public, Request, Query):
+    # TODO: replace body with real exists fields, for example:
+    # shelter_id: IntRef = Field(..., alias="shelter")
+    id: IntRef
+
+    def deserialize(self, **kwargs: typing.Any) -> dict[str, typing.Any]:
+        data = self.model_dump(by_alias=True)
+        data.update(kwargs)
+        return data

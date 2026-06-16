@@ -1,0 +1,31 @@
+from httpx import AsyncClient
+from httpx import Response
+
+from src.entrypoints.http.public.schemas import {{ entity }}
+
+
+class TestCreate{{ entity }}:
+    client: AsyncClient
+    payload: dict[str, object]
+
+    async def setup(self) -> None:
+        self.payload = {
+            # TODO: fill request body
+        }
+
+    async def process(self) -> Response:
+        return await self.client.post("/api/{{ collection }}:create", json=self.payload)
+
+    async def check(self, response: Response) -> None:
+        assert response.status_code == 201
+
+        {{ entity }}.model_validate(response.json())
+
+    async def test(self, client: AsyncClient) -> None:
+        self.client = client
+
+        await self.setup()
+
+        response = await self.process()
+
+        await self.check(response)

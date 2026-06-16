@@ -1,0 +1,24 @@
+import types
+import typing
+
+from src.decorators.usecases.session import sessionmaker
+from src.infrastructure.databases.orm.sqlalchemy.queries import Filter
+from src.infrastructure.databases.orm.sqlalchemy.session import Session
+from src.infrastructure.databases.postgres.adapters import repositories
+
+
+class Usecase:
+    container: types.SimpleNamespace
+
+    def build(self, session: Session) -> None:
+        self.container = types.SimpleNamespace(
+            repository=types.SimpleNamespace(
+                {{ singular }}=repositories.{{ entity }}(session),
+            ),
+        )
+
+    @sessionmaker.write
+    async def __call__(self, session: Session, **payload: typing.Any) -> None:
+        self.build(session)
+
+        await self.container.repository.{{ singular }}.delete(Filter.eq(key="id", value=payload["id"]))
