@@ -61,9 +61,10 @@ class Base(typing.Generic[tables.Table]):
     async def all(
         cls,
         session: Session,
-        *filters: typing.Union[models.Filter, models.And, models.Or],
+        filters: list[typing.Union[models.Filter, models.And, models.Or]],
+        sorting: list[models.Sorting] | None = None,
     ) -> list[tables.Table]:
-        statement = cls.build(select(cls.table), filters=list(filters))
+        statement = cls.build(select(cls.table), filters=filters, sorting=sorting)
         return await fetchall(session, statement)
 
     @classmethod

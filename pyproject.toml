@@ -9,4 +9,5 @@ dependencies = [
     "langchain-openai>=1.1.12",
     "langgraph>=1.1.3",
     "pyyaml>=6.0.3",
+    "questionary>=2.1.1",
 ]

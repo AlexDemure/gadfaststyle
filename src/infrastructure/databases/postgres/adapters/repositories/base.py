@@ -40,8 +40,12 @@ class Base(typing.Generic[Crud, Table, Model, Error]):
             raise self.error
         return self.convert(row)
 
-    async def all(self, *filters: typing.Union[Filter, And, Or]) -> list[Model]:
-        rows = await self.crud.all(self.session, *filters)
+    async def all(
+        self,
+        filters: list[typing.Union[Filter, And, Or]],
+        sorting: list[Sorting],
+    ) -> list[Model]:
+        rows = await self.crud.all(self.session, filters, sorting,)
         return [self.convert(row) for row in rows]
 
     async def paginated(
