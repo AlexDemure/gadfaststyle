@@ -1,0 +1,36 @@
+files:
+- path: tests/test_integrations/test_entrypoints/test_http/test_public/test_{{ collection }}/__init__.py
+  mode: w
+  content: |
+    __all__: list[str] = []
+- path: tests/test_integrations/test_entrypoints/test_http/test_public/test_{{ collection }}/test_{{ operation }}.py
+  mode: w
+  content: |
+    from httpx import AsyncClient
+    from httpx import Response
+
+    from tests.factories.infrastructure.databases.postgres.tables import {{ model }} as {{ model }}Factory
+
+
+    class TestGet{{ model }}:
+        client: AsyncClient
+        identifier: int
+
+        async def setup(self) -> None:
+            model = await {{ model }}Factory.init(model={})
+            self.identifier = model.id
+
+        async def process(self) -> Response:
+            return await self.client.get(f"/api/{{ collection }}/{self.identifier}")
+
+        async def check(self, response: Response) -> None:
+            assert response.status_code == 200
+
+        async def test(self, client: AsyncClient) -> None:
+            self.client = client
+
+            await self.setup()
+
+            response = await self.process()
+
+            await self.check(response)

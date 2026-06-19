@@ -1,0 +1,60 @@
+files:
+- path: src/entrypoints/http/public/routers/{{ collection }}/__init__.py
+  mode: w
+  content: |
+    from .registry import router
+
+
+    __all__ = [
+        "router",
+    ]
+- path: src/entrypoints/http/public/routers/{{ collection }}/registry.py
+  mode: w
+  content: |
+    from src.framework.routing import APIRouter
+
+
+    router = APIRouter()
+- path: src/entrypoints/http/public/routers/{{ collection }}/{{ operation }}.py
+  mode: w
+  content: |
+    from fastapi import Body
+    from fastapi import Depends
+    from fastapi import status
+
+    from src.application.usecases.{{ collection }}.update import Usecase
+    from src.entrypoints.http.public.deps.{{ collection }}.update import dependency
+    from src.entrypoints.http.public.schemas import Update{{ model }}
+    from src.framework.routing import APIRouter
+
+
+    router = APIRouter()
+
+
+    @router.put(
+        "/{{ collection }}:update",
+        status_code=status.HTTP_204_NO_CONTENT,
+        response_model=None,
+        description="Update {{ table }}",
+    )
+    async def command(
+        body: Update{{ model }} = Body(...),
+        usecase: Usecase = Depends(dependency),
+    ) -> None:
+        await usecase(**body.deserialize())
+- path: src/entrypoints/http/public/routers/{{ collection }}/registry.py
+  mode: a
+  content: |
+    from . import {{ operation }}
+- path: src/entrypoints/http/public/routers/{{ collection }}/registry.py
+  mode: a
+  content: |
+    router.include_router({{ operation }}.router)
+- path: src/entrypoints/http/public/routers/registry.py
+  mode: a
+  content: |
+    from . import {{ collection }}
+- path: src/entrypoints/http/public/routers/registry.py
+  mode: a
+  content: |
+    router.include_router({{ collection }}.router, tags=["{{ model }}"])

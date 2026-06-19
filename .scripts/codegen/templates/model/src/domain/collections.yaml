@@ -1,0 +1,5 @@
+files:
+- path: src/domain/collections/__init__.py
+  mode: a
+  content: |
+    from .exceptions import {{ model }}NotFound

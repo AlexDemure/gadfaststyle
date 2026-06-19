@@ -1,0 +1,20 @@
+files:
+- path: src/application/utils/{{ table }}.py
+  mode: w
+  content: |
+    import typing
+
+    from src.domain.models import {{ model }}
+
+
+    def serialize(model: object) -> {{ model }}:
+        return {{ model }}.model_validate(model, from_attributes=True)
+
+
+    def decrypt(decrypter: typing.Callable[..., typing.Any], model: {{ model }}) -> {{ model }}:
+        fields = {key: getattr(model, key) for key in {{ model }}.__encrypted__}
+
+        for key, value in {{ model }}.decrypt(decrypter=decrypter, **fields).items():
+            setattr(model, key, value)
+
+        return model

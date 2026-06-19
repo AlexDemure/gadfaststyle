@@ -1,0 +1,23 @@
+files:
+- path: src/infrastructure/databases/postgres/tables/{{ table }}.py
+  mode: w
+  content: |
+    from sqlalchemy import BigInteger
+    from sqlalchemy import Column
+    from sqlalchemy import DateTime
+
+    from src.infrastructure.databases.orm.sqlalchemy.tables import Base
+
+
+    class {{ model }}(Base):
+        __tablename__ = "{{ table }}"
+        __collection__ = "{{ collection }}"
+
+        id = Column(BigInteger, primary_key=True, autoincrement=True)
+        created = Column(DateTime(timezone=True), nullable=False)
+        updated = Column(DateTime(timezone=True), nullable=False)
+        # TODO: add business columns
+- path: src/infrastructure/databases/postgres/tables/__init__.py
+  mode: a
+  content: |
+    from .{{ table }} import {{ model }}

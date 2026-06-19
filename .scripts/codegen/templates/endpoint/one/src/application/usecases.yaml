@@ -1,0 +1,33 @@
+files:
+- path: src/application/usecases/{{ collection }}/__init__.py
+  mode: w
+  content: ''
+- path: src/application/usecases/{{ collection }}/{{ operation }}.py
+  mode: w
+  content: |
+    import types
+
+    from src.decorators.usecases.session import sessionmaker
+    from src.domain.models import {{ model }}
+    from src.infrastructure.databases.orm.sqlalchemy.queries import Filter
+    from src.infrastructure.databases.orm.sqlalchemy.session import Session
+    from src.infrastructure.databases.postgres.adapters import repositories
+
+
+    class Usecase:
+        container: types.SimpleNamespace
+
+        def build(self, session: Session) -> None:
+            self.container = types.SimpleNamespace(
+                repository=types.SimpleNamespace(
+                    {{ table }}=repositories.{{ model }}(session),
+                ),
+            )
+
+        @sessionmaker.read
+        async def __call__(self, session: Session, identifier: int) -> {{ model }}:
+            self.build(session)
+
+            {{ table }} = await self.container.repository.{{ table }}.one(Filter.eq(key="id", value=identifier))
+
+            return {{ table }}

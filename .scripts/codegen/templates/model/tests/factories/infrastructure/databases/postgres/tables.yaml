@@ -1,0 +1,23 @@
+files:
+- path: tests/factories/infrastructure/databases/postgres/tables/{{ table }}.py
+  mode: w
+  content: |
+    import factory
+
+    from src.common.formats.utils import date
+    from src.infrastructure.databases.postgres import tables
+
+    from .base import Table
+
+
+    class {{ model }}(Table):
+        class Meta:
+            model = tables.{{ model }}
+
+        created = factory.LazyFunction(date.now)
+        updated = factory.LazyAttribute(lambda object_: object_.created)
+        # TODO: add business fields
+- path: tests/factories/infrastructure/databases/postgres/tables/__init__.py
+  mode: a
+  content: |
+    from .{{ table }} import {{ model }}

@@ -1,0 +1,65 @@
+context:
+  schema: '{{ collection|pascal }}'
+
+files:
+- path: src/entrypoints/http/public/routers/{{ collection }}/__init__.py
+  mode: w
+  content: |
+    from .registry import router
+
+
+    __all__ = [
+        "router",
+    ]
+- path: src/entrypoints/http/public/routers/{{ collection }}/registry.py
+  mode: w
+  content: |
+    from src.framework.routing import APIRouter
+
+
+    router = APIRouter()
+- path: src/entrypoints/http/public/routers/{{ collection }}/{{ operation }}.py
+  mode: w
+  content: |
+    from fastapi import Body
+    from fastapi import Depends
+    from fastapi import status
+
+    from src.application.usecases.{{ collection }}.paginated import Usecase
+    from src.entrypoints.http.public.deps.{{ collection }}.paginated import dependency
+    from src.entrypoints.http.public.schemas import Search{{ model }}
+    from src.entrypoints.http.public.schemas import {{ schema }}
+    from src.framework.routing import APIRouter
+
+
+    router = APIRouter()
+
+
+    @router.post(
+        "/{{ collection }}:search",
+        status_code=status.HTTP_200_OK,
+        response_model={{ schema }},
+        description="Search {{ table }}",
+    )
+    async def query(
+        body: Search{{ model }} = Body(...),
+        usecase: Usecase = Depends(dependency),
+    ) -> {{ schema }}:
+        rows, total = await usecase(**body.deserialize())
+        return {{ schema }}.serialize(rows, total)
+- path: src/entrypoints/http/public/routers/{{ collection }}/registry.py
+  mode: a
+  content: |
+    from . import {{ operation }}
+- path: src/entrypoints/http/public/routers/{{ collection }}/registry.py
+  mode: a
+  content: |
+    router.include_router({{ operation }}.router)
+- path: src/entrypoints/http/public/routers/registry.py
+  mode: a
+  content: |
+    from . import {{ collection }}
+- path: src/entrypoints/http/public/routers/registry.py
+  mode: a
+  content: |
+    router.include_router({{ collection }}.router, tags=["{{ model }}"])

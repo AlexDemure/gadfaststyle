@@ -1,0 +1,4 @@
+files:
+- path: src/entrypoints/http/public/deps/{{ collection }}/__init__.py
+  mode: w
+  content: ''

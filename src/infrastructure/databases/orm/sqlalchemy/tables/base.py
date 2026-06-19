@@ -4,7 +4,8 @@ from sqlalchemy.orm import DeclarativeBase
 
 
 class Base(DeclarativeBase):
-    pass
+    __tablename__: str
+    __collection__: str
 
 
 Table = typing.TypeVar("Table", bound=Base)

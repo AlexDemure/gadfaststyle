@@ -1,0 +1,7 @@
+scripts:
+  - command: isort .scripts/codegen src tests --settings-path .scripts/lints/configs
+    check: false
+  - command: ruff check --fix .scripts/codegen src tests --no-cache --config .scripts/lints/configs/ruff.toml
+    check: false
+  - command: ruff format .scripts/codegen src tests --no-cache --config .scripts/lints/configs/ruff.toml
+    check: false

@@ -1,6 +1,0 @@
-class {{ plural }}(Public, Response, Paginated):
-    items: list[{{ entity }}]
-
-    @classmethod
-    def serialize(cls, models: list[Model], total: int) -> typing.Self:
-        return cls(items=[{{ entity }}.serialize(model) for model in models], total=total)

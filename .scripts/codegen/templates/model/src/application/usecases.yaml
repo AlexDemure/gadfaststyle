@@ -1,0 +1,4 @@
+files:
+- path: src/application/usecases/{{ collection }}/__init__.py
+  mode: w
+  content: ''

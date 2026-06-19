@@ -1,0 +1,37 @@
+files:
+- path: src/infrastructure/databases/postgres/crud/{{ table }}.py
+  mode: w
+  content: |
+    import typing
+
+    from src.infrastructure.databases.orm.sqlalchemy.crud import Base
+    from src.infrastructure.databases.orm.sqlalchemy.session import Session
+    from src.infrastructure.databases.postgres import tables
+
+
+    class {{ model }}(Base[tables.{{ model }}]):
+        table = tables.{{ model }}
+
+        @classmethod
+        async def list(
+            cls,
+            session: Session,
+            filters: dict[str, typing.Any],
+            sorting: dict[str, typing.Any],
+            pagination: dict[str, typing.Any],
+        ) -> list[tables.{{ model }}]:
+            raise NotImplementedError
+
+        @classmethod
+        async def paginated(
+            cls,
+            session: Session,
+            filters: dict[str, typing.Any],
+            sorting: dict[str, typing.Any],
+            pagination: dict[str, typing.Any],
+        ) -> tuple[list[tables.{{ model }}], int]:
+            raise NotImplementedError
+- path: src/infrastructure/databases/postgres/crud/__init__.py
+  mode: a
+  content: |
+    from .{{ table }} import {{ model }}

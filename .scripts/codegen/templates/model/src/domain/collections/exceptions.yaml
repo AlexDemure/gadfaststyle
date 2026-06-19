@@ -1,0 +1,12 @@
+files:
+- path: src/domain/collections/exceptions/{{ table }}.py
+  mode: w
+  content: |
+    from .base import BusinessError
+
+
+    class {{ model }}NotFound(BusinessError): ...
+- path: src/domain/collections/exceptions/__init__.py
+  mode: a
+  content: |
+    from .{{ table }} import {{ model }}NotFound

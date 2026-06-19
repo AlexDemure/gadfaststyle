@@ -1,0 +1,61 @@
+files:
+- path: src/entrypoints/http/public/routers/{{ collection }}/__init__.py
+  mode: w
+  content: |
+    from .registry import router
+
+
+    __all__ = [
+        "router",
+    ]
+- path: src/entrypoints/http/public/routers/{{ collection }}/registry.py
+  mode: w
+  content: |
+    from src.framework.routing import APIRouter
+
+
+    router = APIRouter()
+- path: src/entrypoints/http/public/routers/{{ collection }}/{{ operation }}.py
+  mode: w
+  content: |
+    from fastapi import Body
+    from fastapi import Depends
+    from fastapi import status
+
+    from src.application.usecases.{{ collection }}.create import Usecase
+    from src.entrypoints.http.public.deps.{{ collection }}.create import dependency
+    from src.entrypoints.http.public.schemas import Create{{ model }}
+    from src.entrypoints.http.public.schemas import {{ model }}
+    from src.framework.routing import APIRouter
+
+
+    router = APIRouter()
+
+
+    @router.post(
+        "/{{ collection }}:create",
+        status_code=status.HTTP_201_CREATED,
+        response_model={{ model }},
+        description="Create {{ table }}",
+    )
+    async def command(
+        body: Create{{ model }} = Body(...),
+        usecase: Usecase = Depends(dependency),
+    ) -> {{ model }}:
+        return {{ model }}.serialize(await usecase(**body.deserialize()))
+- path: src/entrypoints/http/public/routers/{{ collection }}/registry.py
+  mode: a
+  content: |
+    from . import {{ operation }}
+- path: src/entrypoints/http/public/routers/{{ collection }}/registry.py
+  mode: a
+  content: |
+    router.include_router({{ operation }}.router)
+- path: src/entrypoints/http/public/routers/registry.py
+  mode: a
+  content: |
+    from . import {{ collection }}
+- path: src/entrypoints/http/public/routers/registry.py
+  mode: a
+  content: |
+    router.include_router({{ collection }}.router, tags=["{{ model }}"])

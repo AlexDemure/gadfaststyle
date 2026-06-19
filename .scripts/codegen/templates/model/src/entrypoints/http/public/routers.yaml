@@ -1,0 +1,25 @@
+files:
+- path: src/entrypoints/http/public/routers/{{ collection }}/__init__.py
+  mode: w
+  content: |
+    from .registry import router
+
+
+    __all__ = [
+        "router",
+    ]
+- path: src/entrypoints/http/public/routers/{{ collection }}/registry.py
+  mode: w
+  content: |
+    from src.framework.routing import APIRouter
+
+
+    router = APIRouter()
+- path: src/entrypoints/http/public/routers/registry.py
+  mode: a
+  content: |
+    from . import {{ collection }}
+- path: src/entrypoints/http/public/routers/registry.py
+  mode: a
+  content: |
+    router.include_router({{ collection }}.router, tags=["{{ model }}"])
