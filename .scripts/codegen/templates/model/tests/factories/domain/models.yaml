@@ -11,17 +11,16 @@ files:
     class {{ model }}:
         @classmethod
         def init(cls, model: dict[str, typing.Any] | None = None) -> Model:
-            created = updated = date.now()
-            payload: dict[str, typing.Any] = {
-                "id": 1,
-                "created": created,
-                "updated": updated,
-            }
+            overrides = dict(model or {})
+            created = overrides.pop("created", date.now())
+            updated = overrides.pop("updated", created)
 
-            if model:
-                payload.update(model)
-
-            return Model.model_validate(payload)
+            return Model(
+                id=overrides.pop("id", 1),
+                created=created,
+                updated=updated,
+                **overrides,
+            )
 - path: tests/factories/domain/models/__init__.py
   mode: p
   content: |
