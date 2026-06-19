@@ -29,6 +29,6 @@ files:
                 **kwargs,
             )
 - path: src/domain/models/__init__.py
-  mode: a
+  mode: p
   content: |
     from .{{ table }} import {{ model }}

@@ -58,14 +58,14 @@ files:
         def serialize(cls, models: list[Model], total: int) -> typing.Self:
             return cls(items=[{{ model }}.serialize(model) for model in models], total=total)
 - path: src/entrypoints/http/public/schemas/__init__.py
-  mode: a
+  mode: p
   content: |
     from .{{ table }} import {{ model }}
 - path: src/entrypoints/http/public/schemas/__init__.py
-  mode: a
+  mode: p
   content: |
     from .{{ table }} import Pagination{{ model }}
 - path: src/entrypoints/http/public/schemas/__init__.py
-  mode: a
+  mode: p
   content: |
     from .{{ table }} import Paginated{{ model }}

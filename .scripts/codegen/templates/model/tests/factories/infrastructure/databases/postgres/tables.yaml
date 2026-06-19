@@ -18,6 +18,6 @@ files:
         updated = factory.LazyAttribute(lambda object_: object_.created)
         # TODO: add business fields
 - path: tests/factories/infrastructure/databases/postgres/tables/__init__.py
-  mode: a
+  mode: p
   content: |
     from .{{ table }} import {{ model }}

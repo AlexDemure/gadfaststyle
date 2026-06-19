@@ -45,6 +45,6 @@ files:
             )
             return [self.convert(row) for row in rows], total
 - path: src/infrastructure/databases/postgres/adapters/repositories/__init__.py
-  mode: a
+  mode: p
   content: |
     from .{{ table }} import {{ model }}

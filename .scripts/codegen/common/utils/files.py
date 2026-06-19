@@ -13,6 +13,16 @@ def write(path: pathlib.Path, content: str, mode: str) -> None:
             file.write(f"{prefix}{content}")
         return
 
+    if mode == "p":
+        if not path.exists():
+            path.write_text(content, encoding="utf-8")
+            return
+
+        current = path.read_text(encoding="utf-8")
+        suffix = "\n" if current.strip() else ""
+        path.write_text(f"{content}{suffix}{current}", encoding="utf-8")
+        return
+
     if mode in {"w", "ow"}:
         path.write_text(content, encoding="utf-8")
         return

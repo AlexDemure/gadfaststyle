@@ -47,10 +47,10 @@ files:
             data.update(kwargs)
             return data
 - path: src/entrypoints/http/public/schemas/__init__.py
-  mode: a
+  mode: p
   content: |
     from .{{ table }} import {{ model }}
 - path: src/entrypoints/http/public/schemas/__init__.py
-  mode: a
+  mode: p
   content: |
     from .{{ table }} import List{{ model }}

@@ -23,6 +23,6 @@ files:
 
             return Model.model_validate(payload)
 - path: tests/factories/domain/models/__init__.py
-  mode: a
+  mode: p
   content: |
     from .{{ table }} import {{ model }}

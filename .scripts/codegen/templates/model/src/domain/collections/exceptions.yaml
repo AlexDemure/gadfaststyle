@@ -7,6 +7,6 @@ files:
 
     class {{ model }}NotFound(BusinessError): ...
 - path: src/domain/collections/exceptions/__init__.py
-  mode: a
+  mode: p
   content: |
     from .{{ table }} import {{ model }}NotFound
