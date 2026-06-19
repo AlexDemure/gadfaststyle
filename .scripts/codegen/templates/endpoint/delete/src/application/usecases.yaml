@@ -25,7 +25,7 @@ files:
             )
 
         @sessionmaker.write
-        async def __call__(self, session: Session, **payload: typing.Any) -> None:
+        async def __call__(self, session: Session, {{ table }}_id: int, **payload: typing.Any) -> None:
             self.build(session)
 
-            await self.container.repository.{{ table }}.delete(Filter.eq(key="id", value=payload["id"]))
+            await self.container.repository.{{ table }}.delete(Filter.eq(key="id", value={{ table }}_id))

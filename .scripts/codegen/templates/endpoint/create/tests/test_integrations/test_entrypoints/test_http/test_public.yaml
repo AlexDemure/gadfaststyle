@@ -14,20 +14,24 @@ files:
 
     class TestCreate{{ model }}:
         client: AsyncClient
-        payload: dict[str, object]
 
         async def setup(self) -> None:
-            self.payload = {
-                # TODO: fill request body
-            }
+            pass
 
         async def process(self) -> Response:
-            return await self.client.post("/api/{{ collection }}:create", json=self.payload)
+            return await self.client.post(
+                "/api/{{ collection }}:create",
+                json={
+                    # TODO: fill request body
+                },
+            )
 
         async def check(self, response: Response) -> None:
             assert response.status_code == 201
 
-            {{ model }}.model_validate(response.json())
+            schema = {{ model }}.model_validate(response.json())
+
+            assert schema.id
 
         async def test(self, client: AsyncClient) -> None:
             self.client = client

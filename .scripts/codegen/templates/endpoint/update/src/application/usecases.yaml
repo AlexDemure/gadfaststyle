@@ -24,9 +24,7 @@ files:
             )
 
         @sessionmaker.write
-        async def __call__(self, session: Session, **payload: typing.Any) -> None:
+        async def __call__(self, session: Session, {{ table }}_id: int, **payload: typing.Any) -> None:
             self.build(session)
 
-            identifier = payload.pop("id")
-
-            await self.container.repository.{{ table }}.update(id=identifier, **payload)
+            await self.container.repository.{{ table }}.update(id={{ table }}_id, **payload)

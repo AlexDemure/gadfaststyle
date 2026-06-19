@@ -42,7 +42,8 @@ files:
         body: Search{{ model }} = Body(...),
         usecase: Usecase = Depends(dependency),
     ) -> list[{{ model }}]:
-        return [{{ model }}.serialize(model) for model in await usecase(**body.deserialize())]
+        {{ collection }} = await usecase(**body.deserialize())
+        return [{{ model }}.serialize({{ table }}) for {{ table }} in {{ collection }}]
 - path: src/entrypoints/http/public/routers/{{ collection }}/registry.py
   mode: a
   content: |

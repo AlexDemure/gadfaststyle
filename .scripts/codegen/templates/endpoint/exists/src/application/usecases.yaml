@@ -25,7 +25,7 @@ files:
             )
 
         @sessionmaker.read
-        async def __call__(self, session: Session, **payload: typing.Any) -> bool:
+        async def __call__(self, session: Session, {{ table }}_id: int, **payload: typing.Any) -> bool:
             self.build(session)
 
-            return await self.container.repository.{{ table }}.exists(Filter.eq(key="id", value=payload["id"]))
+            return await self.container.repository.{{ table }}.exists(Filter.eq(key="id", value={{ table }}_id))

@@ -46,7 +46,8 @@ files:
         usecase: Usecase = Depends(dependency),
     ) -> {{ schema }}:
         rows, total = await usecase(**body.deserialize())
-        return {{ schema }}.serialize(rows, total)
+        page = {{ schema }}.serialize(rows, total)
+        return page
 - path: src/entrypoints/http/public/routers/{{ collection }}/registry.py
   mode: a
   content: |

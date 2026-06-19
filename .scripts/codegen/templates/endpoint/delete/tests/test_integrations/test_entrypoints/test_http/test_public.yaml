@@ -9,21 +9,28 @@ files:
     from httpx import AsyncClient
     from httpx import Response
 
+    from tests.factories.infrastructure.databases.postgres.tables import {{ model }} as {{ model }}Factory
+
 
     class TestDelete{{ model }}:
         client: AsyncClient
-        payload: dict[str, object]
+        model: {{ model }}Factory
 
         async def setup(self) -> None:
-            self.payload = {
-                "id": 1,
-            }
+            self.model = await {{ model }}Factory.init(model={})
 
         async def process(self) -> Response:
-            return await self.client.request("DELETE", "/api/{{ collection }}:delete", json=self.payload)
+            return await self.client.request(
+                "DELETE",
+                "/api/{{ collection }}:delete",
+                json={
+                    "id": self.model.id,
+                },
+            )
 
         async def check(self, response: Response) -> None:
             assert response.status_code == 204
+            assert not response.content
 
         async def test(self, client: AsyncClient) -> None:
             self.client = client

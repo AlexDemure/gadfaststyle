@@ -26,10 +26,10 @@ files:
     class Exists{{ model }}(Public, Request, Query):
         # TODO: replace body with real exists fields, for example:
         # shelter_id: IntRef = Field(..., alias="shelter")
-        id: IntRef
+        {{ table }}_id: IntRef = Field(..., alias="id")
 
         def deserialize(self, **kwargs: typing.Any) -> dict[str, typing.Any]:
-            data = self.model_dump(by_alias=True)
+            data = self.model_dump()
             data.update(kwargs)
             return data
 - path: src/entrypoints/http/public/schemas/__init__.py

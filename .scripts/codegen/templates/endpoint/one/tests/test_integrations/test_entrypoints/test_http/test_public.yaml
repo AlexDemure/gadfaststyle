@@ -9,21 +9,26 @@ files:
     from httpx import AsyncClient
     from httpx import Response
 
+    from src.entrypoints.http.public.schemas import {{ model }}
     from tests.factories.infrastructure.databases.postgres.tables import {{ model }} as {{ model }}Factory
 
 
     class TestGet{{ model }}:
         client: AsyncClient
+        model: {{ model }}Factory
 
         async def setup(self) -> None:
-            model = await {{ model }}Factory.init(model={})
-            self.{{ table }}_id = model.id
+            self.model = await {{ model }}Factory.init(model={})
 
         async def process(self) -> Response:
-            return await self.client.get(f"/api/{{ collection }}/{self.{{ table }}_id}")
+            return await self.client.get(f"/api/{{ collection }}/{self.model.id}")
 
         async def check(self, response: Response) -> None:
             assert response.status_code == 200
+            
+            schema = {{ model }}.model_validate(response.json())
+
+            assert schema.id == self.model.id
 
         async def test(self, client: AsyncClient) -> None:
             self.client = client

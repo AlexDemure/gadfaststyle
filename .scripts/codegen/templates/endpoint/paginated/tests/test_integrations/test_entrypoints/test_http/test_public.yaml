@@ -12,23 +12,33 @@ files:
     from httpx import AsyncClient
     from httpx import Response
 
+    from src.entrypoints.http.public.schemas import {{ schema }}
+    from tests.factories.infrastructure.databases.postgres.tables import {{ model }} as {{ model }}Factory
+
 
     class TestSearch{{ schema }}:
         client: AsyncClient
-        payload: dict[str, object]
+        model: {{ model }}Factory
 
         async def setup(self) -> None:
-            self.payload = {
-                "filters": {},
-                "sorting": {"field": "created", "direction": "asc"},
-                "pagination": {"page": 1, "size": 10},
-            }
+            self.model = await {{ model }}Factory.init(model={})
 
         async def process(self) -> Response:
-            return await self.client.post("/api/{{ collection }}:search", json=self.payload)
+            return await self.client.post(
+                "/api/{{ collection }}:search",
+                json={
+                    "filters": {},
+                    "sorting": {"field": "created", "direction": "asc"},
+                    "pagination": {"page": 1, "size": 10},
+                },
+            )
 
         async def check(self, response: Response) -> None:
             assert response.status_code == 200
+
+            schema = {{ schema }}.model_validate(response.json())
+
+            assert any(item.id == self.model.id for item in schema.items)
 
         async def test(self, client: AsyncClient) -> None:
             self.client = client

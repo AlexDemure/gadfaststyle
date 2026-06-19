@@ -25,10 +25,10 @@ files:
 
     class Delete{{ model }}(Public, Request, Command):
         # TODO: replace body with real command fields when delete is not by plain id.
-        id: IntRef
+        {{ table }}_id: IntRef = Field(..., alias="id")
 
         def deserialize(self, **kwargs: typing.Any) -> dict[str, typing.Any]:
-            data = self.model_dump(by_alias=True)
+            data = self.model_dump()
             data.update(kwargs)
             return data
 - path: src/entrypoints/http/public/schemas/__init__.py

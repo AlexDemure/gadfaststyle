@@ -23,14 +23,8 @@ files:
     from fastapi import status
 
     from src.application.usecases.{{ collection }}.exists import Usecase
-    from src.common.formats.utils import field
-    from src.domain.models import User
-    from src.entrypoints.http.common.collections import ACTIVE
-    from src.entrypoints.http.common.collections import AUTHORIZATION_ERRORS
-    from src.entrypoints.http.common.deps import whoiam
     from src.entrypoints.http.public.deps.{{ collection }}.exists import dependency
     from src.entrypoints.http.public.schemas import Exists{{ model }}
-    from src.framework.openapi.utils import errors
     from src.framework.routing import APIRouter
 
 
@@ -39,18 +33,16 @@ files:
 
     @router.post(
         "/{{ collection }}:exists",
-        summary=ACTIVE,
         description="Exists {{ table }}",
         status_code=status.HTTP_200_OK,
         response_model=bool,
-        responses=errors(*AUTHORIZATION_ERRORS),
     )
     async def query(
         body: Exists{{ model }} = Body(...),
         usecase: Usecase = Depends(dependency),
-        user: User = Depends(whoiam),
     ) -> bool:
-        return await usecase(**body.deserialize(user_id=field.required(user.id)))
+        exists = await usecase(**body.deserialize())
+        return exists
 - path: src/entrypoints/http/public/routers/{{ collection }}/registry.py
   mode: a
   content: |
