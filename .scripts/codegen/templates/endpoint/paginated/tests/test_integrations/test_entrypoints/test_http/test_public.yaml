@@ -1,8 +1,7 @@
 files:
 - path: tests/test_integrations/test_entrypoints/test_http/test_public/test_{{ collection }}/__init__.py
   mode: w
-  content: |
-    __all__: list[str] = []
+  content: ''
 - path: tests/test_integrations/test_entrypoints/test_http/test_public/test_{{ collection }}/test_{{ operation }}.py
   mode: w
   content: |

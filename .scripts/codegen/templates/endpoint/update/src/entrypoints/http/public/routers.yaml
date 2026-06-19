@@ -3,11 +3,6 @@ files:
   mode: w
   content: |
     from .registry import router
-
-
-    __all__ = [
-        "router",
-    ]
 - path: src/entrypoints/http/public/routers/{{ collection }}/registry.py
   mode: w
   content: |
