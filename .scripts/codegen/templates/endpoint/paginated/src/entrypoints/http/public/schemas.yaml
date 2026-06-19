@@ -34,10 +34,6 @@ files:
             )
 
     class Search{{ model }}(Public, Request, Query):
-        class Search{{ model }}FlagsFilters(Public, Request, Query):
-            # TODO: add real boolean switches.
-            pass
-
         class Search{{ model }}Filters(Public, Request, Query):
             # TODO: add real domain filters.
             pass
