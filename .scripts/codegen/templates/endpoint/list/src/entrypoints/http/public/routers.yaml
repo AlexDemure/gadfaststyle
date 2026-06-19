@@ -24,7 +24,7 @@ files:
 
     from src.application.usecases.{{ collection }}.list import Usecase
     from src.entrypoints.http.public.deps.{{ collection }}.list import dependency
-    from src.entrypoints.http.public.schemas import Search{{ model }}
+    from src.entrypoints.http.public.schemas import List{{ model }}
     from src.entrypoints.http.public.schemas import {{ model }}
     from src.framework.routing import APIRouter
 
@@ -39,10 +39,11 @@ files:
         description="List {{ table }}",
     )
     async def query(
-        body: Search{{ model }} = Body(...),
+        body: List{{ model }} = Body(...),
         usecase: Usecase = Depends(dependency),
     ) -> list[{{ model }}]:
         {{ collection }} = await usecase(**body.deserialize())
+
         return [{{ model }}.serialize({{ table }}) for {{ table }} in {{ collection }}]
 - path: src/entrypoints/http/public/routers/{{ collection }}/registry.py
   mode: a

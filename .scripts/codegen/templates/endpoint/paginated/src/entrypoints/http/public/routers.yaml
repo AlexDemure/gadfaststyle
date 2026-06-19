@@ -1,6 +1,3 @@
-context:
-  schema: '{{ collection|pascal }}'
-
 files:
 - path: src/entrypoints/http/public/routers/{{ collection }}/__init__.py
   mode: w
@@ -27,8 +24,8 @@ files:
 
     from src.application.usecases.{{ collection }}.paginated import Usecase
     from src.entrypoints.http.public.deps.{{ collection }}.paginated import dependency
-    from src.entrypoints.http.public.schemas import Search{{ model }}
-    from src.entrypoints.http.public.schemas import {{ schema }}
+    from src.entrypoints.http.public.schemas import Paginated{{ model }}
+    from src.entrypoints.http.public.schemas import Pagination{{ model }}
     from src.framework.routing import APIRouter
 
 
@@ -38,15 +35,16 @@ files:
     @router.post(
         "/{{ collection }}:search",
         status_code=status.HTTP_200_OK,
-        response_model={{ schema }},
-        description="Search {{ table }}",
+        response_model=Paginated{{ model }},
+        description="Paginated {{ table }}",
     )
     async def query(
-        body: Search{{ model }} = Body(...),
+        body: Pagination{{ model }} = Body(...),
         usecase: Usecase = Depends(dependency),
-    ) -> {{ schema }}:
+    ) -> Paginated{{ model }}:
         rows, total = await usecase(**body.deserialize())
-        page = {{ schema }}.serialize(rows, total)
+        page = Paginated{{ model }}.serialize(rows, total)
+
         return page
 - path: src/entrypoints/http/public/routers/{{ collection }}/registry.py
   mode: a

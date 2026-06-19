@@ -1,6 +1,3 @@
-context:
-  schema: '{{ collection|pascal }}'
-
 files:
 - path: src/entrypoints/http/public/schemas/{{ table }}.py
   mode: a
@@ -33,20 +30,20 @@ files:
                 updated=model.updated,
             )
 
-    class Search{{ model }}(Public, Request, Query):
-        class Search{{ model }}Filters(Public, Request, Query):
+    class Pagination{{ model }}(Public, Request, Query):
+        class Pagination{{ model }}Filters(Public, Request, Query):
             # TODO: add real domain filters.
             pass
 
-        class Search{{ model }}Sorting(Public, Request, Query):
+        class Pagination{{ model }}Sorting(Public, Request, Query):
             field: typing.Literal["created", "updated"]
             direction: Direction = Direction.asc
 
-        class Search{{ model }}Pagination(Public, Request, Query, Pagination): ...
+        class Pagination{{ model }}Pagination(Public, Request, Query, Pagination): ...
 
-        filters: Search{{ model }}Filters
-        sorting: Search{{ model }}Sorting
-        pagination: Search{{ model }}Pagination
+        filters: Pagination{{ model }}Filters
+        sorting: Pagination{{ model }}Sorting
+        pagination: Pagination{{ model }}Pagination
 
         def deserialize(self, **kwargs: typing.Any) -> dict[str, typing.Any]:
             data = self.model_dump()
@@ -54,7 +51,7 @@ files:
             data.update(kwargs)
             return data
 
-    class {{ schema }}(Public, Response, Paginated):
+    class Paginated{{ model }}(Public, Response, Paginated):
         items: list[{{ model }}]
 
         @classmethod
@@ -67,8 +64,8 @@ files:
 - path: src/entrypoints/http/public/schemas/__init__.py
   mode: a
   content: |
-    from .{{ table }} import Search{{ model }}
+    from .{{ table }} import Pagination{{ model }}
 - path: src/entrypoints/http/public/schemas/__init__.py
   mode: a
   content: |
-    from .{{ table }} import {{ schema }}
+    from .{{ table }} import Paginated{{ model }}

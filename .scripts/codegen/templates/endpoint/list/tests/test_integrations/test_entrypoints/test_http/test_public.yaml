@@ -1,6 +1,3 @@
-context:
-  schema: '{{ collection|pascal }}'
-
 files:
 - path: tests/test_integrations/test_entrypoints/test_http/test_public/test_{{ collection }}/__init__.py
   mode: w
@@ -16,7 +13,7 @@ files:
     from tests.factories.infrastructure.databases.postgres.tables import {{ model }} as {{ model }}Factory
 
 
-    class TestList{{ schema }}:
+    class TestList{{ model }}:
         client: AsyncClient
         model: {{ model }}Factory
 
@@ -29,7 +26,6 @@ files:
                 json={
                     "filters": {},
                     "sorting": {"field": "created", "direction": "asc"},
-                    "pagination": {"page": 1, "size": 10},
                 },
             )
 

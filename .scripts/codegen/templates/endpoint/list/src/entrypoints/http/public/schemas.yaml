@@ -30,24 +30,20 @@ files:
                 updated=model.updated,
             )
 
-    class Search{{ model }}(Public, Request, Query):
-        class Search{{ model }}Filters(Public, Request, Query):
+    class List{{ model }}(Public, Request, Query):
+        class List{{ model }}Filters(Public, Request, Query):
             # TODO: add real domain filters.
             pass
 
-        class Search{{ model }}Sorting(Public, Request, Query):
+        class List{{ model }}Sorting(Public, Request, Query):
             field: typing.Literal["created", "updated"]
             direction: Direction = Direction.asc
 
-        class Search{{ model }}Pagination(Public, Request, Query, Pagination): ...
-
-        filters: Search{{ model }}Filters
-        sorting: Search{{ model }}Sorting
-        pagination: Search{{ model }}Pagination
+        filters: List{{ model }}Filters
+        sorting: List{{ model }}Sorting
 
         def deserialize(self, **kwargs: typing.Any) -> dict[str, typing.Any]:
             data = self.model_dump()
-            data["pagination"] = self.pagination.convert
             data.update(kwargs)
             return data
 - path: src/entrypoints/http/public/schemas/__init__.py
@@ -57,4 +53,4 @@ files:
 - path: src/entrypoints/http/public/schemas/__init__.py
   mode: a
   content: |
-    from .{{ table }} import Search{{ model }}
+    from .{{ table }} import List{{ model }}
