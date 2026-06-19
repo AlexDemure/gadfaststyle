@@ -9,15 +9,15 @@ files:
     from httpx import Response
 
     from src.entrypoints.http.public.schemas import {{ model }}
-    from tests.factories.infrastructure.databases.postgres.tables import {{ model }} as {{ model }}Factory
+    from tests.factories.infrastructure.databases.postgres import tables
 
 
     class TestList{{ model }}:
         client: AsyncClient
-        model: {{ model }}Factory
+        model: tables.{{ model }}
 
         async def setup(self) -> None:
-            self.model = await {{ model }}Factory.init(model={})
+            self.model = await tables.{{ model }}.init(model={})
 
         async def process(self) -> Response:
             return await self.client.post(
