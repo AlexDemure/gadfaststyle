@@ -25,9 +25,9 @@ files:
             )
 
         @sessionmaker.read
-        async def __call__(self, session: Session, identifier: int) -> {{ model }}:
+        async def __call__(self, session: Session, {{ table }}_id: int) -> {{ model }}:
             self.build(session)
 
-            {{ table }} = await self.container.repository.{{ table }}.one(Filter.eq(key="id", value=identifier))
+            {{ table }} = await self.container.repository.{{ table }}.one(Filter.eq(key="id", value={{ table }}_id))
 
             return {{ table }}

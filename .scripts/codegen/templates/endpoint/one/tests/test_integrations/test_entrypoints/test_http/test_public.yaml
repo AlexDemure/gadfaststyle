@@ -14,14 +14,13 @@ files:
 
     class TestGet{{ model }}:
         client: AsyncClient
-        identifier: int
 
         async def setup(self) -> None:
             model = await {{ model }}Factory.init(model={})
-            self.identifier = model.id
+            self.{{ table }}_id = model.id
 
         async def process(self) -> Response:
-            return await self.client.get(f"/api/{{ collection }}/{self.identifier}")
+            return await self.client.get(f"/api/{{ collection }}/{self.{{ table }}_id}")
 
         async def check(self, response: Response) -> None:
             assert response.status_code == 200

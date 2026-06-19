@@ -20,19 +20,32 @@ files:
   content: |
     from fastapi import Depends
     from fastapi import Path
+    from fastapi import status
 
     from src.application.usecases.{{ collection }}.one import Usecase
+    from src.domain.collections import {{ model }}NotFound
     from src.entrypoints.http.public.deps.{{ collection }}.one import dependency
     from src.entrypoints.http.public.schemas import {{ model }}
+    from src.framework.openapi.utils import errors
     from src.framework.routing import APIRouter
 
 
     router = APIRouter()
 
 
-    @router.get("/{{ collection }}/{id}", response_model={{ model }}, description="Get {{ table }}")
-    async def query(usecase: Usecase = Depends(dependency), id: int = Path(...)) -> {{ model }}:
-        return {{ model }}.serialize(await usecase(identifier=id))
+    @router.get(
+        "/{{ collection }}/{id:int}",
+        description="Page {{ table }}",
+        status_code=status.HTTP_200_OK,
+        response_model={{ model }},
+        responses=errors({{ model }}NotFound),
+    )
+    async def query(
+        usecase: Usecase = Depends(dependency),
+        {{ table }}_id: int = Path(..., alias="id"),
+    ) -> {{ model }}:
+        {{ table }} = await usecase({{ table }}_id={{ table }}_id)
+        return {{ model }}.serialize({{ table }})
 - path: src/entrypoints/http/public/routers/{{ collection }}/registry.py
   mode: a
   content: |
